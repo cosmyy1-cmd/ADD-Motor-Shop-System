@@ -1,0 +1,993 @@
+/* =========================================================
+   ADD MOTOR SHOP
+   MOTORCYCLE DETAILS MODAL
+   motorcycle-details.css
+========================================================= */
+
+
+/* =========================================================
+   MODAL OVERLAY
+========================================================= */
+
+#motorcycleModal {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 18px;
+
+    box-sizing: border-box;
+
+    background: rgba(0, 0, 0, 0.78);
+
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+
+    z-index: 99999;
+
+    overflow: hidden;
+}
+
+
+#motorcycleModal.show,
+#motorcycleModal.active {
+    display: flex !important;
+}
+
+
+/* =========================================================
+   MODAL CONTAINER
+========================================================= */
+
+#motorcycleModal .modal {
+    position: relative;
+
+    width: min(690px, 100%);
+
+    max-width: 690px;
+
+    height: auto;
+
+    max-height: calc(100vh - 36px);
+
+    margin: auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: hidden;
+
+    flex-shrink: 1;
+
+    border: 1px solid #30343b;
+
+    border-radius: 13px;
+
+    background: #181b20;
+
+    color: #f5f5f5;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.55);
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   MODAL HEADER
+========================================================= */
+
+#motorcycleModal .modal-header {
+    min-height: 68px;
+
+    flex: 0 0 auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 14px 18px;
+
+    border-bottom: 1px solid #2c3037;
+
+    background: #181b20;
+
+    box-sizing: border-box;
+}
+
+
+#motorcycleModal .modal-eyebrow {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #ef3646;
+
+    font-size: 8px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: 1.3px;
+
+    text-transform: uppercase;
+}
+
+
+#motorcycleModal .modal-header h2 {
+    margin: 0;
+
+    color: #f5f5f5;
+
+    font-size: 16px;
+
+    line-height: 1.2;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+========================================================= */
+
+#motorcycleModal .modal-close {
+    width: 32px;
+
+    height: 32px;
+
+    flex: 0 0 32px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 0;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    background: #242930;
+
+    color: #aeb6c2;
+
+    cursor: pointer;
+
+    font-size: 12px;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+#motorcycleModal .modal-close:hover {
+    background: #30353d;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   MODAL BODY
+========================================================= */
+
+#motorcycleModal .modal-body {
+    width: 100%;
+
+    min-height: 0;
+
+    flex: 1 1 auto;
+
+    padding: 16px 18px;
+
+    box-sizing: border-box;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+    overscroll-behavior: contain;
+
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: thin;
+}
+
+
+#motorcycleModal .modal-body::-webkit-scrollbar {
+    width: 5px;
+}
+
+
+#motorcycleModal .modal-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+#motorcycleModal .modal-body::-webkit-scrollbar-thumb {
+    background: #3a4048;
+
+    border-radius: 999px;
+}
+
+
+/* =========================================================
+   MAIN DETAILS
+========================================================= */
+
+.motorcycle-details-view {
+    width: 100%;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   MOTORCYCLE HERO
+========================================================= */
+
+.motorcycle-details-hero {
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding-bottom: 14px;
+
+    border-bottom: 1px solid #2b3037;
+}
+
+
+.motorcycle-details-hero-left {
+    min-width: 0;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 11px;
+}
+
+
+.motorcycle-details-hero-icon {
+    width: 40px;
+
+    height: 40px;
+
+    flex: 0 0 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: rgba(239, 54, 70, 0.12);
+
+    color: #ef3646;
+
+    font-size: 17px;
+}
+
+
+.motorcycle-details-hero-info {
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.motorcycle-details-brand {
+    margin-bottom: 1px;
+
+    color: #9da7b5;
+
+    font-size: 11px;
+
+    line-height: 1.2;
+
+    font-weight: 600;
+}
+
+
+.motorcycle-details-model {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 21px;
+
+    line-height: 1.1;
+
+    font-weight: 800;
+
+    overflow-wrap: anywhere;
+}
+
+
+.motorcycle-details-meta {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    gap: 6px;
+
+    margin-top: 5px;
+
+    color: #aab2be;
+
+    font-size: 10px;
+
+    line-height: 1.3;
+}
+
+
+.motorcycle-details-meta span {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 4px;
+}
+
+
+.motorcycle-details-meta i {
+    color: #9ca5b2;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   PRIMARY BADGE
+========================================================= */
+
+.motorcycle-details-primary {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    flex-shrink: 0;
+
+    padding: 6px 9px;
+
+    border-radius: 999px;
+
+    background: rgba(245, 184, 61, 0.12);
+
+    color: #f5b83d;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.2px;
+
+    white-space: nowrap;
+}
+
+
+.motorcycle-details-primary i {
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.motorcycle-details-section {
+    padding-top: 14px;
+}
+
+
+.motorcycle-details-section-title {
+    margin-bottom: 8px;
+
+    color: #8e98a6;
+
+    font-size: 8px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: 0.9px;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   INFORMATION GRID
+========================================================= */
+
+.motorcycle-details-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    border: 1px solid #30353d;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    background: #1b1f24;
+}
+
+
+/* =========================================================
+   INFORMATION BOX
+========================================================= */
+
+.motorcycle-details-box {
+    min-height: 55px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    gap: 3px;
+
+    padding: 9px 11px;
+
+    border-right: 1px solid #30353d;
+
+    border-bottom: 1px solid #30353d;
+
+    box-sizing: border-box;
+}
+
+
+.motorcycle-details-box:nth-child(2n) {
+    border-right: 0;
+}
+
+
+.motorcycle-details-box:nth-last-child(-n + 2) {
+    border-bottom: 0;
+}
+
+
+.motorcycle-details-box-label {
+    color: #788392;
+
+    font-size: 8px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: 0.6px;
+}
+
+
+.motorcycle-details-box-value {
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    color: #f4f5f6;
+
+    font-size: 11px;
+
+    line-height: 1.2;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   OWNER CARD
+========================================================= */
+
+.motorcycle-owner-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px 11px;
+
+    border: 1px solid #30353d;
+
+    border-radius: 8px;
+
+    background: #1b1f24;
+
+    box-sizing: border-box;
+}
+
+
+.motorcycle-owner-icon {
+    width: 34px;
+
+    height: 34px;
+
+    flex: 0 0 34px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #272c33;
+
+    color: #d8dde5;
+
+    font-size: 12px;
+}
+
+
+.motorcycle-owner-content {
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.motorcycle-owner-name {
+    color: #ffffff;
+
+    font-size: 12px;
+
+    line-height: 1.2;
+
+    font-weight: 700;
+
+    overflow-wrap: anywhere;
+}
+
+
+.motorcycle-owner-contact {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    color: #a4adb9;
+
+    font-size: 9px;
+
+    line-height: 1.3;
+}
+
+
+.motorcycle-owner-contact span {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 4px;
+}
+
+
+.motorcycle-owner-contact i {
+    color: #8d97a5;
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   OWNER ADDRESS
+========================================================= */
+
+.motorcycle-owner-address {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 6px;
+
+    margin-top: 6px;
+
+    padding: 7px 9px;
+
+    border-radius: 7px;
+
+    background: #1b1f24;
+
+    color: #aab3bf;
+
+    font-size: 9px;
+
+    line-height: 1.3;
+
+    overflow-wrap: anywhere;
+}
+
+
+.motorcycle-owner-address i {
+    margin-top: 1px;
+
+    color: #8d97a5;
+}
+
+
+/* =========================================================
+   REGISTRATION GRID
+========================================================= */
+
+.motorcycle-registration-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    border: 1px solid #30353d;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    background: #1b1f24;
+}
+
+
+.motorcycle-registration-box {
+    min-height: 54px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    gap: 3px;
+
+    padding: 9px 11px;
+
+    box-sizing: border-box;
+}
+
+
+.motorcycle-registration-box:first-child {
+    border-right: 1px solid #30353d;
+}
+
+
+.motorcycle-registration-box span {
+    color: #788392;
+
+    font-size: 8px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: 0.6px;
+
+    text-transform: uppercase;
+}
+
+
+.motorcycle-registration-box strong {
+    color: #f4f5f6;
+
+    font-size: 10px;
+
+    line-height: 1.2;
+
+    font-weight: 700;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   LIGHT MODE
+========================================================= */
+
+body:not(.dark-mode) #motorcycleModal .modal {
+    background: #ffffff;
+
+    border-color: #dfe3e8;
+
+    color: #1c2025;
+}
+
+
+body:not(.dark-mode) #motorcycleModal .modal-header {
+    background: #ffffff;
+
+    border-color: #e2e6eb;
+}
+
+
+body:not(.dark-mode) #motorcycleModal .modal-header h2 {
+    color: #1d2228;
+}
+
+
+body:not(.dark-mode) #motorcycleModal .modal-close {
+    background: #f0f2f5;
+
+    color: #65707d;
+}
+
+
+body:not(.dark-mode) #motorcycleModal .modal-close:hover {
+    background: #e6e9ed;
+
+    color: #20252b;
+}
+
+
+body:not(.dark-mode) .motorcycle-details-hero {
+    border-color: #e1e5ea;
+}
+
+
+body:not(.dark-mode) .motorcycle-details-brand {
+    color: #68727e;
+}
+
+
+body:not(.dark-mode) .motorcycle-details-model {
+    color: #1c2025;
+}
+
+
+body:not(.dark-mode) .motorcycle-details-meta {
+    color: #66717e;
+}
+
+
+body:not(.dark-mode) .motorcycle-details-section-title {
+    color: #6e7885;
+}
+
+
+body:not(.dark-mode) .motorcycle-details-grid,
+body:not(.dark-mode) .motorcycle-owner-card,
+body:not(.dark-mode) .motorcycle-registration-grid {
+    background: #ffffff;
+
+    border-color: #dfe3e8;
+}
+
+
+body:not(.dark-mode) .motorcycle-details-box {
+    border-color: #dfe3e8;
+}
+
+
+body:not(.dark-mode) .motorcycle-details-box-label,
+body:not(.dark-mode) .motorcycle-registration-box span {
+    color: #7a8490;
+}
+
+
+body:not(.dark-mode) .motorcycle-details-box-value,
+body:not(.dark-mode) .motorcycle-registration-box strong {
+    color: #252a30;
+}
+
+
+body:not(.dark-mode) .motorcycle-owner-card {
+    background: #ffffff;
+}
+
+
+body:not(.dark-mode) .motorcycle-owner-icon {
+    background: #f0f2f5;
+
+    color: #56616d;
+}
+
+
+body:not(.dark-mode) .motorcycle-owner-name {
+    color: #22272d;
+}
+
+
+body:not(.dark-mode) .motorcycle-owner-contact {
+    color: #68737f;
+}
+
+
+body:not(.dark-mode) .motorcycle-owner-address {
+    background: #f5f6f8;
+
+    color: #65707c;
+}
+
+
+body:not(.dark-mode) .motorcycle-registration-box:first-child {
+    border-color: #dfe3e8;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    #motorcycleModal {
+        align-items: center;
+
+        padding: 10px;
+    }
+
+
+    #motorcycleModal .modal {
+        width: 100%;
+
+        max-width: 100%;
+
+        max-height: calc(100vh - 20px);
+
+        border-radius: 11px;
+    }
+
+
+    #motorcycleModal .modal-header {
+        min-height: 62px;
+
+        padding: 12px 14px;
+    }
+
+
+    #motorcycleModal .modal-body {
+        padding: 13px 14px;
+    }
+
+
+    .motorcycle-details-hero {
+        flex-direction: column;
+
+        gap: 10px;
+
+        padding-bottom: 12px;
+    }
+
+
+    .motorcycle-details-primary {
+        align-self: flex-start;
+    }
+
+
+    .motorcycle-details-model {
+        font-size: 19px;
+    }
+
+
+    .motorcycle-details-section {
+        padding-top: 12px;
+    }
+
+
+    .motorcycle-details-grid,
+    .motorcycle-registration-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .motorcycle-details-box,
+    .motorcycle-details-box:nth-child(2n),
+    .motorcycle-details-box:nth-last-child(-n + 2) {
+        border-right: 0;
+
+        border-bottom: 1px solid #30353d;
+    }
+
+
+    .motorcycle-details-box:last-child {
+        border-bottom: 0;
+    }
+
+
+    .motorcycle-registration-box:first-child {
+        border-right: 0;
+
+        border-bottom: 1px solid #30353d;
+    }
+
+
+    .motorcycle-owner-contact {
+        flex-direction: column;
+
+        gap: 4px;
+    }
+
+}
+
+
+@media (max-width: 420px) {
+
+    #motorcycleModal {
+        padding: 7px;
+    }
+
+
+    #motorcycleModal .modal {
+        max-height: calc(100vh - 14px);
+
+        border-radius: 10px;
+    }
+
+
+    #motorcycleModal .modal-header {
+        min-height: 58px;
+
+        padding: 11px 12px;
+    }
+
+
+    #motorcycleModal .modal-body {
+        padding: 11px 12px;
+    }
+
+
+    .motorcycle-details-hero-left {
+        gap: 8px;
+    }
+
+
+    .motorcycle-details-hero-icon {
+        width: 36px;
+
+        height: 36px;
+
+        flex-basis: 36px;
+
+        font-size: 15px;
+    }
+
+
+    .motorcycle-details-model {
+        font-size: 18px;
+    }
+
+
+    .motorcycle-details-section {
+        padding-top: 10px;
+    }
+
+}

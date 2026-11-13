@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | ADD Motor Shop</title>
+    <link rel="stylesheet" href="css/register.css">
+
+    <style>
+        /* CUSTOM DROPDOWNS - ALWAYS OPEN DOWNWARD */
+
+        .custom-select-wrapper {
+            position: relative;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .custom-select-wrapper.open {
+            z-index: 10000;
+        }
+
+        .custom-select-original {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            min-height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            border: 0 !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+        }
+
+        .custom-select-button {
+            display: block;
+            position: relative;
+            width: 100%;
+            min-height: 48px;
+            padding: 12px 42px 12px 14px;
+            border: 1px solid var(--border, #d5d5d5);
+            border-radius: 8px;
+            background: var(--input-bg, #ffffff);
+            color: var(--text, #222222);
+            font-family: inherit;
+            font-size: inherit;
+            font-weight: normal;
+            line-height: 1.4;
+            text-align: left;
+            cursor: pointer;
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease,
+                color 0.2s ease;
+        }
+
+        .custom-select-button::after {
+            content: "";
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: translateY(-70%) rotate(45deg);
+            transition: transform 0.2s ease;
+        }
+
+        .custom-select-wrapper.open .custom-select-button::after {
+            transform: translateY(-30%) rotate(225deg);
+        }
+
+        .custom-select-button:hover:not(:disabled) {
+            border-color: var(--red, #e63946);
+        }
+
+        .custom-select-button:focus {
+            outline: none;
+            border-color: var(--red, #e63946);
+            box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.12);
+        }
+
+        .custom-select-button:disabled {
+            background: var(--surface-soft, #f1f1f1);
+            color: var(--muted, #999999);
+            cursor: not-allowed;
+            opacity: 0.65;
+        }
+
+        .custom-select-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 5px) !important;
+            bottom: auto !important;
+            left: 0;
+            right: 0;
+            width: 100%;
+            max-height: 220px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            background: var(--surface, #ffffff);
+            color: var(--text, #222222);
+            border: 1px solid var(--border, #dddddd);
+            border-radius: 8px;
+            box-shadow: var(--shadow, 0 8px 20px rgba(0, 0, 0, 0.14));
+            z-index: 10001;
+        }
+
+        .custom-select-wrapper.open .custom-select-menu {
+            display: block;
+        }
+
+        .custom-select-option {
+            display: block;
+            width: 100%;
+            min-height: 42px;
+            padding: 11px 14px;
+            border: none;
+            border-radius: 0;
+            background: transparent;
+            color: var(--text, #222222);
+            font-family: inherit;
+            font-size: inherit;
+            font-weight: normal;
+            line-height: 1.4;
+            text-align: left;
+            cursor: pointer;
+            transition:
+                background 0.15s ease,
+                color 0.15s ease;
+        }
+
+        .custom-select-option:hover,
+        .custom-select-option.selected {
+            background: rgba(230, 57, 70, 0.12);
+            color: var(--red, #e63946);
+        }
+
+        .custom-select-option:disabled {
+            color: var(--muted, #999999);
+            background: transparent;
+            cursor: not-allowed;
+            opacity: 0.65;
+        }
+
+        .custom-select-option:focus {
+            outline: 2px solid var(--red, #e63946);
+            outline-offset: -2px;
+        }
+
+        .custom-select-menu::-webkit-scrollbar {
+            width: 7px;
+        }
+
+        .custom-select-menu::-webkit-scrollbar-track {
+            background: var(--surface-soft, #f8f8f9);
+            border-radius: 8px;
+        }
+
+        .custom-select-menu::-webkit-scrollbar-thumb {
+            background: var(--border, #dddddd);
+            border-radius: 8px;
+        }
+
+        .custom-select-menu::-webkit-scrollbar-thumb:hover {
+            background: var(--muted, #999999);
+        }
+
+        @media (max-width: 600px) {
+            .custom-select-menu {
+                max-height: 180px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="register-page">
+
+        <section class="form-side">
+            <header class="form-topbar">
+                <a href="index.html" class="back-link">← Back to Home</a>
+            </header>
+
+            <div class="form-wrapper">
+                <div class="form-heading">
+                    <span class="eyebrow">CUSTOMER ACCOUNT</span>
+                    <h2>Create your account</h2>
+                    <p>Complete the information below to register with ADD Motor Shop.</p>
+                </div>
+
+                <div id="errorMessage" class="message error-message" role="alert"></div>
+
+                <form id="registerForm" enctype="multipart/form-data" novalidate>
+
+                    <!-- 01 PERSONAL INFORMATION -->
+                    <section class="form-section">
+                        <div class="section-heading">
+                            <span class="section-number">01</span>
+                            <div>
+                                <h3>Personal Information</h3>
+                                <p>Enter your name as it appears on your valid ID.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="firstName">First Name <span>*</span></label>
+                                <input type="text" id="firstName" name="firstName"
+                                       maxlength="50"
+                                       placeholder="Enter first name"
+                                       autocomplete="given-name" required>
+                            </div>
+
+                            <div class="field">
+                                <label for="middleName">Middle Name <small>(Optional)</small></label>
+                                <input type="text" id="middleName" name="middleName"
+                                       maxlength="50"
+                                       placeholder="Enter middle name"
+                                       autocomplete="additional-name">
+                            </div>
+
+                            <div class="field">
+                                <label for="lastName">Last Name <span>*</span></label>
+                                <input type="text" id="lastName" name="lastName"
+                                       maxlength="50"
+                                       placeholder="Enter last name"
+                                       autocomplete="family-name" required>
+                            </div>
+
+                            <div class="field">
+                                <label for="suffix">Suffix <small>(Optional)</small></label>
+                                <select id="suffix" name="suffix">
+                                    <option value="">No suffix</option>
+                                    <option value="Jr.">Jr.</option>
+                                    <option value="Sr.">Sr.</option>
+                                    <option value="II">II</option>
+                                    <option value="III">III</option>
+                                    <option value="IV">IV</option>
+                                    <option value="V">V</option>
+                                </select>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 02 CONTACT INFORMATION -->
+                    <section class="form-section">
+                        <div class="section-heading">
+                            <span class="section-number">02</span>
+                            <div>
+                                <h3>Contact Information</h3>
+                                <p>Provide an active email address and mobile number.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="email">Gmail Address <span>*</span></label>
+                                <input type="email" id="email" name="email"
+                                       maxlength="150"
+                                       placeholder="example@gmail.com"
+                                       autocomplete="email" required>
+                                <small>Only Gmail addresses are accepted.</small>
+                            </div>
+
+                            <div class="field">
+                                <label for="phone">Mobile Number <span>*</span></label>
+                                <input type="tel" id="phone" name="phone"
+                                       maxlength="11"
+                                       placeholder="09XXXXXXXXX"
+                                       inputmode="numeric"
+                                       autocomplete="tel" required>
+                                <small>Use the Philippine mobile number format.</small>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 03 HOME ADDRESS -->
+                    <section class="form-section">
+                        <div class="section-heading">
+                            <span class="section-number">03</span>
+                            <div>
+                                <h3>Home Address</h3>
+                                <p>Select your location and provide your complete address.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="region">Region <span>*</span></label>
+                                <select id="region" name="region" required>
+                                    <option value="">Loading regions...</option>
+                                </select>
+                            </div>
+
+                            <div class="field">
+                                <label for="province">Province <span>*</span></label>
+                                <select id="province" name="province" required disabled>
+                                    <option value="">Select region first</option>
+                                </select>
+                            </div>
+
+                            <div class="field">
+                                <label for="city">City / Municipality <span>*</span></label>
+                                <select id="city" name="city" required disabled>
+                                    <option value="">Select province first</option>
+                                </select>
+                            </div>
+
+                            <div class="field">
+                                <label for="barangay">Barangay <span>*</span></label>
+                                <select id="barangay" name="barangay" required disabled>
+                                    <option value="">Select city / municipality first</option>
+                                </select>
+                            </div>
+
+                            <div class="field full-field">
+                                <label for="streetAddress">
+                                    House Number, Street, Subdivision <span>*</span>
+                                </label>
+                                <input type="text" id="streetAddress" name="streetAddress"
+                                       maxlength="200"
+                                       placeholder="House no., street, subdivision, etc."
+                                       autocomplete="street-address" required>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 04 ACCOUNT SECURITY -->
+                    <section class="form-section">
+                        <div class="section-heading">
+                            <span class="section-number">04</span>
+                            <div>
+                                <h3>Account Security</h3>
+                                <p>Create a secure password for your account.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="password">Password <span>*</span></label>
+
+                                <div class="password-input-wrap">
+                                    <input type="password" id="password" name="password"
+                                           minlength="8"
+                                           placeholder="Create a password"
+                                           autocomplete="new-password" required>
+
+                                    <button type="button"
+                                            class="password-toggle"
+                                            data-target="password"
+                                            aria-label="Show password"
+                                            aria-pressed="false">
+                                        Show
+                                    </button>
+                                </div>
+
+                                <small>At least 8 characters and one number.</small>
+                            </div>
+
+                            <div class="field">
+                                <label for="confirmPassword">
+                                    Confirm Password <span>*</span>
+                                </label>
+
+                                <div class="password-input-wrap">
+                                    <input type="password" id="confirmPassword"
+                                           name="confirmPassword"
+                                           placeholder="Re-enter your password"
+                                           autocomplete="new-password" required>
+
+                                    <button type="button"
+                                            class="password-toggle"
+                                            data-target="confirmPassword"
+                                            aria-label="Show confirm password"
+                                            aria-pressed="false">
+                                        Show
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 05 IDENTITY VERIFICATION -->
+                    <section class="form-section">
+                        <div class="section-heading">
+                            <span class="section-number">05</span>
+                            <div>
+                                <h3>Identity Verification</h3>
+                                <p>Upload a valid ID to verify your identity.</p>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="idType">Type of ID <span>*</span></label>
+
+                            <select id="idType" name="idType" required>
+                                <option value="">Select your ID</option>
+                                <option value="Driver's License">Driver's License (Preferred)</option>
+                                <option value="Philippine National ID">Philippine National ID (PhilID)</option>
+                                <option value="Passport">Philippine Passport</option>
+                                <option value="UMID">UMID</option>
+                                <option value="SSS ID">SSS ID</option>
+                                <option value="PhilHealth ID">PhilHealth ID</option>
+                                <option value="Postal ID">Postal ID</option>
+                                <option value="Voter's ID">Voter's ID</option>
+                                <option value="Student ID">Student ID</option>
+                            </select>
+                        </div>
+
+                        <div class="upload-box">
+                            <input type="file" id="identityDocument"
+                                   name="identityDocument"
+                                   accept=".jpg,.jpeg,.png,image/jpeg,image/png"
+                                   required>
+
+                            <label for="identityDocument" class="upload-label">
+                                <span class="upload-icon">↑</span>
+                                <strong>Choose your ID image</strong>
+                                <span>JPG, JPEG, or PNG · Maximum file size: 5 MB</span>
+                            </label>
+
+                            <div id="filePreview" class="file-preview"></div>
+                        </div>
+
+                        <p class="privacy-note">
+                            Your ID image is stored securely for identity verification
+                            and is not displayed publicly.
+                        </p>
+                    </section>
+
+                    <!-- TERMS AND SUBMIT -->
+                    <div class="terms-row">
+                        <input type="checkbox" id="terms" name="terms" required>
+
+                        <label for="terms">
+                            I confirm that the information I provided is accurate
+                            and I agree to the collection and use of my information
+                            for account registration and verification.
+                        </label>
+                    </div>
+
+                    <button type="submit" id="registerButton" class="submit-button">
+                        Create Customer Account <span>→</span>
+                    </button>
+
+                    <p class="login-prompt">
+                        Already have an account? <a href="login.html">Sign in</a>
+                    </p>
+
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- CONFIRMATION POPUP -->
+    <div class="modal-backdrop" id="confirmModal" aria-hidden="true">
+        <div class="modal-card" role="dialog" aria-modal="true"
+             aria-labelledby="confirmTitle">
+
+            <div class="modal-icon">?</div>
+
+            <h3 id="confirmTitle">Create your account?</h3>
+
+            <p>
+                Please review your information before continuing.
+                Are you sure you want to create your account?
+            </p>
+
+            <div class="modal-actions">
+                <button type="button" class="secondary-button"
+                        id="cancelRegistration">
+                    Review Information
+                </button>
+
+                <button type="button" class="submit-button modal-submit"
+                        id="confirmRegistration">
+                    Yes, Create Account
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUCCESS / PENDING APPROVAL POPUP -->
+    <div class="modal-backdrop" id="successModal" aria-hidden="true">
+        <div class="modal-card success-card" role="dialog" aria-modal="true"
+             aria-labelledby="successTitle">
+
+            <div class="success-animation">
+                <svg viewBox="0 0 80 80" aria-hidden="true">
+                    <circle cx="40" cy="40" r="35"></circle>
+                    <path d="M22 41 L34 53 L59 27"></path>
+                </svg>
+            </div>
+
+            <h3 id="successTitle">Account Registration Submitted!</h3>
+
+            <p>
+                Your ADD Motor Shop customer account has been successfully
+                registered and is now pending admin approval.
+            </p>
+
+            <p>
+                Our administrator will review your submitted information.
+                You will be able to sign in once your account has been approved.
+            </p>
+
+            <p>
+                Thank you for your patience!
+            </p>
+
+            <button type="button" id="successDone" class="submit-button">
+                Done <span>→</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="js/themes/register-theme.js"></script>
+
+    <script>
+    (() => {
+        const API_BASE = "http://localhost:3000";
+
+        const form = document.getElementById("registerForm");
+        const errorMessage = document.getElementById("errorMessage");
+        const registerButton = document.getElementById("registerButton");
+        const confirmModal = document.getElementById("confirmModal");
+        const successModal = document.getElementById("successModal");
+        const fileInput = document.getElementById("identityDocument");
+        const filePreview = document.getElementById("filePreview");
+
+        const regionSelect = document.getElementById("region");
+        const provinceSelect = document.getElementById("province");
+        const citySelect = document.getElementById("city");
+        const barangaySelect = document.getElementById("barangay");
+
+        let pendingFormData = null;
+
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = "block";
+            errorMessage.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+        }
+
+        function clearError() {
+            errorMessage.textContent = "";
+            errorMessage.style.display = "none";
+        }
+
+        function showFieldError(message, fieldId) {
+            showError(message);
+
+            const field = document.getElementById(fieldId);
+
+            if (!field) return;
+
+            const customWrapper = field.closest(".custom-select-wrapper");
+
+            if (customWrapper) {
+                const dropdownButton = customWrapper.querySelector(
+                    ".custom-select-button"
+                );
+
+                if (dropdownButton) {
+                    setTimeout(() => {
+                        customWrapper.scrollIntoView({
+                            behavior: "smooth",
+                            block: "center"
+                        });
+
+                        dropdownButton.focus({
+                            preventScroll: true
+                        });
+                    }, 150);
+
+                    return;
+                }
+            }
+
+            if (fieldId === "identityDocument") {
+                const uploadBox = field.closest(".upload-box");
+                const uploadLabel = uploadBox?.querySelector(".upload-label");
+
+                setTimeout(() => {
+                    (uploadBox || field).scrollIntoView({
+                        behavior: "smooth",
+                        block: "center"
+                    });
+
+                    field.focus({
+                        preventScroll: true
+                    });
+
+                    if (uploadLabel) {
+                        uploadLabel.setAttribute("tabindex", "-1");
+                    }
+                }, 150);
+
+                return;
+            }
+
+            setTimeout(() => {
+                field.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+                field.focus({
+                    preventScroll: true
+                });
+            }, 150);
+        }
+
+        // SHOW / HIDE PASSWORD
+        document.querySelectorAll(".password-toggle").forEach(button => {
+            button.addEventListener("click", () => {
+                const targetId = button.dataset.target;
+                const passwordInput = document.getElementById(targetId);
+
+                if (!passwordInput) return;
+
+                const isHidden = passwordInput.type === "password";
+
+                passwordInput.type = isHidden ? "text" : "password";
+                button.textContent = isHidden ? "Hide" : "Show";
+                button.setAttribute("aria-pressed", String(isHidden));
+
+                button.setAttribute(
+                    "aria-label",
+                    isHidden ? "Hide password" : "Show password"
+                );
+            });
+        });
+
+        function setOptions(select, items, placeholder) {
+            select.innerHTML = "";
+
+            const first = document.createElement("option");
+            first.value = "";
+            first.textContent = placeholder;
+            select.appendChild(first);
+
+            items.forEach(item => {
+                const option = document.createElement("option");
+                option.value = item.name;
+                option.textContent = item.name;
+                option.dataset.code = item.code;
+                select.appendChild(option);
+            });
+
+            select.disabled = false;
+        }
+
+        function resetSelect(select, placeholder) {
+            select.innerHTML = "";
+
+            const option = document.createElement("option");
+            option.value = "";
+            option.textContent = placeholder;
+
+            select.appendChild(option);
+            select.disabled = true;
+        }
+
+        async function loadRegions() {
+            try {
+                const response = await fetch(
+                    "https://psgc.gitlab.io/api/regions/"
+                );
+
+                if (!response.ok) {
+                    throw new Error("Unable to load regions.");
+                }
+
+                const regions = await response.json();
+                regions.sort((a, b) => a.name.localeCompare(b.name));
+
+                setOptions(regionSelect, regions, "Select region");
+
+            } catch (error) {
+                resetSelect(regionSelect, "Unable to load regions");
+
+                showError(
+                    "The Philippine address list could not be loaded. Please refresh the page and try again."
+                );
+            }
+        }
+
+        regionSelect.addEventListener("change", async () => {
+            const selected = regionSelect.selectedOptions[0];
+
+            resetSelect(provinceSelect, "Loading provinces...");
+            resetSelect(citySelect, "Select province first");
+            resetSelect(barangaySelect, "Select city / municipality first");
+
+            if (!selected || !selected.dataset.code) return;
+
+            try {
+                const code = selected.dataset.code;
+
+                const response = await fetch(
+                    `https://psgc.gitlab.io/api/regions/${code}/provinces/`
+                );
+
+                if (!response.ok) throw new Error();
+
+                const provinces = await response.json();
+
+                if (provinces.length) {
+                    provinces.sort((a, b) => a.name.localeCompare(b.name));
+
+                    setOptions(
+                        provinceSelect,
+                        provinces,
+                        "Select province"
+                    );
+                } else {
+                    resetSelect(
+                        provinceSelect,
+                        "Not applicable for this region"
+                    );
+
+                    await loadCities(code, true);
+                }
+
+            } catch {
+                resetSelect(
+                    provinceSelect,
+                    "Unable to load provinces"
+                );
+
+                showError(
+                    "Unable to load provinces. Please try selecting the region again."
+                );
+            }
+        });
+
+        async function loadCities(parentCode, isRegion = false) {
+            resetSelect(citySelect, "Loading cities / municipalities...");
+            resetSelect(barangaySelect, "Select city / municipality first");
+
+            try {
+                const url = isRegion
+                    ? `https://psgc.gitlab.io/api/regions/${parentCode}/cities-municipalities/`
+                    : `https://psgc.gitlab.io/api/provinces/${parentCode}/cities-municipalities/`;
+
+                const response = await fetch(url);
+
+                if (!response.ok) throw new Error();
+
+                const cities = await response.json();
+                cities.sort((a, b) => a.name.localeCompare(b.name));
+
+                setOptions(
+                    citySelect,
+                    cities,
+                    "Select city / municipality"
+                );
+
+            } catch {
+                resetSelect(citySelect, "Unable to load cities");
+
+                showError(
+                    "Unable to load cities or municipalities. Please try again."
+                );
+            }
+        }
+
+        provinceSelect.addEventListener("change", async () => {
+            const selected = provinceSelect.selectedOptions[0];
+
+            resetSelect(citySelect, "Select province first");
+            resetSelect(
+                barangaySelect,
+                "Select city / municipality first"
+            );
+
+            if (selected && selected.dataset.code) {
+                await loadCities(selected.dataset.code);
+            }
+        });
+
+        citySelect.addEventListener("change", async () => {
+            const selected = citySelect.selectedOptions[0];
+
+            resetSelect(barangaySelect, "Loading barangays...");
+
+            if (!selected || !selected.dataset.code) return;
+
+            try {
+                const response = await fetch(
+                    `https://psgc.gitlab.io/api/cities-municipalities/${selected.dataset.code}/barangays/`
+                );
+
+                if (!response.ok) throw new Error();
+
+                const barangays = await response.json();
+                barangays.sort((a, b) => a.name.localeCompare(b.name));
+
+                setOptions(
+                    barangaySelect,
+                    barangays,
+                    "Select barangay"
+                );
+
+            } catch {
+                resetSelect(barangaySelect, "Unable to load barangays");
+
+                showError(
+                    "Unable to load barangays. Please try again."
+                );
+            }
+        });
+
+        loadRegions();
+
+        // CUSTOM DROPDOWNS
+        const customSelects = [];
+
+        function initializeCustomDropdown(select) {
+            if (!select || select.dataset.customInitialized === "true") {
+                return;
+            }
+
+            select.dataset.customInitialized = "true";
+
+            const wrapper = document.createElement("div");
+            wrapper.className = "custom-select-wrapper";
+
+            select.parentNode.insertBefore(wrapper, select);
+            wrapper.appendChild(select);
+
+            select.classList.add("custom-select-original");
+
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "custom-select-button";
+            button.setAttribute("aria-haspopup", "listbox");
+            button.setAttribute("aria-expanded", "false");
+
+            const label = document.querySelector(`label[for="${select.id}"]`);
+
+            if (label) {
+                button.setAttribute(
+                    "aria-label",
+                    label.textContent.trim()
+                );
+            }
+
+            const menu = document.createElement("div");
+            menu.className = "custom-select-menu";
+            menu.setAttribute("role", "listbox");
+
+            wrapper.append(button, menu);
+
+            function closeDropdown() {
+                wrapper.classList.remove("open");
+                button.setAttribute("aria-expanded", "false");
+            }
+
+            function refreshDropdown() {
+                menu.innerHTML = "";
+
+                const selectedOption = select.options[select.selectedIndex];
+
+                button.textContent = selectedOption
+                    ? selectedOption.textContent.trim()
+                    : "Select an option";
+
+                button.disabled = select.disabled;
+
+                button.setAttribute(
+                    "aria-expanded",
+                    String(wrapper.classList.contains("open"))
+                );
+
+                Array.from(select.options).forEach(option => {
+                    const item = document.createElement("button");
+
+                    item.type = "button";
+                    item.className = "custom-select-option";
+                    item.textContent = option.textContent.trim();
+                    item.disabled = option.disabled || option.value === "";
+                    item.setAttribute("role", "option");
+
+                    if (option.value === select.value) {
+                        item.classList.add("selected");
+                        item.setAttribute("aria-selected", "true");
+                    } else {
+                        item.setAttribute("aria-selected", "false");
+                    }
+
+                    item.addEventListener("click", () => {
+                        if (item.disabled) return;
+
+                        select.value = option.value;
+
+                        select.dispatchEvent(
+                            new Event("change", { bubbles: true })
+                        );
+
+                        refreshDropdown();
+                        closeDropdown();
+                        button.focus();
+                    });
+
+                    menu.appendChild(item);
+                });
+            }
+
+            function openDropdown() {
+                if (select.disabled) return;
+
+                customSelects.forEach(other => {
+                    if (other.wrapper !== wrapper) {
+                        other.closeDropdown();
+                    }
+                });
+
+                wrapper.classList.add("open");
+                button.setAttribute("aria-expanded", "true");
+            }
+
+            button.addEventListener("click", () => {
+                if (wrapper.classList.contains("open")) {
+                    closeDropdown();
+                } else {
+                    openDropdown();
+                }
+            });
+
+            if (label) {
+                label.addEventListener("click", event => {
+                    event.preventDefault();
+                    button.focus();
+
+                    if (!select.disabled) {
+                        openDropdown();
+                    }
+                });
+            }
+
+            const observer = new MutationObserver(() => {
+                refreshDropdown();
+            });
+
+            observer.observe(select, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+
+            select.addEventListener("change", refreshDropdown);
+
+            customSelects.push({
+                wrapper,
+                button,
+                closeDropdown,
+                refreshDropdown
+            });
+
+            refreshDropdown();
+        }
+
+        [
+            "suffix",
+            "region",
+            "province",
+            "city",
+            "barangay",
+            "idType"
+        ].forEach(id => {
+            initializeCustomDropdown(document.getElementById(id));
+        });
+
+        document.addEventListener("click", event => {
+            customSelects.forEach(item => {
+                if (!item.wrapper.contains(event.target)) {
+                    item.closeDropdown();
+                }
+            });
+        });
+
+        document.addEventListener("keydown", event => {
+            if (event.key === "Escape") {
+                customSelects.forEach(item => item.closeDropdown());
+            }
+        });
+
+        // NAME INPUT VALIDATION
+        ["firstName", "middleName", "lastName"].forEach(id => {
+            const input = document.getElementById(id);
+
+            input.addEventListener("input", () => {
+                input.value = input.value.replace(
+                    /[^\p{L}\p{M}\s.'-]/gu,
+                    ""
+                );
+            });
+        });
+
+        // PHONE NUMBER INPUT VALIDATION
+        document.getElementById("phone").addEventListener("input", event => {
+            event.target.value = event.target.value
+                .replace(/\D/g, "")
+                .slice(0, 11);
+        });
+
+        // ID IMAGE PREVIEW AND VALIDATION
+        fileInput.addEventListener("change", () => {
+            filePreview.innerHTML = "";
+
+            const file = fileInput.files[0];
+
+            if (!file) return;
+
+            const allowedTypes = ["image/jpeg", "image/png"];
+
+            if (!allowedTypes.includes(file.type)) {
+                fileInput.value = "";
+
+                showError(
+                    "Please upload your ID as a JPG, JPEG, or PNG image."
+                );
+
+                return;
+            }
+
+            if (file.size > 5 * 1024 * 1024) {
+                fileInput.value = "";
+
+                showError(
+                    "Your ID image exceeds the 5 MB file size limit."
+                );
+
+                return;
+            }
+
+            clearError();
+
+            const image = document.createElement("img");
+            image.alt = "Identity document preview";
+            image.src = URL.createObjectURL(file);
+
+            const details = document.createElement("div");
+            details.className = "file-details";
+
+            const fileName = document.createElement("strong");
+            fileName.textContent = file.name;
+
+            const fileSize = document.createElement("small");
+            fileSize.textContent =
+                `${(file.size / 1024 / 1024).toFixed(2)} MB`;
+
+            details.append(fileName, fileSize);
+            filePreview.append(image, details);
+        });
+
+        // FORM VALIDATION
+        function validateForm() {
+            const firstName =
+                document.getElementById("firstName").value.trim();
+
+            const middleName =
+                document.getElementById("middleName").value.trim();
+
+            const lastName =
+                document.getElementById("lastName").value.trim();
+
+            const email =
+                document.getElementById("email").value.trim();
+
+            const phone =
+                document.getElementById("phone").value.trim();
+
+            const password =
+                document.getElementById("password").value;
+
+            const confirmPassword =
+                document.getElementById("confirmPassword").value;
+
+            const idType =
+                document.getElementById("idType").value;
+
+            const file = fileInput.files[0];
+
+            const namePattern =
+                /^[\p{L}\p{M}][\p{L}\p{M}\s.'-]*$/u;
+
+            if (!firstName || !namePattern.test(firstName)) {
+                return {
+                    message: "Please enter a valid first name.",
+                    field: "firstName"
+                };
+            }
+
+            if (middleName && !namePattern.test(middleName)) {
+                return {
+                    message: "Please enter a valid middle name.",
+                    field: "middleName"
+                };
+            }
+
+            if (!lastName || !namePattern.test(lastName)) {
+                return {
+                    message: "Please enter a valid last name.",
+                    field: "lastName"
+                };
+            }
+
+            if (!/^[^\s@]+@gmail\.com$/i.test(email)) {
+                return {
+                    message: "Please use a valid Gmail address.",
+                    field: "email"
+                };
+            }
+
+            if (!/^09\d{9}$/.test(phone)) {
+                return {
+                    message: "Please enter a valid 11-digit Philippine mobile number starting with 09.",
+                    field: "phone"
+                };
+            }
+
+            if (!regionSelect.value) {
+                return {
+                    message: "Please select your region.",
+                    field: "region"
+                };
+            }
+
+            if (
+                provinceSelect.options.length > 1 &&
+                !provinceSelect.value
+            ) {
+                return {
+                    message: "Please select your province.",
+                    field: "province"
+                };
+            }
+
+            if (!citySelect.value) {
+                return {
+                    message: "Please select your city or municipality.",
+                    field: "city"
+                };
+            }
+
+            if (!barangaySelect.value) {
+                return {
+                    message: "Please select your barangay.",
+                    field: "barangay"
+                };
+            }
+
+            if (
+                document.getElementById("streetAddress")
+                    .value.trim().length < 3
+            ) {
+                return {
+                    message: "Please enter your house number and street address.",
+                    field: "streetAddress"
+                };
+            }
+
+            if (password.length < 8 || !/\d/.test(password)) {
+                return {
+                    message: "Password must contain at least 8 characters and one number.",
+                    field: "password"
+                };
+            }
+
+            if (!confirmPassword) {
+                return {
+                    message: "Please confirm your password.",
+                    field: "confirmPassword"
+                };
+            }
+
+            if (password !== confirmPassword) {
+                return {
+                    message: "Passwords do not match.",
+                    field: "confirmPassword"
+                };
+            }
+
+            if (!idType) {
+                return {
+                    message: "Please select the type of ID.",
+                    field: "idType"
+                };
+            }
+
+            if (!file) {
+                return {
+                    message: "Please upload a clear image of your valid ID.",
+                    field: "identityDocument"
+                };
+            }
+
+            if (!["image/jpeg", "image/png"].includes(file.type)) {
+                return {
+                    message: "Only JPG, JPEG, and PNG ID images are accepted.",
+                    field: "identityDocument"
+                };
+            }
+
+            if (file.size > 5 * 1024 * 1024) {
+                return {
+                    message: "Your ID image must not exceed 5 MB.",
+                    field: "identityDocument"
+                };
+            }
+
+            if (!document.getElementById("terms").checked) {
+                return {
+                    message: "Please confirm the information and agree to the registration terms.",
+                    field: "terms"
+                };
+            }
+
+            return null;
+        }
+
+        // PREPARE REGISTRATION DATA AND SHOW CONFIRMATION
+        form.addEventListener("submit", event => {
+            event.preventDefault();
+            clearError();
+
+            const validationError = validateForm();
+
+            if (validationError) {
+                showFieldError(
+                    validationError.message,
+                    validationError.field
+                );
+
+                return;
+            }
+
+            pendingFormData = new FormData();
+
+            pendingFormData.append(
+                "firstName",
+                document.getElementById("firstName").value.trim()
+            );
+
+            pendingFormData.append(
+                "middleName",
+                document.getElementById("middleName").value.trim()
+            );
+
+            pendingFormData.append(
+                "lastName",
+                document.getElementById("lastName").value.trim()
+            );
+
+            pendingFormData.append(
+                "suffix",
+                document.getElementById("suffix").value.trim()
+            );
+
+            pendingFormData.append(
+                "email",
+                document.getElementById("email").value.trim()
+            );
+
+            pendingFormData.append(
+                "phone",
+                document.getElementById("phone").value.trim()
+            );
+
+            pendingFormData.append("region", regionSelect.value);
+
+            pendingFormData.append(
+                "province",
+                provinceSelect.value || "Not Applicable"
+            );
+
+            pendingFormData.append("city", citySelect.value);
+            pendingFormData.append("barangay", barangaySelect.value);
+
+            pendingFormData.append(
+                "streetAddress",
+                document.getElementById("streetAddress").value.trim()
+            );
+
+            pendingFormData.append(
+                "password",
+                document.getElementById("password").value
+            );
+
+            pendingFormData.append(
+                "idType",
+                document.getElementById("idType").value
+            );
+
+            pendingFormData.append(
+                "identityDocument",
+                fileInput.files[0]
+            );
+
+            confirmModal.classList.add("show");
+            confirmModal.setAttribute("aria-hidden", "false");
+        });
+
+        // CANCEL CONFIRMATION
+        document.getElementById("cancelRegistration")
+            .addEventListener("click", () => {
+                confirmModal.classList.remove("show");
+                confirmModal.setAttribute("aria-hidden", "true");
+            });
+
+        // SUBMIT REGISTRATION AFTER CONFIRMATION
+        document.getElementById("confirmRegistration")
+            .addEventListener("click", async () => {
+                if (!pendingFormData) return;
+
+                const confirmButton =
+                    document.getElementById("confirmRegistration");
+
+                confirmButton.disabled = true;
+                confirmButton.textContent = "Creating Account...";
+
+                try {
+                    const response = await fetch(
+                        `${API_BASE}/api/register`,
+                        {
+                            method: "POST",
+                            body: pendingFormData
+                        }
+                    );
+
+                    const result = await response.json();
+
+                    if (!response.ok || !result.success) {
+                        throw new Error(
+                            result.message ||
+                            "Registration failed. Please try again."
+                        );
+                    }
+
+                    confirmModal.classList.remove("show");
+                    confirmModal.setAttribute("aria-hidden", "true");
+
+                    successModal.classList.add("show");
+                    successModal.setAttribute("aria-hidden", "false");
+
+                    pendingFormData = null;
+
+                } catch (error) {
+                    confirmModal.classList.remove("show");
+                    confirmModal.setAttribute("aria-hidden", "true");
+
+                    showError(
+                        error.message ||
+                        "Unable to register. Please check your connection and try again."
+                    );
+
+                } finally {
+                    confirmButton.disabled = false;
+                    confirmButton.textContent = "Yes, Create Account";
+                }
+            });
+
+        // REDIRECT TO LOGIN AFTER SUCCESSFUL REGISTRATION
+        document.getElementById("successDone")
+            .addEventListener("click", () => {
+                window.location.href = "login.html";
+            });
+
+    })();
+    </script>
+</body>
+</html>

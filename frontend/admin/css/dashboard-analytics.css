@@ -1,0 +1,418 @@
+/* =========================================
+   DASHBOARD DAILY REVENUE CARDS
+========================================= */
+
+.dashboard-daily-revenue-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    width: 100%;
+    margin: 0 0 22px;
+}
+
+.dashboard-revenue-summary-card {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    min-width: 0;
+    padding: 22px 24px;
+    background: var(--card-bg, #ffffff);
+    border: 1px solid var(--border-color, #e8e8e8);
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.035);
+}
+
+.dashboard-revenue-summary-icon {
+    display: flex;
+    flex: 0 0 52px;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    font-size: 20px;
+}
+
+.service-revenue-summary .dashboard-revenue-summary-icon {
+    color: #e63946;
+    background: rgba(230, 57, 70, 0.11);
+}
+
+.product-revenue-summary .dashboard-revenue-summary-icon {
+    color: #2563eb;
+    background: rgba(37, 99, 235, 0.11);
+}
+
+.dashboard-revenue-summary-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+    gap: 5px;
+}
+
+.dashboard-revenue-summary-label {
+    color: var(--text-secondary, #777777);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.dashboard-revenue-summary-value {
+    color: var(--text-primary, #171717);
+    font-size: clamp(21px, 2.2vw, 28px);
+    font-weight: 750;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+}
+
+.dashboard-revenue-summary-note {
+    color: var(--text-secondary, #888888);
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+
+/* =========================================
+   APPOINTMENT ANALYTICS LAYOUT
+========================================= */
+
+.dashboard-appointment-analytics {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 22px;
+}
+
+.dashboard-analytics-card {
+    min-width: 0;
+    padding: 22px;
+    overflow: hidden;
+    background: var(--card-bg, #ffffff);
+    border: 1px solid var(--border-color, #e8e8e8);
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.035);
+}
+
+.dashboard-analytics-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+.dashboard-analytics-card-header h3 {
+    margin: 0;
+    color: var(--text-primary, #171717);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.dashboard-analytics-card-header p {
+    margin: 5px 0 0;
+    color: var(--text-secondary, #888888);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.dashboard-analytics-period {
+    flex: 0 0 auto;
+    padding: 6px 10px;
+    color: var(--text-secondary, #777777);
+    background: var(--surface-secondary, #f5f5f5);
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 650;
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   CHART CONTAINERS
+========================================= */
+
+.dashboard-chart-container {
+    width: 100%;
+    min-height: 260px;
+    overflow: hidden;
+}
+
+.dashboard-analytics-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 220px;
+    overflow: visible;
+}
+
+.dashboard-chart-gridline {
+    stroke: var(--border-color, #e8e8e8);
+    stroke-width: 1;
+    stroke-dasharray: 4 5;
+}
+
+.dashboard-chart-axis-label {
+    fill: var(--text-secondary, #888888);
+    font-family: inherit;
+    font-size: 11px;
+}
+
+.dashboard-chart-value {
+    fill: var(--text-primary, #444444);
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.dashboard-chart-bar {
+    fill: #e63946;
+    transition: opacity 0.2s ease;
+}
+
+.dashboard-chart-bar:hover {
+    opacity: 0.75;
+}
+
+.dashboard-chart-area {
+    fill: rgba(230, 57, 70, 0.10);
+    stroke: none;
+}
+
+.dashboard-chart-line {
+    fill: none;
+    stroke: #e63946;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.dashboard-chart-point {
+    fill: #ffffff;
+    stroke: #e63946;
+    stroke-width: 2.5;
+}
+
+.dashboard-analytics-loading,
+.dashboard-analytics-empty,
+.dashboard-analytics-error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
+    padding: 20px;
+    color: var(--text-secondary, #888888);
+    font-size: 13px;
+    text-align: center;
+}
+
+.dashboard-analytics-error {
+    color: #dc2626;
+}
+
+
+/* =========================================
+   WEEKLY CATEGORY PIE CHART
+========================================= */
+
+.dashboard-category-chart-layout {
+    display: grid;
+    grid-template-columns: minmax(180px, 0.9fr) minmax(220px, 1.1fr);
+    align-items: center;
+    gap: 30px;
+    min-height: 250px;
+}
+
+.dashboard-category-pie-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.dashboard-category-pie {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: min(210px, 100%);
+    aspect-ratio: 1;
+    border-radius: 50%;
+}
+
+.dashboard-category-pie-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 58%;
+    aspect-ratio: 1;
+    background: var(--card-bg, #ffffff);
+    border-radius: 50%;
+}
+
+.dashboard-category-pie-center strong {
+    color: var(--text-primary, #171717);
+    font-size: 29px;
+    font-weight: 750;
+    line-height: 1.2;
+}
+
+.dashboard-category-pie-center span {
+    margin-top: 4px;
+    color: var(--text-secondary, #888888);
+    font-size: 10px;
+}
+
+.dashboard-category-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+    width: 100%;
+}
+
+.dashboard-category-legend-item {
+    display: grid;
+    grid-template-columns: 11px minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.dashboard-category-legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.dashboard-category-legend-name {
+    overflow: hidden;
+    color: var(--text-secondary, #777777);
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dashboard-category-legend-value {
+    color: var(--text-primary, #222222);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.dashboard-category-legend-percent {
+    min-width: 48px;
+    color: var(--text-secondary, #888888);
+    font-size: 11px;
+    text-align: right;
+}
+
+
+/* =========================================
+   DARK MODE
+========================================= */
+
+body.dark-mode .dashboard-revenue-summary-card,
+body.dark-mode .dashboard-analytics-card {
+    background: var(--card-bg, #1b1b1b);
+    border-color: var(--border-color, #333333);
+}
+
+body.dark-mode .dashboard-revenue-summary-value,
+body.dark-mode .dashboard-analytics-card-header h3,
+body.dark-mode .dashboard-category-pie-center strong,
+body.dark-mode .dashboard-category-legend-value {
+    color: var(--text-primary, #f5f5f5);
+}
+
+body.dark-mode .dashboard-category-pie-center {
+    background: var(--card-bg, #1b1b1b);
+}
+
+body.dark-mode .dashboard-analytics-period {
+    background: var(--surface-secondary, #292929);
+}
+
+body.dark-mode .dashboard-chart-value {
+    fill: var(--text-primary, #f5f5f5);
+}
+
+body.dark-mode .dashboard-chart-gridline {
+    stroke: var(--border-color, #383838);
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+    .dashboard-daily-revenue-grid {
+        gap: 12px;
+    }
+
+    .dashboard-revenue-summary-card {
+        gap: 12px;
+        padding: 17px;
+    }
+
+    .dashboard-revenue-summary-icon {
+        flex-basis: 44px;
+        width: 44px;
+        height: 44px;
+        font-size: 17px;
+    }
+
+    .dashboard-analytics-card {
+        padding: 18px;
+    }
+
+    .dashboard-category-chart-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 15px;
+    }
+
+    .dashboard-category-pie {
+        width: 185px;
+    }
+
+    .dashboard-category-legend {
+        max-width: 420px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 520px) {
+    .dashboard-daily-revenue-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .dashboard-revenue-summary-card {
+        padding: 16px;
+    }
+
+    .dashboard-analytics-card {
+        padding: 15px;
+    }
+
+    .dashboard-analytics-card-header {
+        flex-direction: column;
+        gap: 9px;
+    }
+
+    .dashboard-analytics-card-header h3 {
+        font-size: 15px;
+    }
+
+    .dashboard-chart-container {
+        min-height: 210px;
+    }
+
+    .dashboard-analytics-svg {
+        min-height: 190px;
+    }
+
+    .dashboard-category-pie {
+        width: 170px;
+    }
+}

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ADD Motor Shop - Admin Login</title>
+
+    <!-- Google Font -->
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Admin Login CSS -->
+    <link
+        rel="stylesheet"
+        href="css/login.css"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="login-page">
+
+
+        <!-- LEFT BRANDING PANEL -->
+
+        <section class="brand-panel">
+
+
+            <div class="brand-content">
+
+
+                <!-- BRAND LOGO REMOVED -->
+
+
+                <div class="brand-message">
+
+                    <span class="brand-label">
+                        ADMINISTRATION
+                    </span>
+
+                    <h1>
+                        Manage Your
+                        <span>Motor Shop</span>
+                    </h1>
+
+                    <p>
+                        Manage appointments, customers,
+                        motorcycles, services, inventory,
+                        sales, and more from one place.
+                    </p>
+
+                </div>
+
+
+                <div class="brand-features">
+
+                    <div class="feature-item">
+
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-calendar-check"></i>
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Appointment Management
+                            </strong>
+
+                            <span>
+                                Manage customer service schedules
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="feature-item">
+
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-boxes-stacked"></i>
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Inventory Control
+                            </strong>
+
+                            <span>
+                                Monitor parts and stock levels
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="feature-item">
+
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Business Overview
+                            </strong>
+
+                            <span>
+                                View important shop information
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="brand-footer">
+
+                <span>
+                    © 2026 ADD Motor Shop
+                </span>
+
+                <span>
+                    Admin Management System
+                </span>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- LOGIN PANEL -->
+
+        <section class="login-panel">
+
+            <div class="login-container">
+
+
+                <!-- MOBILE LOGO -->
+
+                <div class="mobile-logo">
+
+                    <div class="mobile-logo-icon">
+                        <i class="fa-solid fa-motorcycle"></i>
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            ADD
+                        </strong>
+
+                        <span>
+                            MOTOR SHOP
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- LOGIN HEADER -->
+
+                <div class="login-header">
+
+                    <div class="login-icon">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                    </div>
+
+                    <span class="login-label">
+                        ADMIN PORTAL
+                    </span>
+
+                    <h2>
+                        Welcome Back
+                    </h2>
+
+                    <p>
+                        Sign in to access the
+                        administration dashboard.
+                    </p>
+
+                </div>
+
+
+
+                <!-- LOGIN MESSAGE -->
+
+                <div
+                    id="loginMessage"
+                    class="login-message"
+                    role="alert"
+                    aria-live="polite"
+                ></div>
+
+
+
+                <!-- LOGIN FORM -->
+
+                <form
+                    id="adminLoginForm"
+                    class="login-form"
+                    novalidate
+                >
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-regular fa-envelope"></i>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Enter your admin email"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-group">
+
+                        <div class="label-row">
+
+                            <label for="password">
+                                Password
+                            </label>
+
+                        </div>
+
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-lock"></i>
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                id="togglePassword"
+                                class="password-toggle"
+                                aria-label="Show password"
+                            >
+
+                                <i
+                                    id="passwordIcon"
+                                    class="fa-regular fa-eye"
+                                ></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- LOGIN BUTTON -->
+
+                    <button
+                        type="submit"
+                        id="loginButton"
+                        class="login-button"
+                    >
+
+                        <span
+                            id="loginButtonIcon"
+                            class="button-icon"
+                        >
+
+                            <i class="fa-solid fa-right-to-bracket"></i>
+
+                        </span>
+
+                        <span id="loginButtonText">
+                            Sign In
+                        </span>
+
+                    </button>
+
+
+                </form>
+
+
+
+                <!-- SECURITY NOTICE -->
+
+                <div class="security-notice">
+
+                    <div class="security-icon">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Secure Admin Access
+                        </strong>
+
+                        <span>
+                            This area is restricted to
+                            authorized administrators.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- BACK TO SHOP -->
+
+                <a
+                    href="/frontend/"
+                    class="back-link"
+                >
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Back to Motor Shop
+
+                </a>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- Admin Login JavaScript -->
+
+    <script
+        src="js/login.js"
+    ></script>
+
+</body>
+
+</html>

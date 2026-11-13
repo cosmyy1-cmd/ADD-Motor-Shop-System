@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ADD Motor Shop - Appointments</title>
+
+
+    <!-- Google Fonts -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- Font Awesome -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <!-- SHARED ADMIN LAYOUT -->
+
+    <link
+        rel="stylesheet"
+        href="css/admin-layout.css"
+    >
+
+
+    <!-- APPOINTMENTS PAGE -->
+
+    <link
+        rel="stylesheet"
+        href="css/appointments.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         NAVIGATION IS PROVIDED BY admin-layout.js
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOP BAR
+             MATCHED TO THE DASHBOARD HEADER
+        ================================================== -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    type="button"
+                    class="mobile-menu-button"
+                    id="mobileMenuButton"
+                    aria-label="Open navigation"
+                >
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+
+                <div class="topbar-page-info">
+
+                    <span class="topbar-label">
+                        ADMIN PORTAL
+                    </span>
+
+                    <h2>
+                        Manage ADD Motor Shop
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+
+                <!-- Theme Toggle -->
+
+                <button
+                    type="button"
+                    class="theme-toggle"
+                    id="themeToggle"
+                    aria-label="Toggle light and dark mode"
+                    title="Toggle light and dark mode"
+                >
+
+                    <i
+                        class="fa-solid fa-moon"
+                        id="themeIcon"
+                    ></i>
+
+                    <span id="themeText">
+                        Dark Mode
+                    </span>
+
+                </button>
+
+
+                <!-- Admin Profile -->
+
+                <div class="admin-profile">
+
+                    <div
+                        class="admin-avatar"
+                        id="adminAvatar"
+                    >
+
+                        <span id="adminAvatarInitial">
+                            A
+                        </span>
+
+                    </div>
+
+
+                    <div class="admin-profile-info">
+
+                        <strong id="adminName">
+                            Administrator
+                        </strong>
+
+                        <span id="adminRole">
+                            Administrator
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             PAGE CONTENT
+        ================================================== -->
+
+        <section class="page-content">
+
+
+            <!-- PAGE HEADING -->
+
+            <div class="page-heading">
+
+                <div class="page-heading-left">
+
+                    <span class="page-eyebrow">
+                        APPOINTMENT MANAGEMENT
+                    </span>
+
+                    <h1>
+                        Customer Appointments
+                    </h1>
+
+                    <p>
+                        Review, manage, and update scheduled service appointments.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="refresh-button"
+                    id="refreshButton"
+                >
+
+                    <i class="fa-solid fa-rotate"></i>
+
+                    <span>
+                        Refresh
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 SUMMARY CARDS
+            ================================================== -->
+
+            <div class="summary-grid">
+
+
+                <div class="summary-card">
+
+                    <div class="summary-icon pending">
+
+                        <i class="fa-regular fa-clock"></i>
+
+                    </div>
+
+                    <div class="summary-content">
+
+                        <span class="summary-label">
+                            Pending
+                        </span>
+
+                        <strong
+                            class="summary-value"
+                            id="pendingCount"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <div class="summary-icon confirmed">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    </div>
+
+                    <div class="summary-content">
+
+                        <span class="summary-label">
+                            Confirmed
+                        </span>
+
+                        <strong
+                            class="summary-value"
+                            id="confirmedCount"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <div class="summary-icon in-service">
+
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+
+                    </div>
+
+                    <div class="summary-content">
+
+                        <span class="summary-label">
+                            In Service
+                        </span>
+
+                        <strong
+                            class="summary-value"
+                            id="inServiceCount"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <div class="summary-icon completed">
+
+                        <i class="fa-solid fa-check-double"></i>
+
+                    </div>
+
+                    <div class="summary-content">
+
+                        <span class="summary-label">
+                            Completed
+                        </span>
+
+                        <strong
+                            class="summary-value"
+                            id="completedCount"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <div class="summary-icon cancelled">
+
+                        <i class="fa-solid fa-ban"></i>
+
+                    </div>
+
+                    <div class="summary-content">
+
+                        <span class="summary-label">
+                            Cancelled
+                        </span>
+
+                        <strong
+                            class="summary-value"
+                            id="cancelledCount"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 APPOINTMENT LIST
+            ================================================== -->
+
+            <div class="content-card">
+
+
+                <div class="content-card-header">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            APPOINTMENTS
+                        </span>
+
+                        <h2>
+                            Appointment List
+                        </h2>
+
+                        <p>
+                            View and manage customer service schedules.
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="appointment-count"
+                        id="appointmentCount"
+                    >
+                        0 appointments
+                    </div>
+
+                </div>
+
+
+                <!-- FILTER BAR -->
+
+                <div class="filter-bar">
+
+
+                    <div class="search-box">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Search customer, motorcycle, or service..."
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+
+                    <div class="filter-control">
+
+                        <label for="statusFilter">
+                            Status
+                        </label>
+
+                        <select id="statusFilter">
+
+                            <option value="all">
+                                All Status
+                            </option>
+
+                            <option value="Pending">
+                                Pending
+                            </option>
+
+                            <option value="Confirmed">
+                                Confirmed
+                            </option>
+
+                            <option value="In Service">
+                                In Service
+                            </option>
+
+                            <option value="Completed">
+                                Completed
+                            </option>
+
+                            <option value="Cancelled">
+                                Cancelled
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="filter-control">
+
+                        <label for="dateFilter">
+                            Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="dateFilter"
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="clear-filter-button"
+                        id="clearFiltersButton"
+                    >
+
+                        <i class="fa-solid fa-filter-circle-xmark"></i>
+
+                        Clear
+
+                    </button>
+
+                </div>
+
+
+                <!-- LOADING -->
+
+                <div
+                    class="appointments-loading"
+                    id="appointmentsLoading"
+                >
+
+                    <div class="loading-spinner">
+
+                        <i class="fa-solid fa-spinner"></i>
+
+                    </div>
+
+                    <p>
+                        Loading appointments...
+                    </p>
+
+                </div>
+
+
+                <!-- ERROR -->
+
+                <div
+                    class="appointments-error"
+                    id="appointmentsError"
+                    style="display: none;"
+                >
+
+                    <div class="error-icon">
+
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+
+                    </div>
+
+                    <h3>
+                        Unable to Load Appointments
+                    </h3>
+
+                    <p id="appointmentsErrorMessage">
+                        Something went wrong while loading appointments.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="retry-button"
+                        id="retryButton"
+                    >
+
+                        <i class="fa-solid fa-rotate"></i>
+
+                        Try Again
+
+                    </button>
+
+                </div>
+
+
+                <!-- EMPTY -->
+
+                <div
+                    class="appointments-empty"
+                    id="appointmentsEmpty"
+                    style="display: none;"
+                >
+
+                    <div class="empty-icon">
+
+                        <i class="fa-regular fa-calendar-xmark"></i>
+
+                    </div>
+
+                    <h3>
+                        No Appointments Found
+                    </h3>
+
+                    <p>
+                        There are no appointments matching your current filters.
+                    </p>
+
+                </div>
+
+
+                <!-- APPOINTMENTS GENERATED BY JS -->
+
+                <div
+                    class="appointments-list"
+                    id="appointmentsList"
+                ></div>
+
+            </div>
+
+
+            <!-- =================================================
+                 WORKFLOW
+            ================================================== -->
+
+            <div class="workflow-card">
+
+                <div class="workflow-header">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            APPOINTMENT WORKFLOW
+                        </span>
+
+                        <h2>
+                            Service Status Flow
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="workflow">
+
+
+                    <div class="workflow-step">
+
+                        <div class="workflow-icon pending">
+
+                            <i class="fa-regular fa-clock"></i>
+
+                        </div>
+
+                        <div class="workflow-info">
+
+                            <strong>
+                                Pending
+                            </strong>
+
+                            <span>
+                                Waiting for confirmation
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="workflow-line"></div>
+
+
+                    <div class="workflow-step">
+
+                        <div class="workflow-icon confirmed">
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                        </div>
+
+                        <div class="workflow-info">
+
+                            <strong>
+                                Confirmed
+                            </strong>
+
+                            <span>
+                                Appointment accepted
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="workflow-line"></div>
+
+
+                    <div class="workflow-step">
+
+                        <div class="workflow-icon in-service">
+
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+
+                        </div>
+
+                        <div class="workflow-info">
+
+                            <strong>
+                                In Service
+                            </strong>
+
+                            <span>
+                                Motorcycle is being serviced
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="workflow-line"></div>
+
+
+                    <div class="workflow-step">
+
+                        <div class="workflow-icon completed">
+
+                            <i class="fa-solid fa-check-double"></i>
+
+                        </div>
+
+                        <div class="workflow-info">
+
+                            <strong>
+                                Completed
+                            </strong>
+
+                            <span>
+                                Service has been completed
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         APPOINTMENT DETAILS MODAL
+    ====================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="appointmentModal"
+    >
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <span class="modal-eyebrow">
+                        APPOINTMENT DETAILS
+                    </span>
+
+                    <h2>
+                        Appointment Information
+                    </h2>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="closeAppointmentModal"
+                    aria-label="Close appointment details"
+                >
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+
+            <div
+                class="modal-body"
+                id="appointmentDetails"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         STATUS UPDATE MODAL
+    ====================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="statusModal"
+    >
+
+        <div class="modal status-modal">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <span class="modal-eyebrow">
+                        UPDATE STATUS
+                    </span>
+
+                    <h2>
+                        Appointment Status
+                    </h2>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="cancelStatusButton"
+                    aria-label="Close status dialog"
+                >
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <div class="status-update-icon">
+
+                    <i class="fa-solid fa-arrows-rotate"></i>
+
+                </div>
+
+
+                <p
+                    class="status-modal-message"
+                    id="statusModalMessage"
+                >
+                    Are you sure you want to update this appointment status?
+                </p>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="modal-secondary-button"
+                    id="cancelStatusButton2"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="button"
+                    class="modal-primary-button"
+                    id="confirmStatusButton"
+                >
+
+                    <i class="fa-solid fa-check"></i>
+
+                    Confirm Update
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         TOAST
+    ====================================================== -->
+
+    <div
+        class="toast"
+        id="toast"
+    >
+
+        <div class="toast-icon">
+
+            <i
+                class="fa-solid fa-check"
+                id="toastIcon"
+            ></i>
+
+        </div>
+
+
+        <div class="toast-content">
+
+            <strong id="toastTitle">
+                Success
+            </strong>
+
+            <span id="toastMessage">
+                Operation completed successfully.
+            </span>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="toast-close"
+            id="toastClose"
+            aria-label="Close notification"
+        >
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         SHARED ADMIN LAYOUT
+         THIS CREATES THE CENTRALIZED SIDEBAR
+    ====================================================== -->
+
+    <script src="js/admin-layout.js"></script>
+
+
+    <!-- SHARED THEME -->
+
+    <script src="js/admin-theme.js"></script>
+
+
+    <!-- APPOINTMENT JAVASCRIPT -->
+
+    <script src="js/appointments.js"></script>
+
+</body>
+</html>

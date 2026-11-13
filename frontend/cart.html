@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>My Shopping Cart - ADD Motor Shop</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family:
+                'Segoe UI',
+                Tahoma,
+                Geneva,
+                Verdana,
+                sans-serif;
+        }
+
+        :root {
+
+            --bg: #080808;
+            --panel: #111111;
+            --panel-light: #171717;
+            --border: #292929;
+
+            --red: #dc2626;
+            --red-light: #ef4444;
+            --red-dark: #b91c1c;
+
+            --text: #f5f5f5;
+            --muted: #a3a3a3;
+
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            color: var(--text);
+
+            background:
+
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(220, 38, 38, 0.10),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 90% 90%,
+                    rgba(220, 38, 38, 0.08),
+                    transparent 30%
+                ),
+
+                var(--bg);
+
+        }
+
+        /* =========================================
+           NAVBAR
+        ========================================= */
+
+        .navbar {
+
+            height: 70px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 6%;
+
+            border-bottom: 1px solid var(--border);
+
+            background: rgba(8, 8, 8, 0.95);
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+        }
+
+        .logo {
+
+            color: white;
+
+            font-size: 1.35rem;
+
+            font-weight: 800;
+
+            text-decoration: none;
+
+            letter-spacing: 0.5px;
+
+        }
+
+        .logo span {
+
+            color: var(--red-light);
+
+        }
+
+        .nav-links {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+
+        }
+
+        .nav-links a {
+
+            color: #bdbdbd;
+
+            text-decoration: none;
+
+            font-size: 0.85rem;
+
+            transition: 0.2s;
+
+        }
+
+        .nav-links a:hover {
+
+            color: white;
+
+        }
+
+        .user-name {
+
+            color: var(--red-light);
+
+            font-size: 0.85rem;
+
+            font-weight: 600;
+
+        }
+
+        /* =========================================
+           PAGE
+        ========================================= */
+
+        .page {
+
+            width: 92%;
+
+            max-width: 1100px;
+
+            margin: 45px auto;
+
+        }
+
+        .page-header {
+
+            margin-bottom: 30px;
+
+        }
+
+        .page-header h1 {
+
+            font-size: 2rem;
+
+            margin-bottom: 7px;
+
+        }
+
+        .page-header p {
+
+            color: var(--muted);
+
+            font-size: 0.9rem;
+
+        }
+
+        /* =========================================
+           LOGIN MESSAGE
+        ========================================= */
+
+        .login-message {
+
+            display: none;
+
+            max-width: 500px;
+
+            margin: 80px auto;
+
+            padding: 40px;
+
+            text-align: center;
+
+            border: 1px solid var(--border);
+
+            border-radius: 15px;
+
+            background: var(--panel);
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.5);
+
+        }
+
+        .login-message h2 {
+
+            margin-bottom: 10px;
+
+        }
+
+        .login-message p {
+
+            color: var(--muted);
+
+            margin-bottom: 25px;
+
+            line-height: 1.6;
+
+        }
+
+        .login-button {
+
+            display: inline-block;
+
+            padding: 12px 22px;
+
+            border-radius: 8px;
+
+            color: white;
+
+            background: var(--red);
+
+            text-decoration: none;
+
+            font-weight: 600;
+
+        }
+
+        .login-button:hover {
+
+            background: var(--red-light);
+
+        }
+
+        /* =========================================
+           CART LAYOUT
+        ========================================= */
+
+        .cart-layout {
+
+            display: grid;
+
+            grid-template-columns: 1fr 330px;
+
+            gap: 25px;
+
+            align-items: start;
+
+        }
+
+        .cart-card {
+
+            overflow: hidden;
+
+            border: 1px solid var(--border);
+
+            border-radius: 14px;
+
+            background: var(--panel);
+
+        }
+
+        .cart-header {
+
+            padding: 18px 20px;
+
+            border-bottom: 1px solid var(--border);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+        }
+
+        .cart-header h2 {
+
+            font-size: 1rem;
+
+        }
+
+        .item-count {
+
+            color: var(--muted);
+
+            font-size: 0.8rem;
+
+        }
+
+        /* =========================================
+           CART ITEM
+        ========================================= */
+
+        .cart-item {
+
+            display: grid;
+
+            grid-template-columns: 85px 1fr auto;
+
+            gap: 18px;
+
+            align-items: center;
+
+            padding: 20px;
+
+            border-bottom: 1px solid var(--border);
+
+        }
+
+        .cart-item:last-child {
+
+            border-bottom: none;
+
+        }
+
+        .product-image {
+
+            width: 85px;
+
+            height: 85px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            overflow: hidden;
+
+            border-radius: 10px;
+
+            border: 1px solid var(--border);
+
+            background: #0b0b0b;
+
+            color: #666;
+
+            font-size: 0.7rem;
+
+            text-align: center;
+
+        }
+
+        .product-image img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+        }
+
+        .product-info h3 {
+
+            margin-bottom: 6px;
+
+            font-size: 0.95rem;
+
+        }
+
+        .product-info p {
+
+            color: var(--muted);
+
+            font-size: 0.78rem;
+
+            line-height: 1.5;
+
+        }
+
+        .product-price {
+
+            margin-top: 8px;
+
+            color: var(--red-light);
+
+            font-size: 0.9rem;
+
+            font-weight: 700;
+
+        }
+
+        .item-controls {
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: flex-end;
+
+            gap: 10px;
+
+        }
+
+        .quantity-control {
+
+            display: flex;
+
+            align-items: center;
+
+            border: 1px solid var(--border);
+
+            border-radius: 7px;
+
+            overflow: hidden;
+
+        }
+
+        .quantity-control button {
+
+            width: 30px;
+
+            height: 30px;
+
+            border: none;
+
+            color: white;
+
+            background: #1c1c1c;
+
+            cursor: pointer;
+
+            font-size: 1rem;
+
+        }
+
+        .quantity-control button:hover {
+
+            background: var(--red-dark);
+
+        }
+
+        .quantity {
+
+            width: 35px;
+
+            text-align: center;
+
+            font-size: 0.8rem;
+
+        }
+
+        .subtotal {
+
+            font-size: 0.85rem;
+
+            font-weight: 700;
+
+        }
+
+        .remove-button {
+
+            border: none;
+
+            background: transparent;
+
+            color: #777;
+
+            font-size: 0.72rem;
+
+            cursor: pointer;
+
+        }
+
+        .remove-button:hover {
+
+            color: #ef4444;
+
+        }
+
+        /* =========================================
+           EMPTY CART
+        ========================================= */
+
+        .empty-cart {
+
+            display: none;
+
+            padding: 60px 20px;
+
+            text-align: center;
+
+        }
+
+        .empty-cart .icon {
+
+            margin-bottom: 15px;
+
+            font-size: 3rem;
+
+        }
+
+        .empty-cart h2 {
+
+            margin-bottom: 8px;
+
+        }
+
+        .empty-cart p {
+
+            margin-bottom: 22px;
+
+            color: var(--muted);
+
+            font-size: 0.85rem;
+
+        }
+
+        .shop-button {
+
+            display: inline-block;
+
+            padding: 11px 20px;
+
+            border-radius: 8px;
+
+            background: var(--red);
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 0.85rem;
+
+            font-weight: 600;
+
+        }
+
+        .shop-button:hover {
+
+            background: var(--red-light);
+
+        }
+
+        /* =========================================
+           SUMMARY
+        ========================================= */
+
+        .summary-card {
+
+            padding: 22px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 14px;
+
+            background: var(--panel);
+
+            position: sticky;
+
+            top: 95px;
+
+        }
+
+        .summary-card h2 {
+
+            margin-bottom: 22px;
+
+            font-size: 1rem;
+
+        }
+
+        .summary-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-bottom: 14px;
+
+            color: #bdbdbd;
+
+            font-size: 0.82rem;
+
+        }
+
+        .summary-row.total {
+
+            margin-top: 18px;
+
+            padding-top: 18px;
+
+            border-top: 1px solid var(--border);
+
+            color: white;
+
+            font-size: 1rem;
+
+            font-weight: 700;
+
+        }
+
+        .total-price {
+
+            color: var(--red-light);
+
+        }
+
+        .checkout-button {
+
+            width: 100%;
+
+            margin-top: 22px;
+
+            padding: 13px;
+
+            border: 1px solid var(--red);
+
+            border-radius: 8px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ef4444,
+                    #dc2626,
+                    #b91c1c
+                );
+
+            color: white;
+
+            font-size: 0.9rem;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+        }
+
+        .checkout-button:hover {
+
+            box-shadow:
+                0 8px 25px rgba(220, 38, 38, 0.25);
+
+        }
+
+        .continue-shopping {
+
+            display: block;
+
+            margin-top: 14px;
+
+            color: #888;
+
+            text-align: center;
+
+            font-size: 0.75rem;
+
+            text-decoration: none;
+
+        }
+
+        .continue-shopping:hover {
+
+            color: white;
+
+        }
+
+        /* =========================================
+           LOADING
+        ========================================= */
+
+        .loading {
+
+            padding: 60px 20px;
+
+            text-align: center;
+
+            color: var(--muted);
+
+        }
+
+        .loading-spinner {
+
+            width: 35px;
+
+            height: 35px;
+
+            margin: 0 auto 15px;
+
+            border: 3px solid #292929;
+
+            border-top-color: var(--red);
+
+            border-radius: 50%;
+
+            animation: spin 0.8s linear infinite;
+
+        }
+
+        @keyframes spin {
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+        /* =========================================
+           ERROR
+        ========================================= */
+
+        .error-message {
+
+            display: none;
+
+            margin-bottom: 20px;
+
+            padding: 12px 15px;
+
+            border-radius: 8px;
+
+            border: 1px solid rgba(220, 38, 38, 0.3);
+
+            background: rgba(220, 38, 38, 0.1);
+
+            color: #f87171;
+
+            font-size: 0.8rem;
+
+        }
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 800px) {
+
+            .cart-layout {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .summary-card {
+
+                position: static;
+
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+
+                padding: 0 4%;
+
+            }
+
+            .nav-links {
+
+                gap: 10px;
+
+            }
+
+            .nav-links a {
+
+                display: none;
+
+            }
+
+            .page {
+
+                width: 94%;
+
+                margin: 30px auto;
+
+            }
+
+            .cart-item {
+
+                grid-template-columns: 65px 1fr;
+
+                gap: 12px;
+
+            }
+
+            .product-image {
+
+                width: 65px;
+
+                height: 65px;
+
+            }
+
+            .item-controls {
+
+                grid-column: 2;
+
+                flex-direction: row;
+
+                align-items: center;
+
+                justify-content: space-between;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     NAVBAR
+========================================= -->
+
+<nav class="navbar">
+
+    <a
+        href="index.html"
+        class="logo"
+    >
+        ADD <span>MOTOR</span>
+    </a>
+
+
+    <div class="nav-links">
+
+        <a href="dashboard.html">
+            Dashboard
+        </a>
+
+        <a href="services.html">
+            Services
+        </a>
+
+        <a href="products.html">
+            Products
+        </a>
+
+        <span
+            class="user-name"
+            id="userName"
+        ></span>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================================
+     MAIN PAGE
+========================================= -->
+
+<main class="page">
+
+
+    <div class="page-header">
+
+        <h1>
+            My Shopping Cart
+        </h1>
+
+        <p>
+            Review the products you selected before checkout.
+        </p>
+
+    </div>
+
+
+    <!-- =========================================
+         LOGIN MESSAGE
+    ========================================== -->
+
+    <section
+        class="login-message"
+        id="loginMessage"
+    >
+
+        <h2>
+            Please log in
+        </h2>
+
+        <p>
+            You need to log in before viewing your cart.
+        </p>
+
+        <a
+            href="login.html"
+            class="login-button"
+        >
+            Go to Login
+        </a>
+
+    </section>
+
+
+    <!-- =========================================
+         ERROR
+    ========================================== -->
+
+    <div
+        class="error-message"
+        id="errorMessage"
+    ></div>
+
+
+    <!-- =========================================
+         LOADING
+    ========================================== -->
+
+    <section
+        class="loading"
+        id="loading"
+    >
+
+        <div class="loading-spinner"></div>
+
+        Loading your cart...
+
+    </section>
+
+
+    <!-- =========================================
+         CART
+    ========================================== -->
+
+    <section
+        class="cart-layout"
+        id="cartLayout"
+        style="display: none;"
+    >
+
+
+        <!-- CART ITEMS -->
+
+        <div class="cart-card">
+
+            <div class="cart-header">
+
+                <h2>
+                    Cart Items
+                </h2>
+
+                <span
+                    class="item-count"
+                    id="itemCount"
+                >
+                    0 items
+                </span>
+
+            </div>
+
+
+            <div id="cartItems"></div>
+
+
+            <!-- EMPTY CART -->
+
+            <div
+                class="empty-cart"
+                id="emptyCart"
+            >
+
+                <div class="icon">
+                    🛒
+                </div>
+
+                <h2>
+                    Your cart is empty
+                </h2>
+
+                <p>
+                    You haven't added any products to your cart yet.
+                </p>
+
+                <a
+                    href="products.html"
+                    class="shop-button"
+                >
+                    Browse Products
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- SUMMARY -->
+
+        <aside
+            class="summary-card"
+            id="summaryCard"
+        >
+
+            <h2>
+                Order Summary
+            </h2>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Items
+                </span>
+
+                <span id="summaryItems">
+                    0
+                </span>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Subtotal
+                </span>
+
+                <span id="summarySubtotal">
+                    ₱0.00
+                </span>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Delivery
+                </span>
+
+                <span>
+                    To be calculated
+                </span>
+
+            </div>
+
+
+            <div class="summary-row total">
+
+                <span>
+                    Total
+                </span>
+
+                <span
+                    class="total-price"
+                    id="summaryTotal"
+                >
+                    ₱0.00
+                </span>
+
+            </div>
+
+
+            <button
+                class="checkout-button"
+                id="checkoutButton"
+            >
+                Proceed to Checkout
+            </button>
+
+
+            <a
+                href="products.html"
+                class="continue-shopping"
+            >
+                ← Continue Shopping
+            </a>
+
+        </aside>
+
+
+    </section>
+
+
+</main>
+
+
+<script>
+
+    /* =========================================
+       GLOBAL VARIABLES
+    ========================================= */
+
+    let currentUser = null;
+
+    let currentCart = null;
+
+
+    /* =========================================
+       ELEMENTS
+    ========================================= */
+
+    const loginMessage =
+        document.getElementById("loginMessage");
+
+    const loading =
+        document.getElementById("loading");
+
+    const cartLayout =
+        document.getElementById("cartLayout");
+
+    const cartItems =
+        document.getElementById("cartItems");
+
+    const emptyCart =
+        document.getElementById("emptyCart");
+
+    const errorMessage =
+        document.getElementById("errorMessage");
+
+    const userName =
+        document.getElementById("userName");
+
+    const itemCount =
+        document.getElementById("itemCount");
+
+    const summaryItems =
+        document.getElementById("summaryItems");
+
+    const summarySubtotal =
+        document.getElementById("summarySubtotal");
+
+    const summaryTotal =
+        document.getElementById("summaryTotal");
+
+    const summaryCard =
+        document.getElementById("summaryCard");
+
+    const checkoutButton =
+        document.getElementById("checkoutButton");
+
+
+    /* =========================================
+       PAGE START
+    ========================================= */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function() {
+
+            checkLogin();
+
+        }
+    );
+
+
+    /* =========================================
+       CHECK LOGIN
+    ========================================= */
+
+    function checkLogin() {
+
+        try {
+
+            const storedUser =
+                localStorage.getItem(
+                    "addMotorUser"
+                );
+
+
+            if (!storedUser) {
+
+                showLoginMessage();
+
+                return;
+
+            }
+
+
+            currentUser =
+                JSON.parse(storedUser);
+
+
+            if (
+                !currentUser ||
+                !currentUser.id
+            ) {
+
+                showLoginMessage();
+
+                return;
+
+            }
+
+
+            console.log(
+                "Logged-in user:",
+                currentUser
+            );
+
+
+            if (currentUser.name) {
+
+                userName.textContent =
+                    "Hi, " + currentUser.name;
+
+            }
+
+
+            loadCart();
+
+        } catch (error) {
+
+            console.error(
+                "Login check error:",
+                error
+            );
+
+            showLoginMessage();
+
+        }
+
+    }
+
+
+    /* =========================================
+       SHOW LOGIN MESSAGE
+    ========================================= */
+
+    function showLoginMessage() {
+
+        loading.style.display =
+            "none";
+
+        cartLayout.style.display =
+            "none";
+
+        loginMessage.style.display =
+            "block";
+
+    }
+
+
+    /* =========================================
+       LOAD CART
+    ========================================= */
+
+    async function loadCart() {
+
+        loading.style.display =
+            "block";
+
+        cartLayout.style.display =
+            "none";
+
+        loginMessage.style.display =
+            "none";
+
+        errorMessage.style.display =
+            "none";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/cart/user/" +
+                    currentUser.id
+                );
+
+
+            const data =
+                await response.json();
+
+
+            console.log(
+                "Cart response:",
+                data
+            );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.message ||
+                    "Unable to load cart."
+                );
+
+            }
+
+
+            if (
+                !data.success
+            ) {
+
+                throw new Error(
+                    data.message ||
+                    "Unable to load cart."
+                );
+
+            }
+
+
+            currentCart =
+                data.cart;
+
+
+            displayCart();
+
+
+        } catch (error) {
+
+            console.error(
+                "Load cart error:",
+                error
+            );
+
+
+            loading.style.display =
+                "none";
+
+
+            showError(
+                error.message ||
+                "Unable to load your cart."
+            );
+
+        }
+
+    }
+
+
+    /* =========================================
+       DISPLAY CART
+    ========================================= */
+
+    function displayCart() {
+
+        loading.style.display =
+            "none";
+
+        cartLayout.style.display =
+            "grid";
+
+
+        const items =
+            currentCart &&
+            currentCart.items
+                ? currentCart.items
+                : [];
+
+
+        if (items.length === 0) {
+
+            cartItems.innerHTML =
+                "";
+
+            emptyCart.style.display =
+                "block";
+
+            summaryCard.style.display =
+                "none";
+
+            itemCount.textContent =
+                "0 items";
+
+            summaryItems.textContent =
+                "0";
+
+            summarySubtotal.textContent =
+                "₱0.00";
+
+            summaryTotal.textContent =
+                "₱0.00";
+
+            return;
+
+        }
+
+
+        emptyCart.style.display =
+            "none";
+
+        summaryCard.style.display =
+            "block";
+
+
+        cartItems.innerHTML =
+            "";
+
+
+        let totalQuantity = 0;
+
+        let totalAmount = 0;
+
+
+        items.forEach(
+            function(item) {
+
+                const quantity =
+                    Number(item.quantity) || 0;
+
+                const price =
+                    Number(item.price) || 0;
+
+                const subtotal =
+                    quantity * price;
+
+
+                totalQuantity +=
+                    quantity;
+
+                totalAmount +=
+                    subtotal;
+
+
+                const itemElement =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                itemElement.className =
+                    "cart-item";
+
+
+                let imageHTML =
+                    `<span>NO IMAGE</span>`;
+
+
+                if (item.image) {
+
+                    imageHTML =
+                        `<img
+                            src="${escapeHTML(item.image)}"
+                            alt="${escapeHTML(item.name)}"
+                            onerror="this.style.display='none'; this.parentElement.innerHTML='NO IMAGE';"
+                        >`;
+
+                }
+
+
+                itemElement.innerHTML = `
+
+                    <div class="product-image">
+
+                        ${imageHTML}
+
+                    </div>
+
+
+                    <div class="product-info">
+
+                        <h3>
+                            ${escapeHTML(item.name)}
+                        </h3>
+
+                        <p>
+                            ${escapeHTML(
+                                item.description ||
+                                "Motorcycle product"
+                            )}
+                        </p>
+
+                        <div class="product-price">
+
+                            ₱${price.toFixed(2)}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="item-controls">
+
+                        <div class="quantity-control">
+
+                            <button
+                                type="button"
+                                onclick="changeQuantity(
+                                    ${item.id},
+                                    ${quantity - 1}
+                                )"
+                            >
+                                −
+                            </button>
+
+                            <span class="quantity">
+                                ${quantity}
+                            </span>
+
+                            <button
+                                type="button"
+                                onclick="changeQuantity(
+                                    ${item.id},
+                                    ${quantity + 1}
+                                )"
+                            >
+                                +
+                            </button>
+
+                        </div>
+
+
+                        <div class="subtotal">
+
+                            ₱${subtotal.toFixed(2)}
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="remove-button"
+                            onclick="removeItem(${item.id})"
+                        >
+                            Remove
+                        </button>
+
+                    </div>
+
+                `;
+
+
+                cartItems.appendChild(
+                    itemElement
+                );
+
+            }
+        );
+
+
+        itemCount.textContent =
+            totalQuantity +
+            (
+                totalQuantity === 1
+                    ? " item"
+                    : " items"
+            );
+
+
+        summaryItems.textContent =
+            totalQuantity;
+
+
+        summarySubtotal.textContent =
+            "₱" +
+            totalAmount.toFixed(2);
+
+
+        summaryTotal.textContent =
+            "₱" +
+            totalAmount.toFixed(2);
+
+    }
+
+
+    /* =========================================
+       CHANGE QUANTITY
+    ========================================= */
+
+    async function changeQuantity(
+        cartItemId,
+        newQuantity
+    ) {
+
+        if (
+            newQuantity <= 0
+        ) {
+
+            await removeItem(
+                cartItemId
+            );
+
+            return;
+
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/cart/items/" +
+                    cartItemId,
+                    {
+
+                        method: "PUT",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json"
+
+                        },
+
+                        body:
+                            JSON.stringify({
+
+                                quantity:
+                                    newQuantity
+
+                            })
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.message ||
+                    "Unable to update quantity."
+                );
+
+            }
+
+
+            await loadCart();
+
+
+        } catch (error) {
+
+            console.error(
+                "Quantity update error:",
+                error
+            );
+
+
+            showError(
+                error.message ||
+                "Unable to update quantity."
+            );
+
+        }
+
+    }
+
+
+    /* =========================================
+       REMOVE ITEM
+    ========================================= */
+
+    async function removeItem(
+        cartItemId
+    ) {
+
+        const confirmed =
+            confirm(
+                "Remove this product from your cart?"
+            );
+
+
+        if (!confirmed) {
+
+            return;
+
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/cart/items/" +
+                    cartItemId,
+                    {
+
+                        method: "DELETE"
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.message ||
+                    "Unable to remove item."
+                );
+
+            }
+
+
+            await loadCart();
+
+
+        } catch (error) {
+
+            console.error(
+                "Remove item error:",
+                error
+            );
+
+
+            showError(
+                error.message ||
+                "Unable to remove item."
+            );
+
+        }
+
+    }
+
+
+    /* =========================================
+       CHECKOUT
+    ========================================= */
+
+    checkoutButton.addEventListener(
+        "click",
+        function() {
+
+            if (
+                !currentCart ||
+                !currentCart.items ||
+                currentCart.items.length === 0
+            ) {
+
+                showError(
+                    "Your cart is empty."
+                );
+
+                return;
+
+            }
+
+
+            window.location.href =
+                "checkout.html";
+
+        }
+    );
+
+
+    /* =========================================
+       ERROR
+    ========================================= */
+
+    function showError(message) {
+
+        errorMessage.textContent =
+            message;
+
+        errorMessage.style.display =
+            "block";
+
+
+        errorMessage.scrollIntoView({
+
+            behavior: "smooth",
+
+            block: "center"
+
+        });
+
+    }
+
+
+    /* =========================================
+       ESCAPE HTML
+    ========================================= */
+
+    function escapeHTML(value) {
+
+        if (value === null ||
+            value === undefined) {
+
+            return "";
+
+        }
+
+
+        return String(value)
+
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+
+            .replace(
+                /</g,
+                "&lt;"
+            )
+
+            .replace(
+                />/g,
+                "&gt;"
+            )
+
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

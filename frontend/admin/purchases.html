@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ADD Motor Shop - Purchases</title>
+
+
+    <!-- =====================================================
+         GOOGLE FONTS
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         FONT AWESOME
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <!-- =====================================================
+         SHARED ADMIN LAYOUT
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/admin-layout.css"
+    >
+
+
+    <!-- =====================================================
+         PURCHASES PAGE
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/purchases.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         NAVIGATION IS PROVIDED BY admin-layout.js
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOP BAR
+        ================================================== -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    type="button"
+                    class="mobile-menu-button"
+                    id="mobileMenuButton"
+                    aria-label="Open navigation"
+                >
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+
+                <div class="topbar-page-info">
+
+                    <span class="topbar-label">
+                        ADMIN PORTAL
+                    </span>
+
+                    <h2>
+                        Manage ADD Motor Shop
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+
+                <!-- Theme Toggle -->
+
+                <button
+                    type="button"
+                    class="theme-toggle"
+                    id="themeToggle"
+                    aria-label="Toggle light and dark mode"
+                    title="Toggle light and dark mode"
+                >
+
+                    <i
+                        class="fa-solid fa-moon"
+                        id="themeIcon"
+                    ></i>
+
+                    <span id="themeText">
+                        Dark Mode
+                    </span>
+
+                </button>
+
+
+                <!-- Admin Profile -->
+
+                <div class="admin-profile">
+
+                    <div
+                        class="admin-avatar"
+                        id="adminAvatar"
+                    >
+
+                        <span id="adminAvatarInitial">
+                            A
+                        </span>
+
+                    </div>
+
+
+                    <div class="admin-profile-info">
+
+                        <strong id="adminName">
+                            Administrator
+                        </strong>
+
+                        <span id="adminRole">
+                            Administrator
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             PAGE CONTENT
+        ================================================== -->
+
+        <section class="page-content">
+
+
+            <!-- =================================================
+                 PAGE HEADER
+            ================================================== -->
+
+            <div class="content-header">
+
+                <div>
+
+                    <span class="content-eyebrow">
+                        BUSINESS
+                    </span>
+
+                    <h2>
+                        Purchases
+                    </h2>
+
+                    <p>
+                        Record products purchased from suppliers and monitor purchase costs.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="primary-button"
+                    id="addPurchaseButton"
+                >
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                    Purchase Product
+
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 SUMMARY CARDS
+            ================================================== -->
+
+            <div class="summary-grid">
+
+
+                <!-- PRODUCTS PURCHASED -->
+
+                <div class="summary-card">
+
+                    <div class="summary-icon purchase-icon">
+
+                        <i class="fa-solid fa-boxes-stacked"></i>
+
+                    </div>
+
+
+                    <div class="summary-content">
+
+                        <span>
+                            Products Purchased
+                        </span>
+
+                        <strong id="totalProductsPurchased">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TOTAL QUANTITY -->
+
+                <div class="summary-card">
+
+                    <div class="summary-icon purchase-icon">
+
+                        <i class="fa-solid fa-cubes"></i>
+
+                    </div>
+
+
+                    <div class="summary-content">
+
+                        <span>
+                            Total Quantity
+                        </span>
+
+                        <strong id="totalPurchaseQuantity">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TOTAL PURCHASE COST -->
+
+                <div class="summary-card">
+
+                    <div class="summary-icon cost-icon">
+
+                        <i class="fa-solid fa-peso-sign"></i>
+
+                    </div>
+
+
+                    <div class="summary-content">
+
+                        <span>
+                            Total Purchase Cost
+                        </span>
+
+                        <strong id="totalPurchaseCost">
+                            ₱0.00
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 PURCHASE RECORDS
+            ================================================== -->
+
+            <div class="content-card">
+
+
+                <!-- CARD HEADER -->
+
+                <div class="card-header">
+
+                    <div>
+
+                        <span class="content-eyebrow">
+                            PURCHASE RECORDS
+                        </span>
+
+                        <h3>
+                            Purchased Products
+                        </h3>
+
+                        <p>
+                            View products purchased from suppliers and their total costs.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     FILTERS
+                ================================================== -->
+
+                <div class="filters">
+
+
+                    <!-- SEARCH -->
+
+                    <div class="search-box">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input
+                            type="text"
+                            id="purchaseSearch"
+                            placeholder="Search purchase, supplier, or product..."
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+
+                    <!-- SUPPLIER -->
+
+                    <div class="filter-group">
+
+                        <select
+                            id="supplierFilter"
+                        >
+
+                            <option value="">
+                                All Suppliers
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- CLEAR -->
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        id="clearPurchaseFilters"
+                    >
+
+                        <i class="fa-solid fa-filter-circle-xmark"></i>
+
+                        Clear
+
+                    </button>
+
+                </div>
+
+
+                <!-- =================================================
+                     LOADING
+                ================================================== -->
+
+                <div
+                    class="loading-state"
+                    id="purchaseLoading"
+                >
+
+                    <div class="loading-spinner">
+
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+
+                    </div>
+
+                    <p>
+                        Loading purchases...
+                    </p>
+
+                </div>
+
+
+                <!-- =================================================
+                     ERROR
+                ================================================== -->
+
+                <div
+                    class="error-state"
+                    id="purchaseError"
+                    style="display: none;"
+                >
+
+                    <div class="error-icon">
+
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Unable to Load Purchases
+                    </h3>
+
+
+                    <p id="purchaseErrorMessage">
+                        There was a problem loading the purchase records.
+                    </p>
+
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        id="retryPurchases"
+                    >
+
+                        <i class="fa-solid fa-rotate-right"></i>
+
+                        Try Again
+
+                    </button>
+
+                </div>
+
+
+                <!-- =================================================
+                     EMPTY
+                ================================================== -->
+
+                <div
+                    class="empty-state"
+                    id="purchaseEmpty"
+                    style="display: none;"
+                >
+
+                    <div class="empty-icon">
+
+                        <i class="fa-solid fa-cart-shopping"></i>
+
+                    </div>
+
+
+                    <h3>
+                        No Purchase Records
+                    </h3>
+
+
+                    <p>
+                        No products have been purchased from suppliers yet.
+                    </p>
+
+
+                    <button
+                        type="button"
+                        class="primary-button"
+                        id="emptyAddPurchaseButton"
+                    >
+
+                        <i class="fa-solid fa-cart-shopping"></i>
+
+                        Purchase First Product
+
+                    </button>
+
+                </div>
+
+
+                <!-- =================================================
+                     PURCHASE TABLE
+                ================================================== -->
+
+                <div
+                    class="table-container"
+                    id="purchaseTableContainer"
+                >
+
+                    <table class="purchase-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Purchase ID
+                                </th>
+
+                                <th>
+                                    Supplier
+                                </th>
+
+                                <th>
+                                    Purchase Date
+                                </th>
+
+                                <th>
+                                    Products
+                                </th>
+
+                                <th>
+                                    Quantity
+                                </th>
+
+                                <th>
+                                    Total Cost
+                                </th>
+
+                                <th>
+                                    Actions
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="purchaseTableBody">
+
+                            <!-- Purchase records generated by purchases.js -->
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         PURCHASE PRODUCT MODAL
+    ====================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="purchaseModal"
+        style="display: none;"
+    >
+
+        <div class="purchase-modal">
+
+
+            <!-- MODAL HEADER -->
+
+            <div class="modal-header">
+
+                <div>
+
+                    <span class="modal-eyebrow">
+                        PURCHASING
+                    </span>
+
+                    <h2>
+                        Purchase Product
+                    </h2>
+
+                    <p>
+                        Record products purchased from a supplier.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="closePurchaseModal"
+                    aria-label="Close"
+                >
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 PURCHASE FORM
+            ================================================== -->
+
+            <form
+                id="purchaseForm"
+                class="purchase-form"
+            >
+
+
+                <!-- SUPPLIER -->
+
+                <div class="form-group">
+
+                    <label for="purchaseSupplier">
+                        Supplier
+                    </label>
+
+
+                    <select
+                        id="purchaseSupplier"
+                        name="supplier_id"
+                        required
+                    >
+
+                        <option value="">
+                            Select supplier
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- PURCHASE DATE -->
+
+                <div class="form-group">
+
+                    <label for="purchaseDate">
+                        Purchase Date
+                    </label>
+
+
+                    <input
+                        type="date"
+                        id="purchaseDate"
+                        name="purchase_date"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- =================================================
+                     PRODUCTS PURCHASED
+                ================================================== -->
+
+                <div class="purchase-items-section">
+
+
+                    <div class="items-header">
+
+                        <div>
+
+                            <h3>
+                                Products Purchased
+                            </h3>
+
+                            <p>
+                                Add the products purchased from the supplier.
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="add-item-button"
+                            id="addPurchaseItem"
+                        >
+
+                            <i class="fa-solid fa-plus"></i>
+
+                            Add Product
+
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        class="purchase-items"
+                        id="purchaseItems"
+                    >
+
+
+                        <!-- FIRST PURCHASE ITEM -->
+
+                        <div
+                            class="purchase-item"
+                            data-item-index="0"
+                        >
+
+
+                            <!-- PRODUCT -->
+
+                            <div class="item-field product-field">
+
+                                <label>
+                                    Product
+                                </label>
+
+
+                                <select
+                                    name="product_id[]"
+                                    class="purchase-product"
+                                    required
+                                >
+
+                                    <option value="">
+                                        Select product
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- QUANTITY -->
+
+                            <div class="item-field quantity-field">
+
+                                <label>
+                                    Quantity
+                                </label>
+
+
+                                <input
+                                    type="number"
+                                    name="quantity[]"
+                                    class="purchase-quantity"
+                                    min="1"
+                                    step="1"
+                                    value="1"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- UNIT COST -->
+
+                            <div class="item-field cost-field">
+
+                                <label>
+                                    Unit Cost
+                                </label>
+
+
+                                <div class="currency-input">
+
+                                    <span>
+                                        ₱
+                                    </span>
+
+
+                                    <input
+                                        type="number"
+                                        name="unit_cost[]"
+                                        class="purchase-unit-cost"
+                                        min="0"
+                                        step="0.01"
+                                        placeholder="0.00"
+                                        required
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- TOTAL -->
+
+                            <div class="item-field total-field">
+
+                                <label>
+                                    Total
+                                </label>
+
+
+                                <div class="item-total">
+                                    ₱0.00
+                                </div>
+
+                            </div>
+
+
+                            <!-- REMOVE -->
+
+                            <button
+                                type="button"
+                                class="remove-item-button"
+                                aria-label="Remove product"
+                                disabled
+                            >
+
+                                <i class="fa-solid fa-trash"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     PURCHASE TOTAL
+                ================================================== -->
+
+                <div class="purchase-total">
+
+                    <span>
+                        Total Purchase Cost
+                    </span>
+
+
+                    <strong id="purchaseFormTotal">
+                        ₱0.00
+                    </strong>
+
+                </div>
+
+
+                <!-- =================================================
+                     NOTES
+                ================================================== -->
+
+                <div class="form-group">
+
+                    <label for="purchaseNotes">
+                        Notes
+                    </label>
+
+
+                    <textarea
+                        id="purchaseNotes"
+                        name="notes"
+                        rows="3"
+                        placeholder="Optional purchase notes..."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- =================================================
+                     MODAL ACTIONS
+                ================================================== -->
+
+                <div class="modal-actions">
+
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        id="cancelPurchase"
+                    >
+
+                        Cancel
+
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                        id="savePurchase"
+                    >
+
+                        <i class="fa-solid fa-cart-shopping"></i>
+
+                        Purchase Product
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         PURCHASE DETAILS MODAL
+    ====================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="purchaseDetailsModal"
+        style="display: none;"
+    >
+
+        <div class="purchase-details-modal">
+
+
+            <div class="modal-header">
+
+                <div>
+
+                    <span class="modal-eyebrow">
+                        PURCHASE DETAILS
+                    </span>
+
+
+                    <h2 id="detailsPurchaseTitle">
+                        Purchase Details
+                    </h2>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="closePurchaseDetails"
+                    aria-label="Close"
+                >
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+
+            <div
+                class="purchase-details-content"
+                id="purchaseDetailsContent"
+            >
+
+                <!-- Details generated by purchases.js -->
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         TOAST
+    ====================================================== -->
+
+    <div
+        class="toast"
+        id="purchaseToast"
+    >
+
+        <div class="toast-icon">
+
+            <i class="fa-solid fa-check"></i>
+
+        </div>
+
+
+        <div class="toast-content">
+
+            <strong id="purchaseToastTitle">
+                Success
+            </strong>
+
+
+            <span id="purchaseToastMessage">
+                Purchase saved successfully.
+            </span>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="toast-close"
+            id="closePurchaseToast"
+            aria-label="Close notification"
+        >
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         SHARED ADMIN LAYOUT
+    ====================================================== -->
+
+    <script src="js/admin-layout.js"></script>
+
+
+    <!-- =====================================================
+         SHARED THEME
+    ====================================================== -->
+
+    <script src="js/admin-theme.js"></script>
+
+
+    <!-- =====================================================
+         PURCHASES JAVASCRIPT
+    ====================================================== -->
+
+<script src="js/purchases.js"></script>
+<script src="js/purchases-archive.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,558 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADD Motor Shop - Suppliers</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/suppliers.css">
+    <link rel="stylesheet" href="css/admin-layout.css">
+</head>
+
+<body>
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button type="button" class="mobile-menu-button" id="mobileMenuButton" aria-label="Open navigation">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="topbar-page-info">
+                    <span class="topbar-label">ADMIN PORTAL</span>
+                    <h2>Manage ADD Motor Shop</h2>
+                </div>
+            </div>
+
+            <div class="topbar-right">
+                <button type="button" class="theme-toggle" id="themeToggle"
+                    aria-label="Toggle light and dark mode" title="Toggle light and dark mode">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                    <span id="themeText">Dark Mode</span>
+                </button>
+
+                <div class="admin-profile">
+                    <div class="admin-avatar" id="adminAvatar">
+                        <span id="adminAvatarInitial">A</span>
+                    </div>
+
+                    <div class="admin-profile-info">
+                        <strong id="adminName">Administrator</strong>
+                        <span id="adminRole">Administrator</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- PAGE CONTENT -->
+        <section class="page-content">
+
+            <div class="page-heading">
+                <div class="page-heading-left">
+                    <span class="page-eyebrow">BUSINESS MANAGEMENT</span>
+                    <h1>Suppliers</h1>
+                    <p>Manage supplier information and supplier contacts.</p>
+                </div>
+
+                <button type="button" class="add-supplier-button" id="addSupplierButton">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Add Supplier</span>
+                </button>
+            </div>
+
+            <!-- SUMMARY -->
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <div class="summary-icon total">
+                        <i class="fa-solid fa-truck-field"></i>
+                    </div>
+
+                    <div class="summary-content">
+                        <span class="summary-label">Total Suppliers</span>
+                        <strong class="summary-value" id="totalSuppliers">0</strong>
+                        <span class="summary-description">All registered suppliers</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUPPLIER TABLE -->
+            <section class="content-card">
+                <div class="section-heading suppliers-heading">
+                    <div>
+                        <span class="section-eyebrow">SUPPLIER DIRECTORY</span>
+                        <h2>Supplier List</h2>
+                        <p>View and manage all registered suppliers.</p>
+                    </div>
+
+                    <strong class="supplier-total" id="displayedSuppliers">0 suppliers</strong>
+                </div>
+
+                <div class="filter-bar">
+                    <div class="search-wrapper">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="supplierSearch"
+                            placeholder="Search suppliers..." autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="suppliers-table-wrapper" id="suppliersContainer">
+
+                    <div class="loading-state" id="suppliersLoading">
+                        <div class="loading-spinner">
+                            <i class="fa-solid fa-rotate"></i>
+                        </div>
+                        <h3>Loading Suppliers</h3>
+                        <p>Please wait while we retrieve the supplier records.</p>
+                    </div>
+
+                    <div class="error-state hidden" id="suppliersError">
+                        <div class="error-icon">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                        </div>
+
+                        <div class="error-content">
+                            <h3>Unable to Load Suppliers</h3>
+                            <p id="suppliersErrorMessage">
+                                Something went wrong while loading suppliers.
+                            </p>
+                        </div>
+
+                        <button type="button" class="try-again-button" id="tryAgainSuppliers">
+                            <i class="fa-solid fa-rotate"></i>
+                            Try Again
+                        </button>
+                    </div>
+
+                    <div class="empty-state hidden" id="suppliersEmpty">
+                        <div class="empty-icon">
+                            <i class="fa-solid fa-truck-field"></i>
+                        </div>
+
+                        <h3>No Suppliers Found</h3>
+                        <p>There are no suppliers matching your search.</p>
+
+                        <button type="button" class="empty-add-button" id="emptyAddSupplierButton">
+                            <i class="fa-solid fa-plus"></i>
+                            Add Supplier
+                        </button>
+                    </div>
+
+                    <div class="suppliers-table-scroll hidden" id="suppliersTableWrapper">
+                        <table class="suppliers-table">
+                            <thead>
+                                <tr>
+                                    <th>SUPPLIER</th>
+                                    <th>CONTACT PERSON</th>
+                                    <th>PHONE</th>
+                                    <th>EMAIL</th>
+                                    <th>ADDRESS</th>
+                                    <th>ACTION</th>
+                                </tr>
+                            </thead>
+                            <tbody id="suppliersTableBody"></tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <!-- =====================================================
+         ADD / EDIT SUPPLIER MODAL
+         SUPPLIER INFORMATION ONLY
+    ====================================================== -->
+    <div class="modal-overlay hidden" id="supplierModal">
+        <div class="supplier-modal">
+
+            <button type="button" class="modal-close" id="closeSupplierModal"
+                aria-label="Close supplier form">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="modal-header">
+                <span class="modal-eyebrow">SUPPLIER MANAGEMENT</span>
+                <h2 id="supplierModalTitle">Add Supplier</h2>
+                <p id="supplierModalDescription">
+                    Enter the supplier information below.
+                </p>
+            </div>
+
+            <form id="supplierForm" novalidate>
+
+                <div class="form-group">
+                    <label for="supplierName">
+                        Supplier Name <span>*</span>
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="text" id="supplierName" name="name"
+                            placeholder="Enter supplier name" maxlength="150" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="supplierContactPerson">
+                        Contact Person <span>*</span>
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="text" id="supplierContactPerson" name="contact_person"
+                            placeholder="Enter contact person" maxlength="100" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="supplierPhone">
+                        Phone <span>*</span>
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="text" id="supplierPhone" name="phone"
+                            placeholder="Enter phone number" maxlength="30" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="supplierEmail">Email</label>
+                    <div class="input-wrapper">
+                        <input type="email" id="supplierEmail" name="email"
+                            placeholder="Enter email address" maxlength="150">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="supplierAddress">Address</label>
+                    <div class="input-wrapper textarea-wrapper">
+                        <textarea id="supplierAddress" name="address"
+                            placeholder="Enter supplier address" rows="3"></textarea>
+                    </div>
+                </div>
+
+                <!-- SUPPLIER FORM MESSAGE -->
+                <div class="form-message hidden" id="supplierFormMessage"></div>
+
+                <!-- SUPPLIER FORM ACTIONS -->
+                <div class="modal-actions">
+                    <button type="button" class="cancel-button" id="cancelSupplier">
+                        Cancel
+                    </button>
+
+                    <button type="submit" class="save-button" id="saveSupplier">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        <span>Save Supplier</span>
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- =====================================================
+         SUPPLIER ADDED SUCCESSFULLY MODAL
+         CONTINUE OPENS THE SEPARATE PRODUCT POPUP
+    ====================================================== -->
+    <div class="modal-overlay hidden" id="supplierSuccessModal">
+        <div class="delete-modal supplier-success-modal">
+
+            <div class="delete-icon supplier-success-icon">
+                <i class="fa-solid fa-check"></i>
+            </div>
+
+            <div class="delete-content">
+                <span class="modal-eyebrow">SUPPLIER MANAGEMENT</span>
+                <h2>Supplier Added Successfully!</h2>
+                <p>
+                    The supplier information has been saved.
+                    You can now add the products supplied by this supplier.
+                </p>
+            </div>
+
+            <div class="delete-actions">
+                <button type="button" class="cancel-button" id="supplierSuccessClose">
+                    Close
+                </button>
+
+                <button type="button" class="save-button" id="supplierSuccessContinue">
+                    <i class="fa-solid fa-arrow-right"></i>
+                    Continue
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- =====================================================
+         ADD SUPPLIER PRODUCT MODAL
+         SEPARATE FROM THE SUPPLIER FORM
+    ====================================================== -->
+    <div class="modal-overlay hidden" id="supplierProductModal">
+        <div class="supplier-modal supplier-product-modal">
+
+            <button type="button" id="closeAddSupplierProductForm"
+                class="modal-close supplier-product-close-button"
+                aria-label="Close Add Product" title="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="supplier-add-product-form supplier-add-product-card"
+                id="supplierAddProductForm">
+
+                <div class="supplier-add-product-header">
+                    <div class="supplier-add-product-title-area">
+                        <div class="supplier-add-product-title-icon">
+                            <i class="fa-solid fa-box"></i>
+                        </div>
+
+                        <div>
+                            <strong>Add Supplier Product</strong>
+                            <span>Add a product supplied by this supplier.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="supplier-add-product-card-body">
+
+                    <!-- PRODUCT TYPE -->
+                    <div class="supplier-add-product-type-section">
+                        <label class="supplier-add-product-label">Product Type</label>
+
+                        <div class="supplier-product-type-options">
+
+                            <label class="supplier-product-type-card selected"
+                                data-product-type="registered">
+                                <input type="radio" name="supplierProductType"
+                                    value="registered" checked>
+
+                                <span class="supplier-product-radio">
+                                    <i class="fa-solid fa-circle"></i>
+                                </span>
+
+                                <span class="supplier-product-type-content">
+                                    <strong>Registered Product</strong>
+                                    <small>Choose an existing inventory product</small>
+                                </span>
+                            </label>
+
+                            <label class="supplier-product-type-card"
+                                data-product-type="unregistered">
+                                <input type="radio" name="supplierProductType"
+                                    value="unregistered">
+
+                                <span class="supplier-product-radio">
+                                    <i class="fa-regular fa-circle"></i>
+                                </span>
+
+                                <span class="supplier-product-type-content">
+                                    <strong>New / Unregistered Product</strong>
+                                    <small>Create a new inventory product</small>
+                                </span>
+                            </label>
+
+                        </div>
+                    </div>
+
+                    <!-- REGISTERED PRODUCT -->
+                    <div id="registeredProductField" class="supplier-product-field">
+                        <label for="supplierProductSelect"
+                            class="supplier-add-product-label">
+                            Product
+                        </label>
+
+                        <div class="supplier-product-select-wrapper">
+                            <i class="fa-solid fa-box"></i>
+
+                            <select id="supplierProductSelect">
+                                <option value="">Select a registered product</option>
+                            </select>
+
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                    </div>
+
+                    <!-- UNREGISTERED PRODUCT -->
+                    <div id="unregisteredProductField"
+                        class="supplier-product-field hidden">
+
+                        <label for="supplierNewProductName"
+                            class="supplier-add-product-label">
+                            Product Name
+                        </label>
+
+                        <div class="supplier-product-name-input">
+                            <i class="fa-solid fa-box-open"></i>
+
+                            <input type="text" id="supplierNewProductName"
+                                placeholder="Enter product name"
+                                maxlength="255" autocomplete="off">
+                        </div>
+
+                        <!-- Category field can be populated by suppliers.js -->
+                    </div>
+
+                    <!-- SUPPLIER PRICE -->
+                    <div class="supplier-product-field">
+                        <label for="supplierProductPrice"
+                            class="supplier-add-product-label">
+                            Supplier Price
+                        </label>
+
+                        <div class="supplier-product-price-input">
+                            <span>₱</span>
+
+                            <input type="number" id="supplierProductPrice"
+                                min="0" step="0.01" placeholder="350.00">
+                        </div>
+                    </div>
+
+                    <!-- PRODUCT MESSAGE -->
+                    <div id="supplierAddProductMessage"
+                        class="supplier-add-product-message hidden"
+                        role="alert"></div>
+
+                </div>
+
+                <!-- PRODUCT FOOTER -->
+                <div class="supplier-add-product-card-footer">
+                    <button type="button" id="cancelAddSupplierProduct"
+                        class="supplier-product-cancel-button">
+                        Cancel
+                    </button>
+
+                    <button type="button" id="saveSupplierProduct"
+                        class="supplier-product-save-button">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Add Product</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================
+         DELETE SUPPLIER MODAL
+    ====================================================== -->
+    <div class="modal-overlay hidden" id="deleteSupplierModal">
+        <div class="delete-modal">
+
+            <div class="delete-icon">
+                <i class="fa-solid fa-trash"></i>
+            </div>
+
+            <div class="delete-content">
+                <span class="modal-eyebrow">DELETE SUPPLIER</span>
+                <h2>Delete Supplier?</h2>
+
+                <p>
+                    Are you sure you want to delete
+                    <strong id="deleteSupplierName">this supplier</strong>?
+                </p>
+
+                <p class="delete-warning">
+                    This action cannot be undone.
+                </p>
+            </div>
+
+            <div class="delete-actions">
+                <button type="button" class="cancel-button" id="cancelDeleteSupplier">
+                    Cancel
+                </button>
+
+                <button type="button" class="delete-button" id="confirmDeleteSupplier">
+                    <i class="fa-solid fa-trash"></i>
+                    Delete Supplier
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- =====================================================
+         SUPPLIER DETAILS MODAL
+         PRODUCTS OFFERED WILL BE DISPLAYED HERE BY JAVASCRIPT
+    ====================================================== -->
+    <div class="modal-overlay hidden" id="supplierDetailsModal">
+        <div class="supplier-details-modal">
+
+            <button type="button" class="modal-close" id="closeSupplierDetails"
+                aria-label="Close supplier details">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="details-header">
+                <div class="details-icon">
+                    <i class="fa-solid fa-truck-field"></i>
+                </div>
+
+                <div>
+                    <span class="modal-eyebrow">SUPPLIER DETAILS</span>
+                    <h2 id="detailsSupplierName">Supplier</h2>
+
+                    <span class="details-status" id="detailsSupplierStatus">
+                        Active
+                    </span>
+                </div>
+            </div>
+
+            <div class="details-grid">
+
+                <div class="detail-item">
+                    <span class="detail-label">CONTACT PERSON</span>
+                    <strong id="detailsContactPerson">—</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span class="detail-label">PHONE</span>
+                    <strong id="detailsPhone">—</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span class="detail-label">EMAIL</span>
+                    <strong id="detailsEmail">—</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span class="detail-label">ADDRESS</span>
+                    <strong id="detailsAddress">—</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span class="detail-label">SUPPLIER ID</span>
+                    <strong id="detailsSupplierId">—</strong>
+                </div>
+
+                <div class="detail-item">
+                    <span class="detail-label">CREATED</span>
+                    <strong id="detailsCreatedAt">—</strong>
+                </div>
+
+            </div>
+
+            <!-- The suppliers.js details section will be inserted here. -->
+
+            <div class="details-actions">
+                <button type="button" class="secondary-button" id="detailsCloseButton">
+                    Close
+                </button>
+
+                <button type="button" class="edit-details-button" id="detailsEditButton">
+                    <i class="fa-solid fa-pen"></i>
+                    Edit Supplier
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script src="js/admin-layout.js"></script>
+    <script src="js/admin-theme.js"></script>
+    <script src="js/suppliers.js"></script>
+    <script src="js/supplier-registration.js"></script>
+</body>
+</html>

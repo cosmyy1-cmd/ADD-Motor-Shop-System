@@ -1,0 +1,1829 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ADD Motor Shop - Services</title>
+
+
+    <!-- Google Fonts -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- Font Awesome -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <!-- Shared Admin Layout -->
+
+    <link
+        rel="stylesheet"
+        href="css/admin-layout.css"
+    >
+
+
+    <!-- Services CSS -->
+
+    <link
+        rel="stylesheet"
+        href="css/services.css"
+    >
+
+
+    <style>
+
+        /* =====================================================
+           ADD SERVICE BUTTON
+        ====================================================== */
+
+        .add-service-button {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 8px;
+
+            min-height: 39px;
+
+            padding: 0 15px;
+
+            border: 1px solid var(--red);
+
+            border-radius: 8px;
+
+            background: var(--red);
+
+            color: #ffffff;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 5px 12px
+                rgba(230, 57, 70, 0.16);
+
+            transition:
+                background-color 0.25s ease,
+                border-color 0.25s ease,
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        .add-service-button:hover {
+            background: var(--red-dark);
+
+            border-color: var(--red-dark);
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 17px
+                rgba(230, 57, 70, 0.24);
+        }
+
+
+        .add-service-button i {
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           HEADER ACTIONS
+        ====================================================== */
+
+        .page-heading-actions {
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+        }
+
+
+        /* =====================================================
+           FORM MODAL
+        ====================================================== */
+
+        .service-form-modal {
+            width: min(650px, 100%);
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            background: var(--card);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 13px;
+
+            box-shadow:
+                0 25px 60px
+                rgba(0, 0, 0, 0.30);
+
+            animation:
+                serviceModalIn
+                0.2s ease;
+        }
+
+
+        @keyframes serviceModalIn {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(10px)
+                    scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+
+        }
+
+
+        /* =====================================================
+           FORM HEADER
+        ====================================================== */
+
+        .service-form-header {
+            display: flex;
+
+            align-items: flex-start;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding: 20px 22px;
+
+            border-bottom:
+                1px solid
+                var(--border);
+        }
+
+
+        .service-form-eyebrow {
+            display: block;
+
+            margin-bottom: 5px;
+
+            color: var(--red);
+
+            font-size: 8px;
+
+            font-weight: 800;
+
+            letter-spacing: 1.4px;
+        }
+
+
+        .service-form-header h2 {
+            color: var(--text);
+
+            font-size: 16px;
+
+            font-weight: 800;
+        }
+
+
+        .service-form-header p {
+            margin-top: 4px;
+
+            color: var(--muted);
+
+            font-size: 10px;
+
+            line-height: 1.5;
+        }
+
+
+        .service-form-close {
+            width: 32px;
+            height: 32px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            border: 0;
+
+            border-radius: 7px;
+
+            background: var(--gray-soft);
+
+            color: var(--muted);
+
+            cursor: pointer;
+
+            transition:
+                background-color 0.25s ease,
+                color 0.25s ease;
+        }
+
+
+        .service-form-close:hover {
+            background: var(--red-soft);
+
+            color: var(--red);
+        }
+
+
+        /* =====================================================
+           FORM BODY
+        ====================================================== */
+
+        .service-form-body {
+            padding: 22px;
+        }
+
+
+        .service-form {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 17px;
+        }
+
+
+        .form-row {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 13px;
+        }
+
+
+        .form-group {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 6px;
+        }
+
+
+        .form-group label {
+            color: var(--text);
+
+            font-size: 10px;
+
+            font-weight: 700;
+        }
+
+
+        .form-group label span {
+            color: var(--red);
+        }
+
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 8px;
+
+            background: var(--card-soft);
+
+            color: var(--text);
+
+            outline: none;
+
+            font-size: 11px;
+
+            transition:
+                border-color 0.25s ease,
+                box-shadow 0.25s ease,
+                background-color 0.25s ease;
+        }
+
+
+        .form-group input,
+        .form-group select {
+            height: 40px;
+
+            padding:
+                0 12px;
+        }
+
+
+        .form-group textarea {
+            min-height: 95px;
+
+            resize: vertical;
+
+            padding:
+                11px 12px;
+
+            line-height: 1.55;
+        }
+
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #9ca3af;
+        }
+
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color:
+                var(--red);
+
+            background:
+                var(--card);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(230, 57, 70, 0.08);
+        }
+
+
+        /* =====================================================
+           FORM FOOTER
+        ====================================================== */
+
+        .service-form-footer {
+            display: flex;
+
+            justify-content: flex-end;
+
+            align-items: center;
+
+            gap: 9px;
+
+            padding:
+                16px 22px;
+
+            border-top:
+                1px solid
+                var(--border);
+
+            background:
+                var(--card-soft);
+        }
+
+
+        .service-cancel-button,
+        .service-submit-button {
+            min-height: 38px;
+
+            padding:
+                0 16px;
+
+            border-radius: 8px;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s ease,
+                background-color 0.2s ease,
+                border-color 0.2s ease,
+                color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+
+        .service-cancel-button {
+            border:
+                1px solid
+                var(--border);
+
+            background:
+                var(--card);
+
+            color:
+                var(--text-soft);
+        }
+
+
+        .service-cancel-button:hover {
+            border-color:
+                var(--red);
+
+            background:
+                var(--red-soft);
+
+            color:
+                var(--red);
+        }
+
+
+        .service-submit-button {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 7px;
+
+            border:
+                1px solid
+                var(--red);
+
+            background:
+                var(--red);
+
+            color:
+                #ffffff;
+
+            box-shadow:
+                0 5px 12px
+                rgba(230, 57, 70, 0.16);
+        }
+
+
+        .service-submit-button:hover {
+            background:
+                var(--red-dark);
+
+            border-color:
+                var(--red-dark);
+
+            transform:
+                translateY(-1px);
+
+            box-shadow:
+                0 7px 16px
+                rgba(230, 57, 70, 0.24);
+        }
+
+
+        /* =====================================================
+           DARK MODE FORM
+        ====================================================== */
+
+        body.dark-mode .service-form-modal {
+            background:
+                #181a1d;
+
+            border-color:
+                #2b2f34;
+
+            box-shadow:
+                0 25px 65px
+                rgba(0, 0, 0, 0.60);
+        }
+
+
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group select,
+        body.dark-mode .form-group textarea {
+            background:
+                #141618;
+
+            border-color:
+                #30343a;
+
+            color:
+                #f3f4f6;
+        }
+
+
+        body.dark-mode .form-group input:focus,
+        body.dark-mode .form-group select:focus,
+        body.dark-mode .form-group textarea:focus {
+            background:
+                #181a1d;
+
+            border-color:
+                var(--red);
+        }
+
+
+        body.dark-mode .service-form-footer {
+            background:
+                #141618;
+
+            border-color:
+                #2b2f34;
+        }
+
+
+        body.dark-mode .service-cancel-button {
+            background:
+                #181a1d;
+
+            border-color:
+                #30343a;
+
+            color:
+                #d1d5db;
+        }
+
+
+        body.dark-mode .service-cancel-button:hover {
+            background:
+                rgba(230, 57, 70, 0.10);
+
+            border-color:
+                rgba(230, 57, 70, 0.30);
+
+            color:
+                #ff6b76;
+        }
+
+
+        /* =====================================================
+           TOAST
+        ====================================================== */
+
+        .toast {
+            position: fixed !important;
+
+            bottom: 24px !important;
+
+            right: 24px !important;
+
+            left: auto !important;
+
+            z-index: 9999 !important;
+
+            box-shadow:
+                0 10px 25px -5px
+                rgba(0, 0, 0, 0.4);
+        }
+
+
+        /* =====================================================
+           MOBILE FORM
+        ====================================================== */
+
+        @media (max-width: 700px) {
+
+            .page-heading-actions {
+                width: 100%;
+
+                flex-direction: column;
+
+                align-items: stretch;
+            }
+
+
+            .add-service-button,
+            .refresh-button {
+                width: 100%;
+
+                justify-content: center;
+            }
+
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+
+            .service-form-header {
+                padding:
+                    17px;
+            }
+
+
+            .service-form-body {
+                padding:
+                    17px;
+            }
+
+
+            .service-form-footer {
+                padding:
+                    14px 17px;
+
+                flex-direction: column-reverse;
+            }
+
+
+            .service-cancel-button,
+            .service-submit-button {
+                width: 100%;
+            }
+
+        }
+
+
+        /* =====================================================
+           SERVICES PAGE - SHARED THEME TOGGLE PROTECTION
+        ====================================================== */
+
+        #themeToggle {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 7px;
+
+            cursor: pointer;
+        }
+
+
+        #themeToggle i,
+        #themeToggle span {
+            pointer-events: none;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    type="button"
+                    class="mobile-menu-button"
+                    id="mobileMenuButton"
+                    aria-label="Open navigation"
+                >
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+
+                <div class="topbar-page-info">
+
+                    <span class="topbar-label">
+                        ADMIN PORTAL
+                    </span>
+
+                    <h2>
+                        Manage ADD Motor Shop
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <button
+                    type="button"
+                    class="theme-toggle"
+                    id="themeToggle"
+                    aria-label="Toggle light and dark mode"
+                    title="Toggle light and dark mode"
+                >
+
+                    <i
+                        class="fa-solid fa-moon"
+                        id="themeIcon"
+                    ></i>
+
+                    <span id="themeText">
+                        Dark Mode
+                    </span>
+
+                </button>
+
+
+                <div class="admin-profile">
+
+                    <div
+                        class="admin-avatar"
+                        id="adminAvatar"
+                    >
+
+                        <span id="adminAvatarInitial">
+                            A
+                        </span>
+
+                    </div>
+
+
+                    <div class="admin-profile-info">
+
+                        <strong id="adminName">
+                            Administrator
+                        </strong>
+
+                        <span id="adminRole">
+                            Administrator
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             PAGE CONTENT
+        ================================================== -->
+
+        <section class="page-content">
+
+
+            <!-- PAGE HEADING -->
+
+            <div class="page-heading">
+
+                <div class="page-heading-left">
+
+                    <span class="page-eyebrow">
+                        SERVICE MANAGEMENT
+                    </span>
+
+                    <h1>
+                        Services
+                    </h1>
+
+                    <p>
+                        View and manage motorcycle services and maintenance offerings.
+                    </p>
+
+                </div>
+
+
+                <div class="page-heading-actions">
+
+                    <button
+                        type="button"
+                        class="add-service-button"
+                        id="addServiceButton"
+                    >
+
+                        <i class="fa-solid fa-plus"></i>
+
+                        <span>
+                            Add Service
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="refresh-button"
+                        id="refreshServices"
+                    >
+
+                        <i class="fa-solid fa-rotate"></i>
+
+                        <span>
+                            Refresh
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 SUMMARY
+            ================================================== -->
+
+            <div class="summary-grid">
+
+                <div class="summary-card">
+
+                    <div class="summary-icon total">
+
+                        <i class="fa-solid fa-list-check"></i>
+
+                    </div>
+
+                    <div class="summary-content">
+
+                        <span class="summary-label">
+                            Total Services
+                        </span>
+
+                        <strong
+                            class="summary-value"
+                            id="totalServices"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 SERVICE LIST CARD
+            ================================================== -->
+
+            <div
+                class="content-card"
+                id="serviceListCard"
+            >
+
+
+                <div class="content-card-header">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            SERVICES
+                        </span>
+
+                        <h2>
+                            Service List
+                        </h2>
+
+                        <p>
+                            View registered motorcycle services and details.
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="customer-count"
+                        id="displayedServices"
+                    >
+                        0 services
+                    </div>
+
+                </div>
+
+
+                <!-- SEARCH ONLY -->
+
+                <div class="filter-bar">
+
+                    <div class="search-box">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input
+                            type="text"
+                            id="serviceSearch"
+                            placeholder="Search services..."
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- LOADING -->
+
+                <div
+                    class="customers-loading"
+                    id="servicesLoading"
+                >
+
+                    <div class="loading-spinner">
+
+                        <i class="fa-solid fa-spinner"></i>
+
+                    </div>
+
+                    <p>
+                        Loading services...
+                    </p>
+
+                </div>
+
+
+                <!-- ERROR -->
+
+                <div
+                    class="customers-error"
+                    id="servicesError"
+                    style="display: none;"
+                >
+
+                    <div class="error-icon">
+
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+
+                    </div>
+
+
+                    <div class="error-content">
+
+                        <h3>
+                            Unable to Load Services
+                        </h3>
+
+                        <p id="servicesErrorMessage">
+                            Something went wrong while loading services.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="retry-button"
+                        id="retryServices"
+                    >
+
+                        <i class="fa-solid fa-rotate"></i>
+
+                        Try Again
+
+                    </button>
+
+                </div>
+
+
+                <!-- EMPTY -->
+
+                <div
+                    class="customers-empty"
+                    id="servicesEmpty"
+                    style="display: none;"
+                >
+
+                    <div class="empty-icon">
+
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+
+                    </div>
+
+                    <h3>
+                        No Services Found
+                    </h3>
+
+                    <p>
+                        There are no services matching your current search.
+                    </p>
+
+                </div>
+
+
+                <!-- SERVICE CONTAINER -->
+
+                <div
+                    class="services-grid"
+                    id="servicesGrid"
+                ></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         ADD / EDIT SERVICE MODAL
+    ====================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="serviceFormModal"
+        style="display: none;"
+    >
+
+        <div class="service-form-modal">
+
+
+            <!-- FORM HEADER -->
+
+            <div class="service-form-header">
+
+                <div>
+
+                    <span class="service-form-eyebrow">
+                        SERVICE MANAGEMENT
+                    </span>
+
+                    <h2 id="serviceFormTitle">
+                        Add Service
+                    </h2>
+
+                    <p id="serviceFormSubtitle">
+                        Create a new motorcycle service offering.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="service-form-close"
+                    id="closeServiceFormModal"
+                    aria-label="Close service form"
+                >
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+
+            <!-- FORM -->
+
+            <div class="service-form-body">
+
+                <form
+                    id="serviceForm"
+                    class="service-form"
+                >
+
+                    <!-- Hidden ID -->
+
+                    <input
+                        type="hidden"
+                        id="serviceId"
+                        name="serviceId"
+                    >
+
+
+                    <!-- NAME -->
+
+                    <div class="form-group">
+
+                        <label for="serviceName">
+                            Service Name
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="serviceName"
+                            name="name"
+                            placeholder="Example: Change Oil"
+                            required
+                            maxlength="100"
+                        >
+
+                    </div>
+
+
+                    <!-- CATEGORY -->
+
+                    <div class="form-group">
+
+                        <label for="serviceCategory">
+                            Category
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="serviceCategory"
+                            name="category"
+                            placeholder="Example: General"
+                            required
+                            maxlength="50"
+                        >
+
+                    </div>
+
+
+                    <!-- PRICE + DURATION -->
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="servicePrice">
+                                Price
+                                <span>*</span>
+                            </label>
+
+                            <input
+                                type="number"
+                                id="servicePrice"
+                                name="price"
+                                placeholder="300.00"
+                                min="0"
+                                step="0.01"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="serviceDuration">
+                                Duration (minutes)
+                                <span>*</span>
+                            </label>
+
+                            <input
+                                type="number"
+                                id="serviceDuration"
+                                name="duration"
+                                placeholder="30"
+                                min="1"
+                                step="1"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="form-group">
+
+                        <label for="serviceDescription">
+                            Description
+                            <span>*</span>
+                        </label>
+
+                        <textarea
+                            id="serviceDescription"
+                            name="description"
+                            placeholder="Describe what this service includes..."
+                            required
+                            maxlength="500"
+                        ></textarea>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <!-- FORM FOOTER -->
+
+            <div class="service-form-footer">
+
+                <button
+                    type="button"
+                    class="service-cancel-button"
+                    id="cancelServiceForm"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="service-submit-button"
+                    id="submitServiceButton"
+                    form="serviceForm"
+                >
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    <span>
+                        Add Service
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         SERVICE DETAILS MODAL
+    ====================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="serviceModal"
+    >
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <span class="modal-eyebrow">
+                        SERVICE DETAILS
+                    </span>
+
+                    <h2>
+                        Service Information
+                    </h2>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="closeServiceModal"
+                    aria-label="Close service details"
+                >
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+
+            <div
+                class="modal-body"
+                id="serviceDetails"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         DELETE CONFIRMATION MODAL
+    ====================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="deleteModal"
+    >
+
+        <div class="service-form-modal">
+
+
+            <div class="service-form-header">
+
+                <div>
+
+                    <span
+                        class="service-form-eyebrow"
+                        style="color:#dc2626;"
+                    >
+                        DELETE SERVICE
+                    </span>
+
+                    <h2>
+                        Delete Service?
+                    </h2>
+
+                    <p id="deleteServiceMessage">
+                        Are you sure you want to delete this service?
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="service-form-close"
+                    id="closeDeleteModal"
+                    aria-label="Close delete confirmation"
+                >
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+
+            <div class="service-form-footer">
+
+                <button
+                    type="button"
+                    class="service-cancel-button"
+                    id="cancelDelete"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="button"
+                    class="service-submit-button"
+                    id="confirmDelete"
+                    style="
+                        background:#dc2626;
+                        border-color:#dc2626;
+                    "
+                >
+
+                    <i class="fa-solid fa-trash"></i>
+
+                    Delete Service
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         TOAST
+    ====================================================== -->
+
+    <div
+        class="toast"
+        id="toast"
+    >
+
+        <div class="toast-icon">
+
+            <i
+                class="fa-solid fa-check"
+                id="toastIcon"
+            ></i>
+
+        </div>
+
+
+        <div class="toast-content">
+
+            <strong id="toastTitle">
+                Success
+            </strong>
+
+            <span id="toastMessage">
+                Operation completed successfully.
+            </span>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="toast-close"
+            id="toastClose"
+            aria-label="Close notification"
+        >
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         SHARED ADMIN LAYOUT
+    ====================================================== -->
+
+    <script src="js/admin-layout.js"></script>
+
+
+    <!-- =====================================================
+         SHARED ADMIN THEME
+    ====================================================== -->
+
+    <script src="js/admin-theme.js"></script>
+
+
+    <!-- =====================================================
+         SERVICES JAVASCRIPT
+    ====================================================== -->
+
+    <script src="js/services.js"></script>
+
+
+    <!-- =====================================================
+         ADD SERVICE FORM CONTROLS
+    ====================================================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const addServiceButton =
+                    document.getElementById(
+                        "addServiceButton"
+                    );
+
+
+                const serviceFormModal =
+                    document.getElementById(
+                        "serviceFormModal"
+                    );
+
+
+                const serviceForm =
+                    document.getElementById(
+                        "serviceForm"
+                    );
+
+
+                const closeServiceFormModal =
+                    document.getElementById(
+                        "closeServiceFormModal"
+                    );
+
+
+                const cancelServiceForm =
+                    document.getElementById(
+                        "cancelServiceForm"
+                    );
+
+
+                const submitServiceButton =
+                    document.getElementById(
+                        "submitServiceButton"
+                    );
+
+
+                const serviceFormTitle =
+                    document.getElementById(
+                        "serviceFormTitle"
+                    );
+
+
+                const serviceFormSubtitle =
+                    document.getElementById(
+                        "serviceFormSubtitle"
+                    );
+
+
+                const serviceId =
+                    document.getElementById(
+                        "serviceId"
+                    );
+
+
+                const serviceName =
+                    document.getElementById(
+                        "serviceName"
+                    );
+
+
+                /* =====================================================
+                   SHOW SERVICE LIST
+                ====================================================== */
+
+                function showServiceList() {
+
+                    const serviceListCard =
+                        document.getElementById(
+                            "serviceListCard"
+                        );
+
+
+                    if (serviceListCard) {
+
+                        serviceListCard.style.display =
+                            "";
+
+                    }
+
+
+                    if (serviceFormModal) {
+
+                        serviceFormModal.classList.remove(
+                            "show"
+                        );
+
+                        serviceFormModal.style.display =
+                            "none";
+
+                    }
+
+
+                    /*
+                       Reload the service list so the
+                       newly added service is visible.
+                    */
+
+                    if (
+                        typeof window.loadServices ===
+                        "function"
+                    ) {
+
+                        window.loadServices();
+
+                    }
+
+                }
+
+
+                /* =====================================================
+                   OPEN ADD SERVICE FORM
+                ====================================================== */
+
+                function openAddServiceForm() {
+
+                    if (!serviceFormModal) {
+                        return;
+                    }
+
+
+                    if (serviceForm) {
+                        serviceForm.reset();
+                    }
+
+
+                    if (serviceId) {
+                        serviceId.value = "";
+                    }
+
+
+                    if (serviceForm) {
+                        delete serviceForm.dataset.confirmedAdd;
+                    }
+
+
+                    if (serviceFormTitle) {
+
+                        serviceFormTitle.textContent =
+                            "Add Service";
+
+                    }
+
+
+                    if (serviceFormSubtitle) {
+
+                        serviceFormSubtitle.textContent =
+                            "Create a new motorcycle service offering.";
+
+                    }
+
+
+                    if (submitServiceButton) {
+
+                        submitServiceButton.innerHTML = `
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Add Service</span>
+                        `;
+
+                    }
+
+
+                    serviceFormModal.classList.add(
+                        "show"
+                    );
+
+
+                    serviceFormModal.style.display =
+                        "flex";
+
+
+                    setTimeout(
+                        function () {
+
+                            if (serviceName) {
+                                serviceName.focus();
+                            }
+
+                        },
+                        100
+                    );
+
+                }
+
+
+                /* =====================================================
+                   CLOSE FORM
+                ====================================================== */
+
+                function closeServiceForm() {
+
+                    if (!serviceFormModal) {
+                        return;
+                    }
+
+
+                    serviceFormModal.classList.remove(
+                        "show"
+                    );
+
+
+                    serviceFormModal.style.display =
+                        "none";
+
+
+                    if (serviceForm) {
+
+                        serviceForm.reset();
+
+                        delete serviceForm.dataset.confirmedAdd;
+
+                    }
+
+
+                    if (serviceId) {
+                        serviceId.value = "";
+                    }
+
+
+                    showServiceList();
+
+                }
+
+
+                /* =====================================================
+                   ADD SERVICE BUTTON
+                ====================================================== */
+
+                if (addServiceButton) {
+
+                    addServiceButton.addEventListener(
+                        "click",
+                        function (event) {
+
+                            event.preventDefault();
+
+                            event.stopPropagation();
+
+                            openAddServiceForm();
+
+                        },
+                        true
+                    );
+
+                }
+
+
+                /* =====================================================
+                   X BUTTON
+                ====================================================== */
+
+                if (closeServiceFormModal) {
+
+                    closeServiceFormModal.addEventListener(
+                        "click",
+                        function (event) {
+
+                            event.preventDefault();
+
+                            event.stopPropagation();
+
+                            closeServiceForm();
+
+                        }
+                    );
+
+                }
+
+
+                /* =====================================================
+                   CANCEL BUTTON
+                ====================================================== */
+
+                if (cancelServiceForm) {
+
+                    cancelServiceForm.addEventListener(
+                        "click",
+                        function (event) {
+
+                            event.preventDefault();
+
+                            event.stopPropagation();
+
+                            closeServiceForm();
+
+                        }
+                    );
+
+                }
+
+
+                /* =====================================================
+                   CLICK OUTSIDE MODAL
+                ====================================================== */
+
+                if (serviceFormModal) {
+
+                    serviceFormModal.addEventListener(
+                        "click",
+                        function (event) {
+
+                            if (
+                                event.target ===
+                                serviceFormModal
+                            ) {
+
+                                closeServiceForm();
+
+                            }
+
+                        }
+                    );
+
+                }
+
+
+                /* =====================================================
+                   ESC KEY
+                ====================================================== */
+
+                document.addEventListener(
+                    "keydown",
+                    function (event) {
+
+                        if (
+                            event.key === "Escape" &&
+                            serviceFormModal &&
+                            serviceFormModal.classList.contains("show")
+                        ) {
+
+                            closeServiceForm();
+
+                        }
+
+                    }
+                );
+
+
+                /* =====================================================
+                   INITIAL STATE
+                ====================================================== */
+
+                if (serviceFormModal) {
+
+                    serviceFormModal.classList.remove(
+                        "show"
+                    );
+
+                    serviceFormModal.style.display =
+                        "none";
+
+                }
+
+            }
+
+        );
+
+    </script>
+
+
+</body>
+
+</html>

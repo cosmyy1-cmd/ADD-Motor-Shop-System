@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADD Motor Shop - Sales</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/admin-layout.css">
+    <link rel="stylesheet" href="css/sales.css">
+</head>
+
+<body>
+    <main class="main-content">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button type="button" class="mobile-menu-button" id="mobileMenuButton" aria-label="Open navigation">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div class="topbar-page-info">
+                    <span class="topbar-label">ADMIN PORTAL</span>
+                    <h2>Manage ADD Motor Shop</h2>
+                </div>
+            </div>
+
+            <div class="topbar-right">
+                <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark mode" title="Toggle light and dark mode">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                    <span id="themeText">Dark Mode</span>
+                </button>
+
+                <div class="admin-profile">
+                    <div class="admin-avatar" id="adminAvatar">
+                        <span id="adminAvatarInitial">T</span>
+                    </div>
+                    <div class="admin-profile-info">
+                        <strong id="adminName">tasharet</strong>
+                        <span id="adminRole">Admin</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="page-content">
+            <div class="page-heading">
+                <div class="page-heading-left">
+                    <span class="page-eyebrow">SALES MANAGEMENT</span>
+                    <h1>Product Sales</h1>
+                    <p>Record in-shop product sales and monitor inventory deductions.</p>
+                </div>
+
+                <button type="button" class="refresh-button" id="refreshSales">
+                    <i class="fa-solid fa-rotate"></i>
+                    <span>Refresh</span>
+                </button>
+            </div>
+
+            <div class="summary-grid">
+                <article class="summary-card">
+                    <div class="summary-icon total"><i class="fa-solid fa-peso-sign"></i></div>
+                    <div class="summary-content">
+                        <span class="summary-label">Total Sales</span>
+                        <strong class="summary-value" id="totalSales">₱0.00</strong>
+                        <span class="summary-description">Recorded product sales</span>
+                    </div>
+                </article>
+
+                <article class="summary-card">
+                    <div class="summary-icon today"><i class="fa-solid fa-calendar-day"></i></div>
+                    <div class="summary-content">
+                        <span class="summary-label">Today's Sales</span>
+                        <strong class="summary-value" id="todaySales">₱0.00</strong>
+                        <span class="summary-description">Product revenue today</span>
+                    </div>
+                </article>
+
+                <article class="summary-card">
+                    <div class="summary-icon transactions"><i class="fa-solid fa-receipt"></i></div>
+                    <div class="summary-content">
+                        <span class="summary-label">Transactions</span>
+                        <strong class="summary-value" id="transactionCount">0</strong>
+                        <span class="summary-description">Recorded product sales</span>
+                    </div>
+                </article>
+
+                <article class="summary-card">
+                    <div class="summary-icon product"><i class="fa-solid fa-boxes-stacked"></i></div>
+                    <div class="summary-content">
+                        <span class="summary-label">Items Sold</span>
+                        <strong class="summary-value" id="itemsSold">0</strong>
+                        <span class="summary-description">Total units sold</span>
+                    </div>
+                </article>
+            </div>
+
+            <section class="content-card">
+                <div class="section-heading">
+                    <span class="section-eyebrow">NEW TRANSACTION</span>
+                    <h2>Record a Product Sale</h2>
+                    <p>Select a product from Inventory. The selling price is loaded automatically.</p>
+                </div>
+
+                <form id="saleForm" class="sale-form">
+                    <div class="form-field product-field">
+                        <label for="productSelect">Inventory Product</label>
+                        <select id="productSelect" required>
+                            <option value="">Loading inventory products...</option>
+                        </select>
+                        <small id="productHelp">Select an available product.</small>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="unitPrice">Unit Selling Price</label>
+                        <div class="input-with-prefix">
+                            <span>₱</span>
+                            <input type="text" id="unitPrice" value="0.00" readonly>
+                        </div>
+                        <small>Automatically loaded from Inventory</small>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="availableStock">Available Stock</label>
+                        <input type="text" id="availableStock" value="—" readonly>
+                        <small>Updates after a sale is recorded</small>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="saleQuantity">Quantity</label>
+                        <input type="number" id="saleQuantity" min="1" step="1" value="1" required>
+                        <small id="quantityHelp">Enter the number of units sold.</small>
+                    </div>
+
+                    <div class="sale-total-panel">
+                        <div>
+                            <span class="total-caption">SALE TOTAL</span>
+                            <strong id="calculatedTotal">₱0.00</strong>
+                            <small id="totalBreakdown">Select a product to calculate the total.</small>
+                        </div>
+                        <i class="fa-solid fa-calculator"></i>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="reset" class="secondary-button" id="resetSale">
+                            <i class="fa-solid fa-rotate-left"></i>
+                            Reset
+                        </button>
+                        <button type="submit" class="primary-button" id="submitSale">
+                            <i class="fa-solid fa-check"></i>
+                            Confirm and Record Sale
+                        </button>
+                    </div>
+
+                    <div class="form-message hidden" id="saleFormMessage" role="status" aria-live="polite"></div>
+                </form>
+            </section>
+
+            <section class="content-card">
+                <div class="section-heading transactions-heading">
+                    <div>
+                        <span class="section-eyebrow">SALES HISTORY</span>
+                        <h2>Product Sales History</h2>
+                        <p>Review recorded in-shop sales and their inventory references.</p>
+                    </div>
+                    <strong class="transaction-total" id="displayedTransactions">0 transactions</strong>
+                </div>
+
+                <div class="filter-bar">
+                    <div class="search-wrapper">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="search" id="salesSearch" placeholder="Search reference or product..." autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="sales-table-wrapper" id="salesContainer">
+                    <div class="loading-state" id="salesLoading">
+                        <div class="loading-spinner"></div>
+                        <h3>Loading Product Sales</h3>
+                        <p>Please wait while sales history is retrieved.</p>
+                    </div>
+
+                    <div class="error-state hidden" id="salesError">
+                        <div class="error-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
+                        <div class="error-content">
+                            <h3>Unable to Load Sales</h3>
+                            <p id="salesErrorMessage">Something went wrong while loading product sales.</p>
+                        </div>
+                        <button type="button" class="try-again-button" id="tryAgainSales">
+                            <i class="fa-solid fa-rotate"></i> Try Again
+                        </button>
+                    </div>
+
+                    <div class="empty-state hidden" id="salesEmpty">
+                        <div class="empty-icon"><i class="fa-solid fa-receipt"></i></div>
+                        <h3 id="salesEmptyTitle">No Product Sales Yet</h3>
+                        <p id="salesEmptyMessage">Record a product sale to see it listed here.</p>
+                    </div>
+
+                    <div class="sales-table-scroll hidden" id="salesTableWrapper">
+                        <table class="sales-table">
+                            <thead>
+                                <tr>
+                                    <th>REFERENCE</th>
+                                    <th>PRODUCT</th>
+                                    <th>QUANTITY</th>
+                                    <th>UNIT PRICE</th>
+                                    <th>TOTAL</th>
+                                    <th>DATE</th>
+                                    <th>ACTION</th>
+                                </tr>
+                            </thead>
+                            <tbody id="salesTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <div class="modal-overlay hidden" id="saleModal" role="dialog" aria-modal="true" aria-labelledby="modalSaleReference">
+        <div class="sale-modal">
+            <button type="button" class="modal-close" id="closeSaleModal" aria-label="Close sale details">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="modal-header">
+                <span class="modal-eyebrow">PRODUCT SALE DETAILS</span>
+                <h2 id="modalSaleReference">Sale Details</h2>
+                <p id="modalSaleDate">—</p>
+            </div>
+            <div class="modal-body" id="saleModalBody">Loading...</div>
+        </div>
+    </div>
+
+    <script src="js/admin-layout.js"></script>
+    <script src="js/admin-theme.js"></script>
+    <script src="js/sales.js"></script>
+</body>
+</html>

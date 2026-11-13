@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book Service - ADD Motor Shop</title>
+
+    <link rel="stylesheet" href="css/book-service.css">
+    <link rel="stylesheet" href="css/customer-header.css">
+</head>
+
+<body>
+
+    <!-- SHARED CUSTOMER HEADER -->
+    <div id="customerHeader"></div>
+
+    <!-- MAIN -->
+    <main class="page-container">
+
+        <div class="page-header">
+
+            <h1>
+                Book a <span>Service</span>
+            </h1>
+
+            <p>
+                Schedule your motorcycle repair or maintenance appointment.
+            </p>
+
+        </div>
+
+        <div class="booking-layout">
+
+            <!-- BOOKING FORM -->
+            <div class="card">
+
+                <!-- STEPS -->
+                <div class="steps">
+
+                    <div class="step active">
+                        <span class="step-number">1</span>
+                        Motorcycle
+                    </div>
+
+                    <div class="step active">
+                        <span class="step-number">2</span>
+                        Services
+                    </div>
+
+                    <div class="step active">
+                        <span class="step-number">3</span>
+                        Schedule
+                    </div>
+
+                    <div class="step active">
+                        <span class="step-number">4</span>
+                        Confirm
+                    </div>
+
+                </div>
+
+                <!-- MOTORCYCLE -->
+                <div class="form-group">
+
+                    <label>Motorcycle</label>
+
+                    <div class="motorcycle-box">
+
+                        <div class="motorcycle-selected">
+
+                            <div class="bike-icon">
+                                🏍️
+                            </div>
+
+                            <div class="bike-info">
+
+                                <strong id="selectedBike">
+                                    Honda Click 125
+                                </strong>
+
+                                <span id="selectedBikeDetails">
+                                    ABC 1234 • 2023 • Matte Black
+                                </span>
+
+                            </div>
+
+                            <button
+                                type="button"
+                                class="change-bike"
+                                onclick="changeMotorcycle()"
+                            >
+                                Change
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- SERVICES -->
+                <div class="form-group">
+
+                    <label>Select Service/s</label>
+
+                    <div class="service-grid">
+
+                        <!-- SERVICE 1 -->
+                        <div class="service-option">
+
+                            <input
+                                type="checkbox"
+                                id="service1"
+                                value="Oil Change"
+                                data-price="350"
+                                onchange="updateSummary()"
+                            >
+
+                            <label for="service1" class="service-label">
+                                <span class="service-name">Oil Change</span>
+                                <span class="service-description">
+                                    Engine oil replacement and basic inspection.
+                                </span>
+                                <span class="service-price">₱350</span>
+                            </label>
+
+                            <span class="check-mark">✓</span>
+
+                        </div>
+
+                        <!-- SERVICE 2 -->
+                        <div class="service-option">
+
+                            <input
+                                type="checkbox"
+                                id="service2"
+                                value="Brake Service"
+                                data-price="500"
+                                onchange="updateSummary()"
+                            >
+
+                            <label for="service2" class="service-label">
+                                <span class="service-name">Brake Service</span>
+                                <span class="service-description">
+                                    Brake inspection, adjustment and cleaning.
+                                </span>
+                                <span class="service-price">₱500</span>
+                            </label>
+
+                            <span class="check-mark">✓</span>
+
+                        </div>
+
+                        <!-- SERVICE 3 -->
+                        <div class="service-option">
+
+                            <input
+                                type="checkbox"
+                                id="service3"
+                                value="Tire Change"
+                                data-price="450"
+                                onchange="updateSummary()"
+                            >
+
+                            <label for="service3" class="service-label">
+                                <span class="service-name">Tire Change</span>
+                                <span class="service-description">
+                                    Tire removal and replacement service.
+                                </span>
+                                <span class="service-price">₱450</span>
+                            </label>
+
+                            <span class="check-mark">✓</span>
+
+                        </div>
+
+                        <!-- SERVICE 4 -->
+                        <div class="service-option">
+
+                            <input
+                                type="checkbox"
+                                id="service4"
+                                value="Chain Adjustment"
+                                data-price="250"
+                                onchange="updateSummary()"
+                            >
+
+                            <label for="service4" class="service-label">
+                                <span class="service-name">Chain Adjustment</span>
+                                <span class="service-description">
+                                    Chain inspection, adjustment and lubrication.
+                                </span>
+                                <span class="service-price">₱250</span>
+                            </label>
+
+                            <span class="check-mark">✓</span>
+
+                        </div>
+
+                        <!-- SERVICE 5 -->
+                        <div class="service-option">
+
+                            <input
+                                type="checkbox"
+                                id="service5"
+                                value="Battery Check"
+                                data-price="200"
+                                onchange="updateSummary()"
+                            >
+
+                            <label for="service5" class="service-label">
+                                <span class="service-name">Battery Check</span>
+                                <span class="service-description">
+                                    Battery testing and electrical inspection.
+                                </span>
+                                <span class="service-price">₱200</span>
+                            </label>
+
+                            <span class="check-mark">✓</span>
+
+                        </div>
+
+                        <!-- SERVICE 6 -->
+                        <div class="service-option">
+
+                            <input
+                                type="checkbox"
+                                id="service6"
+                                value="Full Motorcycle Checkup"
+                                data-price="800"
+                                onchange="updateSummary()"
+                            >
+
+                            <label for="service6" class="service-label">
+                                <span class="service-name">Full Motorcycle Checkup</span>
+                                <span class="service-description">
+                                    Complete inspection of major motorcycle components.
+                                </span>
+                                <span class="service-price">₱800</span>
+                            </label>
+
+                            <span class="check-mark">✓</span>
+
+                        </div>
+
+                        <!-- SERVICE 7 -->
+                        <div class="service-option">
+
+                            <input
+                                type="checkbox"
+                                id="service7"
+                                value="Engine Tune-Up"
+                                data-price="700"
+                                onchange="updateSummary()"
+                            >
+
+                            <label for="service7" class="service-label">
+                                <span class="service-name">Engine Tune-Up</span>
+                                <span class="service-description">
+                                    Engine performance inspection and adjustment.
+                                </span>
+                                <span class="service-price">₱700</span>
+                            </label>
+
+                            <span class="check-mark">✓</span>
+
+                        </div>
+
+                        <!-- SERVICE 8 -->
+                        <div class="service-option">
+
+                            <input
+                                type="checkbox"
+                                id="service8"
+                                value="General Maintenance"
+                                data-price="600"
+                                onchange="updateSummary()"
+                            >
+
+                            <label for="service8" class="service-label">
+                                <span class="service-name">General Maintenance</span>
+                                <span class="service-description">
+                                    Basic motorcycle maintenance and inspection.
+                                </span>
+                                <span class="service-price">₱600</span>
+                            </label>
+
+                            <span class="check-mark">✓</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- DATE AND TIME -->
+                <div class="form-group">
+
+                    <label>Preferred Schedule</label>
+
+                    <div class="date-time-grid">
+
+                        <div>
+                            <input
+                                type="date"
+                                id="appointmentDate"
+                                required
+                                onchange="updateSummary()"
+                            >
+                        </div>
+
+                        <div>
+                            <select
+                                id="appointmentTime"
+                                required
+                                onchange="updateSummary()"
+                            >
+
+                                <option value="">Select Time</option>
+                                <option value="08:00">8:00 AM</option>
+                                <option value="09:00">9:00 AM</option>
+                                <option value="10:00">10:00 AM</option>
+                                <option value="11:00">11:00 AM</option>
+                                <option value="13:00">1:00 PM</option>
+                                <option value="14:00">2:00 PM</option>
+                                <option value="15:00">3:00 PM</option>
+                                <option value="16:00">4:00 PM</option>
+
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="schedule-info">
+                        ✓ Service hours: Monday–Saturday, 8:00 AM–5:00 PM
+                    </div>
+
+                </div>
+
+                <!-- CUSTOMER NOTES -->
+                <div class="form-group">
+
+                    <label for="notes">Additional Notes</label>
+
+                    <textarea
+                        id="notes"
+                        placeholder="Describe any motorcycle problems or special requests..."
+                    ></textarea>
+
+                </div>
+
+                <!-- CONFIRM BOOKING -->
+                <button
+                    type="button"
+                    class="btn-primary"
+                    onclick="confirmBooking()"
+                >
+                    Confirm Service Appointment
+                </button>
+
+            </div>
+
+            <!-- APPOINTMENT SUMMARY -->
+            <div class="card summary-card">
+
+                <h2 class="summary-title">
+                    Appointment Summary
+                </h2>
+
+                <div class="summary-section">
+
+                    <div class="summary-label">Motorcycle</div>
+
+                    <div class="summary-value" id="summaryBike">
+                        Honda Click 125
+                    </div>
+
+                </div>
+
+                <div class="summary-section">
+
+                    <div class="summary-label">Selected Services</div>
+
+                    <ul class="summary-services" id="summaryServices">
+                        <li class="summary-empty">
+                            No services selected yet.
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div class="summary-section">
+
+                    <div class="summary-label">Schedule</div>
+
+                    <div class="summary-value" id="summarySchedule">
+                        No schedule selected.
+                    </div>
+
+                </div>
+
+                <div class="summary-total">
+                    <span>Estimated Total</span>
+                    <span id="summaryTotal">₱0</span>
+                </div>
+
+                <div class="notice">
+
+                    <strong>Note:</strong>
+
+                    The displayed price is an estimated service cost.
+                    Final charges may change depending on the actual
+                    motorcycle inspection and parts required.
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- SUCCESS MODAL -->
+    <div class="modal" id="successModal">
+
+        <div class="success-modal">
+
+            <div class="success-icon">✓</div>
+
+            <h2>Appointment Submitted</h2>
+
+            <p>
+                Your service appointment has been submitted successfully.
+                Please wait for ADD Motor Shop to confirm your schedule.
+            </p>
+
+            <div class="appointment-number">
+                APP-2026-001
+            </div>
+
+            <button
+                class="btn-primary"
+                onclick="goToAppointments()"
+            >
+                View My Appointments
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- PAGE SCRIPTS -->
+    <script src="js/book-service.js"></script>
+    <script src="js/customer-header.js"></script>
+
+</body>
+</html>

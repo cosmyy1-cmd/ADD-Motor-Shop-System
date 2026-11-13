@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ADD Motor Shop - Reports</title>
+
+
+    <!-- GOOGLE FONTS -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- FONT AWESOME -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <!-- SHARED ADMIN LAYOUT -->
+
+    <link
+        rel="stylesheet"
+        href="css/admin-layout.css"
+    >
+
+
+    <!-- REPORTS PAGE -->
+
+    <link
+        rel="stylesheet"
+        href="css/reports.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main-content">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    type="button"
+                    class="mobile-menu-button"
+                    id="mobileMenuButton"
+                    aria-label="Open navigation"
+                >
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+
+                <div class="topbar-page-info">
+
+                    <span class="topbar-label">
+                        ADMIN PORTAL
+                    </span>
+
+                    <h2>
+                        Manage ADD Motor Shop
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+
+                <!-- THEME TOGGLE -->
+
+                <button
+                    type="button"
+                    class="theme-toggle"
+                    id="themeToggle"
+                    aria-label="Toggle light and dark mode"
+                    title="Toggle light and dark mode"
+                >
+
+                    <i
+                        class="fa-solid fa-moon"
+                        id="themeIcon"
+                    ></i>
+
+                    <span id="themeText">
+                        Dark Mode
+                    </span>
+
+                </button>
+
+
+                <!-- ADMIN PROFILE -->
+
+                <div class="admin-profile">
+
+                    <div
+                        class="admin-avatar"
+                        id="adminAvatar"
+                    >
+
+                        <span id="adminAvatarInitial">
+                            A
+                        </span>
+
+                    </div>
+
+
+                    <div class="admin-profile-info">
+
+                        <strong id="adminName">
+                            Administrator
+                        </strong>
+
+                        <span id="adminRole">
+                            Administrator
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- REPORTS CONTENT -->
+
+        <section class="reports-content">
+
+
+            <!-- PAGE INTRO -->
+
+            <div class="reports-intro">
+
+                <span class="reports-eyebrow">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    BUSINESS REPORTS
+
+                </span>
+
+                <h1>
+                    Reports &amp; Analytics
+                </h1>
+
+                <p>
+                    Review sales, supplier costs, profit,
+                    and inventory performance of ADD Motor Shop.
+                </p>
+
+            </div>
+
+
+            <!-- REPORT PERIOD -->
+
+            <div class="report-filter-card">
+
+
+                <div class="report-filter-header">
+
+                    <div class="report-filter-title">
+
+                        <div class="report-filter-icon">
+
+                            <i class="fa-solid fa-calendar-days"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Report Period
+                            </h3>
+
+                            <p>
+                                Select a date range for the report.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="report-filter-form">
+
+
+                    <!-- START DATE -->
+
+                    <div class="filter-field">
+
+                        <label for="reportStartDate">
+                            Start Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="reportStartDate"
+                        >
+
+                    </div>
+
+
+                    <!-- END DATE -->
+
+                    <div class="filter-field">
+
+                        <label for="reportEndDate">
+                            End Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="reportEndDate"
+                        >
+
+                    </div>
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="report-filter-actions">
+
+                        <button
+                            type="button"
+                            class="report-primary-button"
+                            id="generateReportButton"
+                        >
+
+                            <i class="fa-solid fa-chart-column"></i>
+
+                            <span>
+                                Generate Report
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="report-secondary-button"
+                            id="clearReportFilter"
+                        >
+
+                            <i class="fa-solid fa-rotate-left"></i>
+
+                            <span>
+                                Clear
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="report-filter-message"
+                    id="reportFilterMessage"
+                ></div>
+
+            </div>
+
+
+            <!-- LOADING STATE -->
+
+            <div
+                class="report-state report-loading"
+                id="reportLoading"
+                hidden
+            >
+
+                <div class="report-state-content">
+
+                    <div class="report-state-icon">
+
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+
+                    </div>
+
+                    <h3>
+                        Loading report...
+                    </h3>
+
+                    <p>
+                        Please wait while the report data is being prepared.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ERROR STATE -->
+
+            <div
+                class="report-state report-error"
+                id="reportError"
+                hidden
+            >
+
+                <div class="report-state-content">
+
+                    <div class="report-state-icon">
+
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+
+                    </div>
+
+                    <h3>
+                        Unable to load report
+                    </h3>
+
+                    <p id="reportErrorMessage">
+                        An error occurred while loading the report.
+                    </p>
+
+
+                    <button
+                        type="button"
+                        class="report-secondary-button report-retry-button"
+                        id="retryReportButton"
+                    >
+
+                        <i class="fa-solid fa-rotate-right"></i>
+
+                        <span>
+                            Retry
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- SALES OVERVIEW -->
+
+            <section class="report-section">
+
+
+                <div class="report-section-header">
+
+                    <div class="report-section-heading">
+
+                        <span class="report-section-eyebrow">
+                            SALES OVERVIEW
+                        </span>
+
+                        <h2>
+                            Sales Summary
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SALES SUMMARY CARDS -->
+
+                <div class="summary-grid">
+
+
+                    <!-- TOTAL SALES -->
+
+                    <div class="summary-card total">
+
+                        <div class="summary-card-top">
+
+                            <div class="summary-icon total">
+
+                                <i class="fa-solid fa-peso-sign"></i>
+
+                            </div>
+
+                            <span class="summary-label">
+                                Total Sales
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            class="summary-value"
+                            id="totalSales"
+                        >
+                            ₱0.00
+                        </div>
+
+
+                        <div class="summary-subtext">
+                            Total recorded sales
+                        </div>
+
+                    </div>
+
+
+                    <!-- PRODUCT SALES -->
+
+                    <div class="summary-card product">
+
+                        <div class="summary-card-top">
+
+                            <div class="summary-icon product">
+
+                                <i class="fa-solid fa-box"></i>
+
+                            </div>
+
+                            <span class="summary-label">
+                                Product Sales
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            class="summary-value"
+                            id="productSales"
+                        >
+                            ₱0.00
+                        </div>
+
+
+                        <div class="summary-subtext">
+                            Revenue from products
+                        </div>
+
+                    </div>
+
+
+                    <!-- SERVICE SALES -->
+
+                    <div class="summary-card service">
+
+                        <div class="summary-card-top">
+
+                            <div class="summary-icon service">
+
+                                <i class="fa-solid fa-screwdriver-wrench"></i>
+
+                            </div>
+
+                            <span class="summary-label">
+                                Service Sales
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            class="summary-value"
+                            id="serviceSales"
+                        >
+                            ₱0.00
+                        </div>
+
+
+                        <div class="summary-subtext">
+                            Revenue from services
+                        </div>
+
+                    </div>
+
+
+                    <!-- TOTAL TRANSACTIONS -->
+
+                    <div class="summary-card transactions">
+
+                        <div class="summary-card-top">
+
+                            <div class="summary-icon transactions">
+
+                                <i class="fa-solid fa-receipt"></i>
+
+                            </div>
+
+                            <span class="summary-label">
+                                Total Transactions
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            class="summary-value"
+                            id="totalTransactions"
+                        >
+                            0
+                        </div>
+
+
+                        <div class="summary-subtext">
+                            Recorded transactions
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- SALES BREAKDOWN + COST REPORT -->
+
+            <div class="report-two-column">
+
+
+                <!-- SALES BREAKDOWN -->
+
+                <div class="report-card">
+
+
+                    <div class="report-card-header">
+
+                        <div>
+
+                            <h3>
+                                Sales Breakdown
+                            </h3>
+
+                            <p>
+                                Comparison between product and service sales.
+                            </p>
+
+                        </div>
+
+
+                        <div class="report-card-header-icon">
+
+                            <i class="fa-solid fa-chart-pie"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="breakdown-list">
+
+
+                        <!-- PRODUCT SALES -->
+
+                        <div class="breakdown-item">
+
+                            <div class="breakdown-top">
+
+                                <div class="breakdown-label">
+
+                                    <i class="fa-solid fa-box product"></i>
+
+                                    <span>
+                                        Product Sales
+                                    </span>
+
+                                </div>
+
+
+                                <strong
+                                    class="breakdown-amount"
+                                    id="breakdownProductSales"
+                                >
+                                    ₱0.00
+                                </strong>
+
+                            </div>
+
+
+                            <div class="breakdown-progress">
+
+                                <div
+                                    class="breakdown-progress-bar product"
+                                    id="productSalesProgress"
+                                    style="width: 0%;"
+                                ></div>
+
+                            </div>
+
+
+                            <div class="breakdown-bottom">
+
+                                <span class="breakdown-description">
+                                    Product share
+                                </span>
+
+                                <span
+                                    class="breakdown-percentage"
+                                    id="productSalesPercentage"
+                                >
+                                    0.0%
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- SERVICE SALES -->
+
+                        <div class="breakdown-item">
+
+                            <div class="breakdown-top">
+
+                                <div class="breakdown-label">
+
+                                    <i class="fa-solid fa-screwdriver-wrench service"></i>
+
+                                    <span>
+                                        Service Sales
+                                    </span>
+
+                                </div>
+
+
+                                <strong
+                                    class="breakdown-amount"
+                                    id="breakdownServiceSales"
+                                >
+                                    ₱0.00
+                                </strong>
+
+                            </div>
+
+
+                            <div class="breakdown-progress">
+
+                                <div
+                                    class="breakdown-progress-bar service"
+                                    id="serviceSalesProgress"
+                                    style="width: 0%;"
+                                ></div>
+
+                            </div>
+
+
+                            <div class="breakdown-bottom">
+
+                                <span class="breakdown-description">
+                                    Service share
+                                </span>
+
+                                <span
+                                    class="breakdown-percentage"
+                                    id="serviceSalesPercentage"
+                                >
+                                    0.0%
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COST REPORT -->
+
+                <div class="report-card">
+
+
+                    <div class="report-card-header">
+
+                        <div>
+
+                            <h3>
+                                Cost Report
+                            </h3>
+
+                            <p>
+                                Supplier costs and total business profit.
+                            </p>
+
+                        </div>
+
+
+                        <div class="report-card-header-icon">
+
+                            <i class="fa-solid fa-coins"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="cost-report-list">
+
+
+                        <!-- SUPPLIER PURCHASE COST -->
+
+                        <div class="cost-report-item">
+
+                            <div class="cost-report-left">
+
+                                <div class="cost-report-icon supplier">
+
+                                    <i class="fa-solid fa-truck-field"></i>
+
+                                </div>
+
+
+                                <div class="cost-report-info">
+
+                                    <strong>
+                                        Supplier Purchase Cost
+                                    </strong>
+
+                                    <span>
+                                        Total cost of received products
+                                        bought from suppliers
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <strong
+                                class="cost-report-value"
+                                id="supplierPurchaseCost"
+                            >
+                                ₱0.00
+                            </strong>
+
+                        </div>
+
+
+                        <!-- TOTAL PROFIT -->
+
+                        <div class="cost-report-item">
+
+                            <div class="cost-report-left">
+
+                                <div class="cost-report-icon profit">
+
+                                    <i class="fa-solid fa-chart-line"></i>
+
+                                </div>
+
+
+                                <div class="cost-report-info">
+
+                                    <strong>
+                                        Total Profit
+                                    </strong>
+
+                                    <span>
+                                        Total sales minus supplier
+                                        purchase costs
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <strong
+                                class="cost-report-value profit"
+                                id="totalProfit"
+                            >
+                                ₱0.00
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- INVENTORY REPORT -->
+
+            <section class="report-card inventory-report-section">
+
+
+                <div class="report-card-header">
+
+                    <div>
+
+                        <h3>
+                            Inventory Report
+                        </h3>
+
+                        <p>
+                            Current product stock performance.
+                        </p>
+
+                    </div>
+
+
+                    <div class="report-card-header-icon">
+
+                        <i class="fa-solid fa-boxes-stacked"></i>
+
+                    </div>
+
+                </div>
+
+
+                <div class="inventory-report-grid">
+
+
+                    <!-- TOTAL PRODUCTS -->
+
+                    <div class="inventory-report-card">
+
+                        <div class="inventory-report-top">
+
+                            <div class="inventory-report-icon total">
+
+                                <i class="fa-solid fa-boxes-stacked"></i>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="inventory-report-label">
+                            Total Products
+                        </div>
+
+                        <div
+                            class="inventory-report-value"
+                            id="totalProducts"
+                        >
+                            0
+                        </div>
+
+                    </div>
+
+
+                    <!-- PRODUCTS IN STOCK -->
+
+                    <div class="inventory-report-card">
+
+                        <div class="inventory-report-top">
+
+                            <div class="inventory-report-icon stock">
+
+                                <i class="fa-solid fa-circle-check"></i>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="inventory-report-label">
+                            Products In Stock
+                        </div>
+
+                        <div
+                            class="inventory-report-value"
+                            id="productsInStock"
+                        >
+                            0
+                        </div>
+
+                    </div>
+
+
+                    <!-- LOW STOCK -->
+
+                    <div class="inventory-report-card">
+
+                        <div class="inventory-report-top">
+
+                            <div class="inventory-report-icon low">
+
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="inventory-report-label">
+                            Low Stock
+                        </div>
+
+                        <div
+                            class="inventory-report-value"
+                            id="lowStockProducts"
+                        >
+                            0
+                        </div>
+
+                    </div>
+
+
+                    <!-- OUT OF STOCK -->
+
+                    <div class="inventory-report-card">
+
+                        <div class="inventory-report-top">
+
+                            <div class="inventory-report-icon out">
+
+                                <i class="fa-solid fa-circle-xmark"></i>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="inventory-report-label">
+                            Out Of Stock
+                        </div>
+
+                        <div
+                            class="inventory-report-value"
+                            id="outOfStockProducts"
+                        >
+                            0
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ANALYTICS CHARTS -->
+
+            <section class="report-section analytics-section">
+
+
+                <div class="report-section-header">
+
+                    <div class="report-section-heading">
+
+                        <span class="report-section-eyebrow">
+                        </span>
+
+                        <h2>
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="report-two-column">
+
+
+                    <!-- PRODUCT SALES BY CATEGORY -->
+
+                    <div class="report-card chart-card">
+
+
+                        <div class="report-card-header">
+
+                            <div>
+
+                                <h3>
+                                    Product Sales by Category
+                                </h3>
+
+                                <p>
+                                    Distribution of product sales revenue
+                                    across categories.
+                                </p>
+
+                            </div>
+
+
+                            <div class="report-card-header-icon">
+
+                                <i class="fa-solid fa-chart-pie"></i>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="report-chart-container">
+
+                            <canvas
+                                id="categorySalesChart"
+                                aria-label="Product sales by category pie chart"
+                                role="img"
+                            ></canvas>
+
+
+                            <div
+                                class="report-chart-empty"
+                                id="categoryChartEmpty"
+                                hidden
+                            >
+
+                                <i class="fa-solid fa-chart-pie"></i>
+
+                                <p>
+                                    No product sales data available
+                                    for this period.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- MONTHLY SALES VS PURCHASE COST -->
+
+                    <div class="report-card chart-card">
+
+
+                        <div class="report-card-header">
+
+                            <div>
+
+                                <h3>
+                                    Monthly Sales vs. Purchase Cost
+                                </h3>
+
+                                <p>
+                                    Compare product sales revenue with
+                                    received supplier purchase costs.
+                                </p>
+
+                            </div>
+
+
+                            <div class="report-card-header-icon">
+
+                                <i class="fa-solid fa-chart-column"></i>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="report-chart-container">
+
+                            <canvas
+                                id="monthlyPerformanceChart"
+                                aria-label="Monthly product sales versus supplier purchase cost chart"
+                                role="img"
+                            ></canvas>
+
+
+                            <div
+                                class="report-chart-empty"
+                                id="monthlyChartEmpty"
+                                hidden
+                            >
+
+                                <i class="fa-solid fa-chart-column"></i>
+
+                                <p>
+                                    No monthly performance data available
+                                    for this period.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+        </section>
+
+    </main>
+
+
+    <!-- CHART.JS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <!-- SHARED ADMIN SCRIPTS -->
+
+    <script src="js/admin-layout.js"></script>
+
+    <script src="js/admin-theme.js"></script>
+
+
+    <!-- REPORTS SCRIPT -->
+
+    <script src="js/reports.js"></script>
+
+</body>
+
+</html>

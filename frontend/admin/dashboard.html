@@ -1,0 +1,398 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADD Motor Shop - Admin Dashboard</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="css/admin-layout.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+<main class="main-content">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+        <div class="topbar-left">
+            <button type="button" class="mobile-menu-button" id="mobileMenuButton" aria-label="Open navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div class="topbar-page-info">
+                <span class="topbar-label">ADMIN PORTAL</span>
+                <h2>Manage ADD Motor Shop</h2>
+            </div>
+        </div>
+
+        <div class="topbar-right">
+            <button type="button" class="theme-toggle" id="themeToggle"
+                aria-label="Toggle light and dark mode" title="Toggle light and dark mode">
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
+                <span id="themeText">Dark Mode</span>
+            </button>
+
+            <div class="admin-profile">
+                <div class="admin-avatar" id="adminAvatar">
+                    <span id="adminAvatarInitial">A</span>
+                </div>
+                <div class="admin-profile-info">
+                    <strong id="adminName">Administrator</strong>
+                    <span id="adminRole">Administrator</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- DASHBOARD -->
+    <section class="dashboard-content">
+
+        <!-- PAGE HEADING -->
+        <section class="page-heading">
+            <div class="heading-left">
+                <div class="heading-eyebrow">
+                    <i class="fa-solid fa-gauge-high"></i>
+                    WEEKLY OVERVIEW
+                </div>
+
+                <h2 id="welcomeTitle">Welcome back, Administrator</h2>
+                <p>Here's your motor shop's weekly performance and activity.</p>
+            </div>
+        </section>
+
+        <!-- WEEKLY PERIOD -->
+        <section class="weekly-period-card">
+            <div>
+                <span class="section-eyebrow">WEEKLY REPORT</span>
+                <h3 id="weeklyDateRange">This Week</h3>
+                <p>Monday – Saturday</p>
+            </div>
+
+            <div class="weekly-period-icon">
+                <i class="fa-solid fa-calendar-week"></i>
+            </div>
+        </section>
+
+        <!-- WEEKLY CHARTS -->
+        <section class="weekly-analytics-grid">
+
+            <!-- APPOINTMENT PIE CHART -->
+            <article class="content-card weekly-appointment-card">
+                <div class="content-card-header">
+                    <div class="content-heading">
+                        <div class="content-heading-icon">
+                            <i class="fa-solid fa-calendar-check"></i>
+                        </div>
+
+                        <div>
+                            <h3>Weekly Appointment Overview</h3>
+                            <p>Appointment distribution by status</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="appointment-chart-layout">
+                    <div class="appointment-donut-wrapper">
+                        <div
+                            class="appointment-donut"
+                            id="weeklyAppointmentChart"
+                            role="img"
+                            aria-label="Weekly appointment status distribution"
+                        >
+                            <div class="appointment-donut-center">
+                                <strong id="weeklyAppointmentTotal">0</strong>
+                                <span>Appointments</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="appointment-chart-legend" id="weeklyAppointmentLegend">
+                        <div class="chart-empty-state">
+                            <i class="fa-solid fa-chart-pie"></i>
+                            <span>Loading appointment data...</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- WEEKLY REVENUE CHART -->
+            <article class="content-card weekly-revenue-card">
+                <div class="content-card-header">
+                    <div class="content-heading">
+                        <div class="content-heading-icon">
+                            <i class="fa-solid fa-chart-column"></i>
+                        </div>
+
+                        <div>
+                            <h3>Weekly Revenue Analytics</h3>
+                            <p>Daily sales from Monday to Saturday</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="weekly-revenue-summary">
+                    <span>Total revenue this week</span>
+                    <strong id="weeklyRevenueChartTotal">₱0.00</strong>
+                </div>
+
+                <div class="weekly-sales-chart" id="weeklySalesChart">
+                    <div class="chart-empty-state">
+                        <i class="fa-solid fa-chart-column"></i>
+                        <span>Loading weekly sales data...</span>
+                    </div>
+                </div>
+
+                <div class="weekly-chart-note">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Revenue is based on recorded sales transactions.</span>
+                </div>
+            </article>
+
+        </section>
+
+        <!-- WEEKLY ACTIVITY -->
+        <section class="weekly-activity-section">
+            <div class="section-heading">
+                <div>
+                    <span class="section-eyebrow">SHOP ACTIVITY</span>
+                    <h3>Weekly Activity Summary</h3>
+                    <p>A quick look at your shop's appointment activity this week.</p>
+                </div>
+            </div>
+
+            <div class="weekly-activity-grid">
+
+                <article class="info-card">
+                    <div class="info-card-icon">
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </div>
+                    <div class="info-card-content">
+                        <span class="info-card-label">TOTAL APPOINTMENTS</span>
+                        <strong class="info-card-value" id="weeklyActivityAppointments">0</strong>
+                        <span class="info-card-description">Appointments this week</span>
+                    </div>
+                </article>
+
+                <article class="info-card">
+                    <div class="info-card-icon">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <div class="info-card-content">
+                        <span class="info-card-label">COMPLETED</span>
+                        <strong class="info-card-value" id="weeklyActivityCompleted">0</strong>
+                        <span class="info-card-description">Completed appointments</span>
+                    </div>
+                </article>
+
+                <article class="info-card">
+                    <div class="info-card-icon">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+                    <div class="info-card-content">
+                        <span class="info-card-label">PENDING</span>
+                        <strong class="info-card-value" id="weeklyActivityPending">0</strong>
+                        <span class="info-card-description">Awaiting confirmation</span>
+                    </div>
+                </article>
+
+                <article class="info-card">
+                    <div class="info-card-icon">
+                        <i class="fa-solid fa-calendar-star"></i>
+                    </div>
+                    <div class="info-card-content">
+                        <span class="info-card-label">BUSIEST DAY</span>
+                        <strong class="info-card-value" id="weeklyBusiestDay">—</strong>
+                        <span class="info-card-description" id="weeklyBusiestDayCount">No appointments yet</span>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- RECENT SALES TRANSACTIONS -->
+        <section class="content-card recent-transactions-card">
+            <div class="content-card-header">
+                <div class="content-heading">
+                    <div class="content-heading-icon">
+                        <i class="fa-solid fa-receipt"></i>
+                    </div>
+
+                    <div>
+                        <h3>Recent Sales Transactions</h3>
+                        <p>Latest recorded sales for this week</p>
+                    </div>
+                </div>
+
+                <a href="sales.html" class="view-all-button">
+                    View All
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="transactions-table-head">
+                <span>REFERENCE</span>
+                <span>CUSTOMER</span>
+                <span>TYPE</span>
+                <span>DATE</span>
+                <span>AMOUNT</span>
+                <span>STATUS</span>
+            </div>
+
+            <div class="recent-transactions" id="recentTransactions">
+                <div class="chart-empty-state">
+                    <i class="fa-solid fa-receipt"></i>
+                    <span>Loading recent transactions...</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- RECENT APPOINTMENTS -->
+        <section class="content-card recent-card">
+            <div class="content-card-header">
+                <div class="content-heading">
+                    <div class="content-heading-icon">
+                        <i class="fa-solid fa-calendar-check"></i>
+                    </div>
+
+                    <div>
+                        <h3>Recent Appointments</h3>
+                        <p>Latest customer service bookings</p>
+                    </div>
+                </div>
+
+                <a href="appointments.html" class="view-all-button">
+                    View All
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="appointment-table-head">
+                <span>CUSTOMER</span>
+                <span>SERVICE</span>
+                <span>DATE &amp; TIME</span>
+                <span>STATUS</span>
+                <span></span>
+            </div>
+
+            <div class="recent-appointments" id="recentAppointments"></div>
+        </section>
+
+        <!-- MANAGEMENT -->
+        <section class="management-section">
+            <div class="section-heading">
+                <div>
+                    <span class="section-eyebrow">MANAGEMENT</span>
+                    <h3>Access the main modules</h3>
+                    <p>Manage the different areas of your motor shop.</p>
+                </div>
+            </div>
+
+            <div class="management-grid">
+
+                <a href="appointments.html" class="management-card">
+                    <div class="management-icon red">
+                        <i class="fa-solid fa-calendar-check"></i>
+                    </div>
+                    <div class="management-card-content">
+                        <span class="management-card-label">APPOINTMENTS</span>
+                        <h4>Manage Bookings</h4>
+                        <p>Schedule, confirm, and monitor customer appointments.</p>
+                    </div>
+                    <div class="management-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+
+                <a href="customers.html" class="management-card">
+                    <div class="management-icon blue">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div class="management-card-content">
+                        <span class="management-card-label">CUSTOMERS</span>
+                        <h4>View Customers</h4>
+                        <p>Review customer profiles and service information.</p>
+                    </div>
+                    <div class="management-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+
+                <a href="motorcycles.html" class="management-card">
+                    <div class="management-icon orange">
+                        <i class="fa-solid fa-motorcycle"></i>
+                    </div>
+                    <div class="management-card-content">
+                        <span class="management-card-label">MOTORCYCLES</span>
+                        <h4>Manage Motorcycles</h4>
+                        <p>Keep track of registered customer motorcycles.</p>
+                    </div>
+                    <div class="management-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+
+                <a href="inventory.html" class="management-card">
+                    <div class="management-icon green">
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                    </div>
+                    <div class="management-card-content">
+                        <span class="management-card-label">INVENTORY</span>
+                        <h4>Monitor Stock</h4>
+                        <p>Check available parts, supplies, and stock levels.</p>
+                    </div>
+                    <div class="management-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- SYSTEM STATUS -->
+        <section class="system-status-card">
+            <div class="system-status-left">
+                <div class="system-status-icon">
+                    <i class="fa-solid fa-server"></i>
+                </div>
+
+                <div>
+                    <span class="system-status-label">SYSTEM STATUS</span>
+                    <h3>ADD Motor Shop is running</h3>
+                    <p>All administrative services are currently available.</p>
+                </div>
+            </div>
+
+            <div class="system-status-right">
+                <span class="online-dot"></span>
+                <div>
+                    <strong>Online</strong>
+                    <span>Admin Portal</span>
+                </div>
+            </div>
+        </section>
+
+    </section>
+</main>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+    <div class="toast-icon">
+        <i class="fa-solid fa-check"></i>
+    </div>
+
+    <div class="toast-content">
+        <strong>Success</strong>
+        <span>Dashboard updated successfully.</span>
+    </div>
+
+    <button type="button" class="toast-close"
+        onclick="this.parentElement.classList.remove('show')"
+        aria-label="Close notification">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+</div>
+
+<!-- ADMIN SCRIPTS -->
+<script src="js/admin-layout.js"></script>
+<script src="js/admin-theme.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/dashboard-analytics.js"></script>
+
+</body>
+</html>

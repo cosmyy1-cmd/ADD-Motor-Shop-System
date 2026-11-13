@@ -1,0 +1,563 @@
+/* =====================================================
+   ADD MOTOR SHOP - SHARED CUSTOMER HEADER
+===================================================== */
+
+#customerHeader {
+    position: relative;
+    z-index: 1000;
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+#customerHeader .customer-navbar {
+    width: 100%;
+    min-height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 18px;
+
+    padding: 10px 32px;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: #0a0a0a;
+
+    border-bottom: 1px solid #292929;
+
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.18);
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+#customerHeader .customer-logo {
+    display: inline-flex;
+    align-items: center;
+
+    flex-shrink: 0;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 1.25rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+
+    white-space: nowrap;
+}
+
+#customerHeader .customer-logo span {
+    color: #dc2626;
+}
+
+
+/* =====================================================
+   NAVIGATION LINKS
+===================================================== */
+
+#customerHeader .customer-nav-links {
+    display: flex !important;
+
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 4px;
+
+    flex-wrap: nowrap;
+}
+
+#customerHeader .customer-nav-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 10px;
+
+    border-radius: 7px;
+
+    color: #a3a3a3;
+
+    text-decoration: none;
+
+    font-size: 0.79rem;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+#customerHeader .customer-nav-links a:hover {
+    color: #ffffff;
+
+    background: rgba(255, 255, 255, 0.06);
+}
+
+#customerHeader .customer-nav-links a.active {
+    color: #ffffff;
+
+    background: #dc2626;
+
+    box-shadow:
+        0 4px 14px rgba(220, 38, 38, 0.25);
+}
+
+
+/* =====================================================
+   LOGOUT LINK
+===================================================== */
+
+#customerHeader .customer-nav-links a.customer-logout {
+    margin-left: 5px;
+
+    padding-left: 12px;
+    padding-right: 12px;
+
+    color: #f87171;
+
+    border: 1px solid rgba(220, 38, 38, 0.35);
+}
+
+#customerHeader .customer-nav-links a.customer-logout:hover {
+    color: #ffffff;
+
+    background: #dc2626;
+
+    border-color: #dc2626;
+}
+
+
+/* =====================================================
+   THEME BUTTON
+   Same design style as the admin .theme-toggle
+===================================================== */
+
+#customerHeader .customer-theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    min-height: 36px;
+
+    margin-left: 5px;
+
+    padding: 9px 12px;
+
+    border: 1px solid #292929;
+
+    border-radius: 8px;
+
+    background: #181a1d;
+
+    color: #f3f4f6;
+
+    font-family: inherit;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+#customerHeader .customer-theme-toggle:hover {
+    background: #23262a;
+
+    border-color: #3b4148;
+}
+
+#customerHeader .customer-theme-toggle:focus-visible {
+    outline: 2px solid #dc2626;
+    outline-offset: 3px;
+}
+
+#customerHeader .customer-theme-toggle .theme-icon {
+    width: 13px;
+    height: 13px;
+
+    flex-shrink: 0;
+
+    fill: none;
+
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+#customerHeader .customer-theme-toggle .theme-icon-moon {
+    display: block;
+}
+
+#customerHeader .customer-theme-toggle .theme-icon-sun {
+    display: none;
+}
+
+
+/* =====================================================
+   DARK THEME BUTTON STATE
+===================================================== */
+
+body.dark-mode #customerHeader .customer-theme-toggle {
+    background: #181a1d;
+
+    border-color: #2b2f34;
+
+    color: #f3f4f6;
+}
+
+body.dark-mode #customerHeader .customer-theme-toggle:hover {
+    background: #23262a;
+}
+
+
+/* =====================================================
+   LIGHT THEME NAVBAR
+===================================================== */
+
+html[data-dashboard-theme="light"] #customerHeader .customer-navbar,
+html[data-book-service-theme="light"] #customerHeader .customer-navbar,
+html[data-appointments-theme="light"] #customerHeader .customer-navbar,
+html[data-service-history-theme="light"] #customerHeader .customer-navbar,
+html[data-motorcycles-theme="light"] #customerHeader .customer-navbar,
+html[data-profile-theme="light"] #customerHeader .customer-navbar {
+    background: #ffffff;
+
+    border-bottom-color: #e5e7eb;
+
+    box-shadow:
+        0 3px 15px rgba(0, 0, 0, 0.06);
+}
+
+html[data-dashboard-theme="light"] #customerHeader .customer-logo,
+html[data-book-service-theme="light"] #customerHeader .customer-logo,
+html[data-appointments-theme="light"] #customerHeader .customer-logo,
+html[data-service-history-theme="light"] #customerHeader .customer-logo,
+html[data-motorcycles-theme="light"] #customerHeader .customer-logo,
+html[data-profile-theme="light"] #customerHeader .customer-logo {
+    color: #111827;
+}
+
+html[data-dashboard-theme="light"] #customerHeader .customer-nav-links a,
+html[data-book-service-theme="light"] #customerHeader .customer-nav-links a,
+html[data-appointments-theme="light"] #customerHeader .customer-nav-links a,
+html[data-service-history-theme="light"] #customerHeader .customer-nav-links a,
+html[data-motorcycles-theme="light"] #customerHeader .customer-nav-links a,
+html[data-profile-theme="light"] #customerHeader .customer-nav-links a {
+    color: #6b7280;
+}
+
+html[data-dashboard-theme="light"] #customerHeader .customer-nav-links a:hover,
+html[data-book-service-theme="light"] #customerHeader .customer-nav-links a:hover,
+html[data-appointments-theme="light"] #customerHeader .customer-nav-links a:hover,
+html[data-service-history-theme="light"] #customerHeader .customer-nav-links a:hover,
+html[data-motorcycles-theme="light"] #customerHeader .customer-nav-links a:hover,
+html[data-profile-theme="light"] #customerHeader .customer-nav-links a:hover {
+    color: #111827;
+
+    background: #f3f4f6;
+}
+
+html[data-dashboard-theme="light"] #customerHeader .customer-nav-links a.active,
+html[data-book-service-theme="light"] #customerHeader .customer-nav-links a.active,
+html[data-appointments-theme="light"] #customerHeader .customer-nav-links a.active,
+html[data-service-history-theme="light"] #customerHeader .customer-nav-links a.active,
+html[data-motorcycles-theme="light"] #customerHeader .customer-nav-links a.active,
+html[data-profile-theme="light"] #customerHeader .customer-nav-links a.active {
+    color: #ffffff;
+
+    background: #dc2626;
+}
+
+html[data-dashboard-theme="light"] #customerHeader .customer-nav-links a.customer-logout,
+html[data-book-service-theme="light"] #customerHeader .customer-nav-links a.customer-logout,
+html[data-appointments-theme="light"] #customerHeader .customer-nav-links a.customer-logout,
+html[data-service-history-theme="light"] #customerHeader .customer-nav-links a.customer-logout,
+html[data-motorcycles-theme="light"] #customerHeader .customer-nav-links a.customer-logout,
+html[data-profile-theme="light"] #customerHeader .customer-nav-links a.customer-logout {
+    color: #dc2626;
+}
+
+html[data-dashboard-theme="light"] #customerHeader .customer-nav-links a.customer-logout:hover,
+html[data-book-service-theme="light"] #customerHeader .customer-nav-links a.customer-logout:hover,
+html[data-appointments-theme="light"] #customerHeader .customer-nav-links a.customer-logout:hover,
+html[data-service-history-theme="light"] #customerHeader .customer-nav-links a.customer-logout:hover,
+html[data-motorcycles-theme="light"] #customerHeader .customer-nav-links a.customer-logout:hover,
+html[data-profile-theme="light"] #customerHeader .customer-nav-links a.customer-logout:hover {
+    color: #ffffff;
+}
+
+
+/* =====================================================
+   LIGHT THEME BUTTON
+===================================================== */
+
+html[data-dashboard-theme="light"] #customerHeader .customer-theme-toggle,
+html[data-book-service-theme="light"] #customerHeader .customer-theme-toggle,
+html[data-appointments-theme="light"] #customerHeader .customer-theme-toggle,
+html[data-service-history-theme="light"] #customerHeader .customer-theme-toggle,
+html[data-motorcycles-theme="light"] #customerHeader .customer-theme-toggle,
+html[data-profile-theme="light"] #customerHeader .customer-theme-toggle {
+    background: #ffffff;
+
+    border-color: #e5e7eb;
+
+    color: #111827;
+}
+
+html[data-dashboard-theme="light"] #customerHeader .customer-theme-toggle:hover,
+html[data-book-service-theme="light"] #customerHeader .customer-theme-toggle:hover,
+html[data-appointments-theme="light"] #customerHeader .customer-theme-toggle:hover,
+html[data-service-history-theme="light"] #customerHeader .customer-theme-toggle:hover,
+html[data-motorcycles-theme="light"] #customerHeader .customer-theme-toggle:hover,
+html[data-profile-theme="light"] #customerHeader .customer-theme-toggle:hover {
+    background: #f9fafb;
+}
+
+
+/* =====================================================
+   THEME ICON VISIBILITY
+===================================================== */
+
+body.dark-mode #customerHeader .theme-icon-moon {
+    display: none;
+}
+
+body.dark-mode #customerHeader .theme-icon-sun {
+    display: block;
+}
+
+html[data-dashboard-theme="light"] #customerHeader .theme-icon-moon,
+html[data-book-service-theme="light"] #customerHeader .theme-icon-moon,
+html[data-appointments-theme="light"] #customerHeader .theme-icon-moon,
+html[data-service-history-theme="light"] #customerHeader .theme-icon-moon,
+html[data-motorcycles-theme="light"] #customerHeader .theme-icon-moon,
+html[data-profile-theme="light"] #customerHeader .theme-icon-moon {
+    display: block;
+}
+
+html[data-dashboard-theme="light"] #customerHeader .theme-icon-sun,
+html[data-book-service-theme="light"] #customerHeader .theme-icon-sun,
+html[data-appointments-theme="light"] #customerHeader .theme-icon-sun,
+html[data-service-history-theme="light"] #customerHeader .theme-icon-sun,
+html[data-motorcycles-theme="light"] #customerHeader .theme-icon-sun,
+html[data-profile-theme="light"] #customerHeader .theme-icon-sun {
+    display: none;
+}
+
+
+/* =====================================================
+   MOBILE MENU BUTTON
+===================================================== */
+
+#customerHeader .customer-menu-toggle {
+    display: none;
+
+    width: 40px;
+    height: 38px;
+
+    padding: 8px;
+
+    flex-shrink: 0;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    border: 1px solid #292929;
+
+    border-radius: 8px;
+
+    background: #181a1d;
+
+    cursor: pointer;
+}
+
+#customerHeader .customer-menu-toggle span {
+    display: block;
+
+    width: 18px;
+    height: 2px;
+
+    border-radius: 2px;
+
+    background: #ffffff;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+html[data-dashboard-theme="light"] #customerHeader .customer-menu-toggle,
+html[data-book-service-theme="light"] #customerHeader .customer-menu-toggle,
+html[data-appointments-theme="light"] #customerHeader .customer-menu-toggle,
+html[data-service-history-theme="light"] #customerHeader .customer-menu-toggle,
+html[data-motorcycles-theme="light"] #customerHeader .customer-menu-toggle,
+html[data-profile-theme="light"] #customerHeader .customer-menu-toggle {
+    background: #ffffff;
+
+    border-color: #e5e7eb;
+}
+
+html[data-dashboard-theme="light"] #customerHeader .customer-menu-toggle span,
+html[data-book-service-theme="light"] #customerHeader .customer-menu-toggle span,
+html[data-appointments-theme="light"] #customerHeader .customer-menu-toggle span,
+html[data-service-history-theme="light"] #customerHeader .customer-menu-toggle span,
+html[data-motorcycles-theme="light"] #customerHeader .customer-menu-toggle span,
+html[data-profile-theme="light"] #customerHeader .customer-menu-toggle span {
+    background: #111827;
+}
+
+
+/* Hamburger animation */
+
+#customerHeader .customer-menu-toggle.is-open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+#customerHeader .customer-menu-toggle.is-open span:nth-child(2) {
+    opacity: 0;
+}
+
+#customerHeader .customer-menu-toggle.is-open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1000px) {
+    #customerHeader .customer-navbar {
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+
+    #customerHeader .customer-nav-links a {
+        padding-left: 8px;
+        padding-right: 8px;
+
+        font-size: 0.74rem;
+    }
+}
+
+
+@media (max-width: 900px) {
+    #customerHeader .customer-navbar {
+        min-height: 66px;
+
+        padding: 12px 20px;
+    }
+
+    #customerHeader .customer-menu-toggle {
+        display: flex;
+    }
+
+    #customerHeader .customer-nav-links {
+        display: none !important;
+
+        position: absolute;
+
+        top: 100%;
+        left: 0;
+        right: 0;
+
+        width: 100%;
+
+        padding: 14px 20px 18px;
+
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 6px;
+
+        background: #0a0a0a;
+
+        border-bottom: 1px solid #292929;
+
+        box-shadow:
+            0 10px 20px rgba(0, 0, 0, 0.22);
+    }
+
+    #customerHeader .customer-nav-links.is-open {
+        display: flex !important;
+    }
+
+    #customerHeader .customer-nav-links a {
+        width: 100%;
+
+        justify-content: flex-start;
+
+        padding: 12px 13px;
+
+        font-size: 0.85rem;
+    }
+
+    #customerHeader .customer-nav-links a.customer-logout {
+        margin-left: 0;
+    }
+
+    #customerHeader .customer-theme-toggle {
+        width: 100%;
+
+        justify-content: center;
+
+        margin-left: 0;
+
+        margin-top: 5px;
+    }
+
+    html[data-dashboard-theme="light"] #customerHeader .customer-nav-links,
+    html[data-book-service-theme="light"] #customerHeader .customer-nav-links,
+    html[data-appointments-theme="light"] #customerHeader .customer-nav-links,
+    html[data-service-history-theme="light"] #customerHeader .customer-nav-links,
+    html[data-motorcycles-theme="light"] #customerHeader .customer-nav-links,
+    html[data-profile-theme="light"] #customerHeader .customer-nav-links {
+        background: #ffffff;
+
+        border-bottom-color: #e5e7eb;
+    }
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    #customerHeader *,
+    #customerHeader *::before,
+    #customerHeader *::after {
+        transition-duration: 0.01ms !important;
+    }
+}

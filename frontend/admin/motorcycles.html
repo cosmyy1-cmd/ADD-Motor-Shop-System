@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ADD Motor Shop - Motorcycles</title>
+
+
+    <!-- =====================================================
+        GOOGLE FONTS
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+        FONT AWESOME
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <!-- =====================================================
+        SHARED ADMIN LAYOUT
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/customers.css"
+    >
+
+
+    <!-- =====================================================
+        CUSTOMERS CSS
+        Motorcycle page uses the Customers design.
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/motorcycle-details.css"
+    >
+
+
+    <!-- =====================================================
+        MOTORCYCLE DETAILS CSS
+        Separate styling for View Motorcycle modal.
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/admin-layout.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+        MAIN CONTENT
+        NAVIGATION IS PROVIDED BY admin-layout.js
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+            TOPBAR
+        ================================================== -->
+
+<header class="topbar">
+
+    <div class="topbar-left">
+
+        <button
+            type="button"
+            class="mobile-menu-button"
+            id="mobileMenuButton"
+            aria-label="Open navigation"
+        >
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="topbar-page-info">
+
+            <span class="topbar-label">
+                ADMIN PORTAL
+            </span>
+
+            <h2>
+                Manage ADD Motor Shop
+            </h2>
+
+        </div>
+
+    </div>
+
+    <div class="topbar-right">
+
+        <button
+            type="button"
+            class="theme-toggle"
+            id="themeToggle"
+            aria-label="Toggle light and dark mode"
+            title="Toggle light and dark mode"
+        >
+            <i
+                class="fa-solid fa-moon"
+                id="themeIcon"
+            ></i>
+
+            <span id="themeText">
+                Dark Mode
+            </span>
+        </button>
+
+        <div class="admin-profile">
+
+            <div
+                class="admin-avatar"
+                id="adminAvatar"
+            >
+                <span id="adminAvatarInitial">
+                    A
+                </span>
+            </div>
+
+            <div class="admin-profile-info">
+
+                <strong id="adminName">
+                    Administrator
+                </strong>
+
+                <span id="adminRole">
+                    Administrator
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+        <!-- =================================================
+            PAGE CONTENT
+        ================================================== -->
+
+        <section class="page-content">
+
+
+            <!-- =================================================
+                PAGE HEADING
+            ================================================== -->
+
+            <div class="page-heading">
+
+
+                <div class="page-heading-left">
+
+
+                    <span class="page-eyebrow">
+                        MOTORCYCLE MANAGEMENT
+                    </span>
+
+
+                    <h1>
+                        Motorcycles
+                    </h1>
+
+
+                    <p>
+                        View and manage registered motorcycles and their customer information.
+                    </p>
+
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="refresh-button"
+                    id="refreshMotorcycles"
+                >
+
+                    <i class="fa-solid fa-rotate"></i>
+
+                    <span>
+                        Refresh
+                    </span>
+
+                </button>
+
+
+            </div>
+
+
+            <!-- =================================================
+                SUMMARY
+            ================================================== -->
+
+            <div class="summary-grid">
+
+
+                <!-- TOTAL MOTORCYCLES -->
+
+                <div class="summary-card">
+
+
+                    <div class="summary-icon motorcycles">
+
+                        <i class="fa-solid fa-motorcycle"></i>
+
+                    </div>
+
+
+                    <div class="summary-content">
+
+                        <span class="summary-label">
+                            Total Motorcycles
+                        </span>
+
+                        <strong
+                            class="summary-value"
+                            id="totalMotorcycles"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- PRIMARY MOTORCYCLES -->
+
+                <div class="summary-card">
+
+
+                    <div class="summary-icon active">
+
+                        <i class="fa-solid fa-star"></i>
+
+                    </div>
+
+
+                    <div class="summary-content">
+
+                        <span class="summary-label">
+                            Primary Motorcycles
+                        </span>
+
+                        <strong
+                            class="summary-value"
+                            id="primaryMotorcycles"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- REGISTERED OWNERS -->
+
+                <div class="summary-card">
+
+
+                    <div class="summary-icon total">
+
+                        <i class="fa-solid fa-users"></i>
+
+                    </div>
+
+
+                    <div class="summary-content">
+
+                        <span class="summary-label">
+                            Registered Owners
+                        </span>
+
+                        <strong
+                            class="summary-value"
+                            id="registeredOwners"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- WITH PLATE NUMBERS -->
+
+                <div class="summary-card">
+
+
+                    <div class="summary-icon appointments">
+
+                        <i class="fa-solid fa-id-card"></i>
+
+                    </div>
+
+
+                    <div class="summary-content">
+
+                        <span class="summary-label">
+                            With Plate Numbers
+                        </span>
+
+                        <strong
+                            class="summary-value"
+                            id="motorcyclesWithPlates"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- NEW MOTORCYCLES -->
+
+                <div class="summary-card">
+
+
+                    <div class="summary-icon new">
+
+                        <i class="fa-solid fa-motorcycle"></i>
+
+                    </div>
+
+
+                    <div class="summary-content">
+
+                        <span class="summary-label">
+                            New Motorcycles
+                        </span>
+
+                        <strong
+                            class="summary-value"
+                            id="newMotorcycles"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                MOTORCYCLE LIST
+            ================================================== -->
+
+            <div class="content-card">
+
+
+                <!-- CONTENT HEADER -->
+
+                <div class="content-card-header">
+
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            MOTORCYCLES
+                        </span>
+
+                        <h2>
+                            Motorcycle List
+                        </h2>
+
+                        <p>
+                            View registered motorcycles and their customer information.
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="customer-count"
+                        id="displayedMotorcycles"
+                    >
+                        0 motorcycles
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                    FILTER BAR
+                ================================================== -->
+
+                <div class="filter-bar">
+
+
+                    <!-- SEARCH -->
+
+                    <div class="search-box">
+
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+
+                        <input
+                            type="text"
+                            id="motorcycleSearch"
+                            placeholder="Search brand, model, owner, or plate..."
+                            autocomplete="off"
+                        >
+
+
+                    </div>
+
+
+                    <!-- BRAND FILTER -->
+
+                    <div class="filter-control">
+
+
+                        <label for="motorcycleBrandFilter">
+                            Brand
+                        </label>
+
+
+                        <select id="motorcycleBrandFilter">
+
+
+                            <option value="all">
+                                All Brands
+                            </option>
+
+
+                        </select>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                    LOADING
+                ================================================== -->
+
+                <div
+                    class="customers-loading"
+                    id="motorcyclesLoading"
+                >
+
+
+                    <div class="loading-spinner">
+
+                        <i class="fa-solid fa-spinner"></i>
+
+                    </div>
+
+
+                    <p>
+                        Loading motorcycles...
+                    </p>
+
+
+                </div>
+
+
+                <!-- =================================================
+                    ERROR
+                ================================================== -->
+
+                <div
+                    class="customers-error"
+                    id="motorcyclesError"
+                    style="display: none;"
+                >
+
+
+                    <div class="error-icon">
+
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+
+                    </div>
+
+
+                    <div class="error-content">
+
+                        <h3>
+                            Unable to Load Motorcycles
+                        </h3>
+
+
+                        <p id="motorcyclesErrorMessage">
+                            Something went wrong while loading motorcycles.
+                        </p>
+
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="retry-button"
+                        id="retryMotorcycles"
+                    >
+
+                        <i class="fa-solid fa-rotate"></i>
+
+                        Try Again
+
+                    </button>
+
+
+                </div>
+
+
+                <!-- =================================================
+                    EMPTY
+                ================================================== -->
+
+                <div
+                    class="customers-empty"
+                    id="motorcyclesEmpty"
+                    style="display: none;"
+                >
+
+
+                    <div class="empty-icon">
+
+                        <i class="fa-solid fa-motorcycle"></i>
+
+                    </div>
+
+
+                    <h3>
+                        No Motorcycles Found
+                    </h3>
+
+
+                    <p>
+                        There are no motorcycles matching your current search or filter.
+                    </p>
+
+
+                </div>
+
+
+                <!-- =================================================
+                    MOTORCYCLE LIST
+                ================================================== -->
+
+                <div
+                    class="customers-list"
+                    id="motorcyclesList"
+                ></div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =====================================================
+        MOTORCYCLE DETAILS MODAL
+    ====================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="motorcycleModal"
+        hidden
+    >
+
+
+        <div
+            class="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="motorcycleModalTitle"
+        >
+
+
+            <!-- MODAL HEADER -->
+
+            <div class="modal-header">
+
+
+                <div>
+
+
+                    <span class="modal-eyebrow">
+                        MOTORCYCLE DETAILS
+                    </span>
+
+
+                    <h2 id="motorcycleModalTitle">
+                        Motorcycle Information
+                    </h2>
+
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="closeMotorcycleModal"
+                    aria-label="Close motorcycle details"
+                >
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+
+            </div>
+
+
+            <!-- MODAL BODY -->
+
+            <div
+                class="modal-body"
+                id="motorcycleDetails"
+            ></div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =====================================================
+        TOAST
+    ====================================================== -->
+
+    <div
+        class="toast"
+        id="toast"
+    >
+
+
+        <div class="toast-icon">
+
+            <i
+                class="fa-solid fa-check"
+                id="toastIcon"
+            ></i>
+
+        </div>
+
+
+        <div class="toast-content">
+
+            <strong id="toastTitle">
+                Success
+            </strong>
+
+
+            <span id="toastMessage">
+                Operation completed successfully.
+            </span>
+
+
+        </div>
+
+
+        <button
+            type="button"
+            class="toast-close"
+            id="toastClose"
+            aria-label="Close notification"
+        >
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+
+    </div>
+
+
+    <!-- =====================================================
+        SHARED ADMIN LAYOUT
+        THIS CREATES THE CENTRALIZED SIDEBAR
+    ====================================================== -->
+
+    <script src="js/admin-layout.js"></script>
+
+
+    <!-- =====================================================
+        SHARED THEME
+    ====================================================== -->
+
+    <script src="js/admin-theme.js"></script>
+
+
+    <!-- =====================================================
+        MOTORCYCLE JAVASCRIPT
+    ====================================================== -->
+
+    <script src="js/motorcycles.js"></script>
+
+
+    <!-- =====================================================
+        MOTORCYCLE DETAILS JAVASCRIPT
+        This MUST come AFTER motorcycles.js.
+    ====================================================== -->
+
+    <script src="js/motorcycle-details.js"></script>
+
+
+</body>
+
+</html>

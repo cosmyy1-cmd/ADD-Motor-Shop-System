@@ -1,0 +1,769 @@
+
+/* =========================================================
+   ADD MOTOR SHOP - CUSTOMER ACCOUNT RESTORATION
+========================================================= */
+
+
+/* =========================================================
+   RESTORATION BUTTON CONTAINER
+========================================================= */
+
+.customer-restoration-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 12px;
+}
+
+
+/* =========================================================
+   LOCKED ACCOUNTS BUTTON
+========================================================= */
+
+.locked-accounts-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 10px 18px;
+    border: 1px solid #e63946;
+    border-radius: 9px;
+    background: #fff;
+    color: #e63946;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.locked-accounts-button:hover {
+    background: #e63946;
+    color: #fff;
+    box-shadow: 0 5px 14px rgba(230, 57, 70, 0.16);
+}
+
+.locked-button-icon {
+    font-size: 14px;
+}
+
+.locked-count-badge {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    min-width: 21px;
+    height: 21px;
+    padding: 0 6px;
+    border-radius: 20px;
+    background: #e63946;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.locked-accounts-button:hover .locked-count-badge {
+    background: #fff;
+    color: #e63946;
+}
+
+
+/* =========================================================
+   MODAL OVERLAY
+========================================================= */
+
+.restoration-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10020;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(3px);
+}
+
+.restoration-modal-overlay.show {
+    display: flex;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.restoration-modal {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 760px;
+    max-height: 88vh;
+    overflow: hidden;
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 15px;
+    background: var(--card-bg, #fff);
+    color: var(--text-color, #222);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================================
+   MODAL HEADER
+========================================================= */
+
+.restoration-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 23px 25px;
+    border-bottom: 1px solid var(--border-color, #e5e7eb);
+}
+
+.restoration-eyebrow {
+    display: block;
+    margin-bottom: 7px;
+    color: #e63946;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+}
+
+.restoration-modal-header h2 {
+    margin: 0;
+    color: var(--text-color, #222);
+    font-size: 21px;
+    font-weight: 750;
+}
+
+.restoration-modal-header p {
+    margin: 7px 0 0;
+    color: var(--text-secondary, #777);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.restoration-close-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-secondary, #777);
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.restoration-close-button:hover {
+    border-color: #e63946;
+    background: #e63946;
+    color: #fff;
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.restoration-summary {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin: 18px 22px 5px;
+    padding: 15px;
+    border: 1px solid rgba(230, 57, 70, 0.18);
+    border-radius: 10px;
+    background: rgba(230, 57, 70, 0.055);
+}
+
+.restoration-summary-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: rgba(230, 57, 70, 0.12);
+    color: #e63946;
+    font-size: 17px;
+}
+
+.restoration-summary strong {
+    display: block;
+    color: var(--text-color, #222);
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.restoration-summary span {
+    display: block;
+    margin-top: 3px;
+    color: var(--text-secondary, #777);
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   LOCKED ACCOUNTS LIST
+========================================================= */
+
+.restoration-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 120px;
+    padding: 18px 22px;
+    overflow-y: auto;
+}
+
+.restoration-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+    color: var(--text-secondary, #777);
+    text-align: center;
+}
+
+.restoration-loading i {
+    color: #e63946;
+    font-size: 23px;
+}
+
+.restoration-loading p {
+    margin: 10px 0 0;
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   LOCKED CUSTOMER CARD
+========================================================= */
+
+.locked-customer-card {
+    padding: 17px;
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 11px;
+    background: var(--card-bg, #fff);
+    transition: border-color 0.2s ease;
+}
+
+.locked-customer-card:hover {
+    border-color: rgba(230, 57, 70, 0.45);
+}
+
+.locked-customer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.locked-customer-profile {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+}
+
+.locked-customer-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 43px;
+    height: 43px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: rgba(230, 57, 70, 0.1);
+    color: #e63946;
+    font-size: 16px;
+}
+
+.locked-customer-name {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.locked-customer-name strong {
+    overflow: hidden;
+    color: var(--text-color, #222);
+    font-size: 14px;
+    font-weight: 750;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.locked-customer-name span {
+    color: var(--text-secondary, #777);
+    font-size: 11px;
+}
+
+.locked-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    padding: 6px 10px;
+    border-radius: 20px;
+    background: rgba(230, 57, 70, 0.1);
+    color: #e63946;
+    font-size: 11px;
+    font-weight: 750;
+}
+
+
+/* =========================================================
+   CUSTOMER INFORMATION
+========================================================= */
+
+.locked-customer-information {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 17px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-color, #e5e7eb);
+}
+
+.locked-customer-information > div {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    min-width: 0;
+    color: var(--text-secondary, #777);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.locked-customer-information i {
+    width: 14px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: #e63946;
+}
+
+.locked-customer-information span {
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   RESTORE BUTTON
+========================================================= */
+
+.locked-customer-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+}
+
+.restore-account-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 38px;
+    padding: 9px 15px;
+    border: 0;
+    border-radius: 8px;
+    background: #e63946;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.restore-account-button:hover:not(:disabled) {
+    background: #c92f3b;
+    box-shadow: 0 4px 12px rgba(230, 57, 70, 0.2);
+}
+
+.restore-account-button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   EMPTY AND ERROR STATES
+========================================================= */
+
+.restoration-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 210px;
+    padding: 25px 15px;
+    text-align: center;
+}
+
+.restoration-empty-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 55px;
+    margin-bottom: 13px;
+    border-radius: 50%;
+    background: rgba(34, 197, 94, 0.1);
+    color: #16a34a;
+    font-size: 22px;
+}
+
+.restoration-empty > i {
+    margin-bottom: 12px;
+    color: #e63946;
+    font-size: 27px;
+}
+
+.restoration-empty h3 {
+    margin: 0;
+    color: var(--text-color, #222);
+    font-size: 16px;
+}
+
+.restoration-empty p {
+    max-width: 390px;
+    margin: 8px 0 0;
+    color: var(--text-secondary, #777);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.restoration-retry-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 15px;
+    padding: 9px 14px;
+    border: 0;
+    border-radius: 7px;
+    background: #e63946;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   MODAL FOOTER
+========================================================= */
+
+.restoration-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 9px;
+    padding: 15px 22px;
+    border-top: 1px solid var(--border-color, #e5e7eb);
+}
+
+.restoration-footer-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 37px;
+    padding: 8px 14px;
+    border: 0;
+    border-radius: 7px;
+    background: #e63946;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.restoration-footer-button.secondary {
+    border: 1px solid var(--border-color, #ddd);
+    background: transparent;
+    color: var(--text-color, #333);
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark-mode .locked-accounts-button {
+    background: #1c1c1c;
+    color: #ff6671;
+}
+
+body.dark-mode .locked-accounts-button:hover {
+    background: #e63946;
+    color: #fff;
+}
+
+body.dark-mode .locked-customer-card {
+    background: var(--card-bg, #1b1b1b);
+}
+
+body.dark-mode .restoration-modal {
+    background: var(--card-bg, #1b1b1b);
+}
+
+body.dark-mode .restoration-summary {
+    background: rgba(230, 57, 70, 0.09);
+}
+
+body.dark-mode .restoration-close-button {
+    background: #242424;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .restoration-modal-overlay {
+        padding: 10px;
+    }
+
+    .restoration-modal {
+        max-height: 94vh;
+        border-radius: 12px;
+    }
+
+    .restoration-modal-header {
+        padding: 17px;
+    }
+
+    .restoration-modal-header h2 {
+        font-size: 17px;
+    }
+
+    .restoration-summary {
+        margin: 13px 14px 4px;
+        padding: 12px;
+    }
+
+    .restoration-list {
+        padding: 13px;
+    }
+
+    .locked-customer-card {
+        padding: 13px;
+    }
+
+    .locked-customer-information {
+        grid-template-columns: 1fr;
+    }
+
+    .locked-customer-top {
+        align-items: flex-start;
+    }
+
+    .locked-status-badge {
+        padding: 5px 7px;
+        font-size: 10px;
+    }
+
+    .restoration-modal-footer {
+        padding: 12px 14px;
+    }
+
+}
+/* =========================================================
+   CUSTOMER RESTORATION - POSITION OVERRIDE
+   ALIGN LOCKED ACCOUNTS WITH PENDING ACCOUNTS
+========================================================= */
+
+.customer-restoration-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 12px;
+    padding: 0;
+}
+
+.customer-pagination-container .customer-restoration-actions {
+    justify-content: center;
+    margin-top: 12px;
+}
+
+/* =========================================================
+   RESPONSIVE RESTORATION BUTTON
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .customer-restoration-actions,
+    .customer-pagination-container .customer-restoration-actions {
+        justify-content: center;
+        margin-top: 12px;
+    }
+
+    .locked-accounts-button {
+        max-width: 100%;
+    }
+
+}
+
+/* =========================================================
+   DARK MODE - COMPLETE RESTORATION MODAL
+========================================================= */
+
+body.dark-mode .restoration-modal {
+    background: #181818;
+    color: #f1f1f1;
+    border-color: #383838;
+}
+
+body.dark-mode .restoration-modal-header,
+body.dark-mode .restoration-modal-footer {
+    border-color: #383838;
+}
+
+body.dark-mode .restoration-modal-header h2,
+body.dark-mode .restoration-summary strong,
+body.dark-mode .locked-customer-name strong,
+body.dark-mode .restoration-empty h3 {
+    color: #f5f5f5;
+}
+
+body.dark-mode .restoration-modal-header p,
+body.dark-mode .restoration-summary span,
+body.dark-mode .locked-customer-name span,
+body.dark-mode .locked-customer-information > div,
+body.dark-mode .restoration-loading {
+    color: #b5b5b5;
+}
+
+body.dark-mode .restoration-close-button {
+    background: #252525;
+    color: #dedede;
+    border-color: #414141;
+}
+
+body.dark-mode .restoration-close-button:hover {
+    background: #e63946;
+    border-color: #e63946;
+    color: #ffffff;
+}
+
+body.dark-mode .restoration-summary {
+    background: rgba(230, 57, 70, 0.10);
+    border-color: rgba(230, 57, 70, 0.25);
+}
+
+body.dark-mode .restoration-summary-icon {
+    background: rgba(230, 57, 70, 0.18);
+    color: #ff6975;
+}
+
+body.dark-mode .restoration-list {
+    background: #181818;
+}
+
+body.dark-mode .locked-customer-card {
+    background: #202020;
+    border-color: #393939;
+}
+
+body.dark-mode .locked-customer-card:hover {
+    border-color: rgba(230, 57, 70, 0.65);
+}
+
+body.dark-mode .locked-customer-information {
+    border-color: #393939;
+}
+
+body.dark-mode .locked-status-badge {
+    background: rgba(230, 57, 70, 0.15);
+    color: #ff7580;
+}
+
+body.dark-mode .locked-accounts-button {
+    background: #202020;
+    color: #ff7580;
+    border-color: #e63946;
+}
+
+body.dark-mode .locked-accounts-button:hover {
+    background: #e63946;
+    color: #ffffff;
+}
+
+body.dark-mode .locked-count-badge {
+    background: #e63946;
+    color: #ffffff;
+}
+
+body.dark-mode .locked-accounts-button:hover .locked-count-badge {
+    background: #ffffff;
+    color: #e63946;
+}
+
+body.dark-mode .restoration-footer-button.secondary {
+    background: #252525;
+    color: #eeeeee;
+    border-color: #444444;
+}
+
+body.dark-mode .restoration-footer-button.secondary:hover {
+    background: #333333;
+}
+
+body.dark-mode .restoration-empty {
+    background: #181818;
+}
+
+body.dark-mode .restoration-empty p {
+    color: #b5b5b5;
+}
+
+body.dark-mode .restoration-retry-button {
+    background: #e63946;
+    color: #ffffff;
+}
+
+body.dark-mode .restoration-loading i {
+    color: #ff6975;
+}
+
+/* =========================================================
+   DARK MODE - SEE MORE BUTTON
+========================================================= */
+
+body.dark-mode .customer-see-more-button {
+    background: #e63946;
+    border-color: #e63946;
+    color: #ffffff;
+}
+
+body.dark-mode .customer-see-more-button:hover:not(:disabled) {
+    background: #c92f3b;
+    border-color: #c92f3b;
+}
+
+/* =========================================================
+   RESPONSIVE RESTORATION BUTTON
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .customer-restoration-actions {
+        justify-content: flex-end;
+    }
+
+    .locked-accounts-button {
+        max-width: 100%;
+    }
+
+}

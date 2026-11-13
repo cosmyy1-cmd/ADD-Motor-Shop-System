@@ -1,0 +1,838 @@
+
+/* =========================================================
+   ADD MOTOR SHOP - INVENTORY ARCHIVE
+   File: frontend/admin/css/inventory-archive.css
+   Purpose:
+   - Active / Archived inventory tabs
+   - Archived products table
+   - Archive loading, error, and empty states
+   - Restore button and restore confirmation modal
+   ========================================================= */
+
+/* ---------- Inventory View Tabs ---------- */
+
+.inventory-archive-tabs {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 0 22px;
+    padding: 6px;
+    width: fit-content;
+    max-width: 100%;
+    background: #f0f1f3;
+    border: 1px solid #e1e3e6;
+    border-radius: 10px;
+}
+
+.inventory-view-tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 42px;
+    padding: 10px 18px;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    background: transparent;
+    color: #525866;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.inventory-view-tab:hover {
+    background: rgba(255, 255, 255, 0.75);
+    color: #22252b;
+}
+
+.inventory-view-tab.active {
+    background: #ffffff;
+    color: #e63946;
+    border-color: #e5e5e5;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
+}
+
+.inventory-view-tab:focus-visible {
+    outline: 2px solid #e63946;
+    outline-offset: 3px;
+}
+
+.inventory-view-tab .tab-count,
+.archive-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 23px;
+    min-height: 23px;
+    padding: 2px 7px;
+    border-radius: 20px;
+    background: #e7e9ed;
+    color: #414651;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.inventory-view-tab.active .tab-count {
+    background: #fde7e9;
+    color: #c92f3b;
+}
+
+/* ---------- Active and Archived Panels ---------- */
+
+.active-inventory-panel,
+.archived-inventory-panel {
+    width: 100%;
+    min-width: 0;
+}
+
+.archived-inventory-panel[hidden],
+.active-inventory-panel[hidden] {
+    display: none !important;
+}
+
+.archived-inventory-panel {
+    margin-top: 0;
+}
+
+.archive-panel-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.archive-panel-heading h2,
+.archive-panel-heading h3 {
+    margin: 0;
+    color: #242830;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.archive-panel-heading p {
+    margin: 5px 0 0;
+    color: #777d88;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.archive-panel-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ---------- Refresh Button ---------- */
+
+#refreshArchiveButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 38px;
+    padding: 9px 14px;
+    border: 1px solid #d9dce2;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #343943;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+#refreshArchiveButton:hover {
+    background: #f7f7f8;
+    border-color: #c7cbd3;
+}
+
+#refreshArchiveButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ---------- Loading State ---------- */
+
+.archive-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    min-height: 150px;
+    padding: 24px;
+    color: #707681;
+    font-size: 14px;
+    text-align: center;
+}
+
+.archive-loading[hidden] {
+    display: none !important;
+}
+
+.archive-loading::before {
+    content: "";
+    width: 19px;
+    height: 19px;
+    flex: 0 0 19px;
+    border: 2px solid #e0e2e7;
+    border-top-color: #e63946;
+    border-radius: 50%;
+    animation: archive-loading-spin 0.75s linear infinite;
+}
+
+@keyframes archive-loading-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ---------- Error State ---------- */
+
+.archive-error {
+    margin: 12px 0;
+    padding: 15px 16px;
+    border: 1px solid #f1c4c7;
+    border-radius: 8px;
+    background: #fff2f2;
+    color: #a5222d;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.archive-error[hidden] {
+    display: none !important;
+}
+
+.archive-error-message {
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+#retryArchiveButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    padding: 7px 12px;
+    border: 1px solid #e3a5aa;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #a5222d;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#retryArchiveButton:hover {
+    background: #ffe4e6;
+}
+
+/* ---------- Empty Archive State ---------- */
+
+.archive-empty {
+    padding: 45px 20px;
+    border: 1px dashed #d8dbe1;
+    border-radius: 10px;
+    background: #ffffff;
+    text-align: center;
+}
+
+.archive-empty[hidden] {
+    display: none !important;
+}
+
+.archive-empty-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    margin: 0 auto 14px;
+    border-radius: 50%;
+    background: #f0f1f3;
+    color: #737985;
+    font-size: 23px;
+}
+
+.archive-empty h3 {
+    margin: 0 0 7px;
+    color: #292d35;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.archive-empty p {
+    max-width: 440px;
+    margin: 0 auto;
+    color: #777d88;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* ---------- Archived Products Table ---------- */
+
+.archive-table-container {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #e5e7eb;
+    border-radius: 9px;
+    background: #ffffff;
+}
+
+.archive-table-container[hidden] {
+    display: none !important;
+}
+
+.archive-table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    text-align: left;
+}
+
+.archive-table thead {
+    background: #f7f8fa;
+}
+
+.archive-table th {
+    padding: 14px 16px;
+    border-bottom: 1px solid #e5e7eb;
+    color: #606673;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.45px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.archive-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #eceef1;
+    color: #3f444e;
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+.archive-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.archive-table tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+.archive-table tbody tr:hover {
+    background: #fafbfc;
+}
+
+.archive-table .archive-product-name {
+    color: #262a32;
+    font-weight: 600;
+}
+
+.archive-table .archive-product-description {
+    display: block;
+    max-width: 260px;
+    margin-top: 4px;
+    overflow: hidden;
+    color: #818692;
+    font-size: 12px;
+    font-weight: 400;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.archive-table .archive-product-image {
+    display: block;
+    width: 44px;
+    height: 44px;
+    border: 1px solid #e7e9ed;
+    border-radius: 7px;
+    background: #f7f8fa;
+    object-fit: cover;
+}
+
+.archive-table .archive-no-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid #e7e9ed;
+    border-radius: 7px;
+    background: #f7f8fa;
+    color: #8b909a;
+    font-size: 18px;
+}
+
+.archive-table .archive-date {
+    color: #707681;
+    white-space: nowrap;
+}
+
+.archive-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 9px;
+    border-radius: 20px;
+    background: #f0f1f3;
+    color: #606673;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.archive-status::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #858b96;
+}
+
+.archive-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+/* ---------- Restore Button ---------- */
+
+.archive-restore-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 34px;
+    padding: 7px 11px;
+    border: 1px solid #b9e2c5;
+    border-radius: 6px;
+    background: #effaf2;
+    color: #237341;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.archive-restore-button:hover {
+    border-color: #8fcea1;
+    background: #ddf5e4;
+    color: #185b30;
+}
+
+.archive-restore-button:focus-visible {
+    outline: 2px solid #25834a;
+    outline-offset: 2px;
+}
+
+.archive-restore-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ---------- Restore Confirmation Modal ---------- */
+
+#restoreModal {
+    position: fixed;
+    inset: 0;
+    z-index: 11000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(12, 14, 18, 0.58);
+    backdrop-filter: blur(2px);
+}
+
+#restoreModal[hidden] {
+    display: none !important;
+}
+
+#restoreModal .modal-content,
+#restoreModal .modal-container,
+#restoreModal .modal-dialog {
+    width: 100%;
+    max-width: 440px;
+    margin: auto;
+    padding: 26px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.2);
+}
+
+#restoreModal .modal-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+    border-radius: 50%;
+    background: #effaf2;
+    color: #237341;
+    font-size: 21px;
+}
+
+#restoreModalTitle {
+    margin: 0 0 10px;
+    color: #242830;
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+#restoreModalMessage {
+    margin: 0;
+    color: #69707c;
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+#restoreModal .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+#cancelRestoreButton,
+#confirmRestoreButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 10px 16px;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+#cancelRestoreButton {
+    border-color: #d9dce2;
+    background: #ffffff;
+    color: #424752;
+}
+
+#cancelRestoreButton:hover {
+    background: #f4f5f7;
+}
+
+#confirmRestoreButton {
+    border-color: #237341;
+    background: #237341;
+    color: #ffffff;
+}
+
+#confirmRestoreButton:hover {
+    border-color: #185b30;
+    background: #185b30;
+}
+
+#cancelRestoreButton:disabled,
+#confirmRestoreButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#cancelRestoreButton:focus-visible,
+#confirmRestoreButton:focus-visible {
+    outline: 2px solid #e63946;
+    outline-offset: 3px;
+}
+
+/* ---------- Dark Mode ---------- */
+
+body.dark-mode .inventory-archive-tabs {
+    border-color: #353941;
+    background: #202329;
+}
+
+body.dark-mode .inventory-view-tab {
+    color: #c3c7d0;
+}
+
+body.dark-mode .inventory-view-tab:hover {
+    background: #2b2f36;
+    color: #ffffff;
+}
+
+body.dark-mode .inventory-view-tab.active {
+    border-color: #414650;
+    background: #30343c;
+    color: #ff6671;
+    box-shadow: none;
+}
+
+body.dark-mode .inventory-view-tab .tab-count,
+body.dark-mode .archive-count {
+    background: #393e47;
+    color: #d9dce3;
+}
+
+body.dark-mode .inventory-view-tab.active .tab-count {
+    background: #51282e;
+    color: #ff9ba2;
+}
+
+body.dark-mode .archive-panel-heading h2,
+body.dark-mode .archive-panel-heading h3 {
+    color: #f0f1f4;
+}
+
+body.dark-mode .archive-panel-heading p {
+    color: #a0a6b2;
+}
+
+body.dark-mode #refreshArchiveButton {
+    border-color: #444953;
+    background: #292d34;
+    color: #e0e3e9;
+}
+
+body.dark-mode #refreshArchiveButton:hover {
+    border-color: #5a606b;
+    background: #343943;
+}
+
+body.dark-mode .archive-loading {
+    color: #b4bac5;
+}
+
+body.dark-mode .archive-loading::before {
+    border-color: #424752;
+    border-top-color: #e63946;
+}
+
+body.dark-mode .archive-error {
+    border-color: #71343a;
+    background: #351f23;
+    color: #ffb5bb;
+}
+
+body.dark-mode #retryArchiveButton {
+    border-color: #81454b;
+    background: #3c2529;
+    color: #ffb5bb;
+}
+
+body.dark-mode #retryArchiveButton:hover {
+    background: #51282e;
+}
+
+body.dark-mode .archive-empty {
+    border-color: #414650;
+    background: #24272e;
+}
+
+body.dark-mode .archive-empty-icon {
+    background: #343841;
+    color: #b5bbc6;
+}
+
+body.dark-mode .archive-empty h3 {
+    color: #f0f1f4;
+}
+
+body.dark-mode .archive-empty p {
+    color: #a0a6b2;
+}
+
+body.dark-mode .archive-table-container {
+    border-color: #393e47;
+    background: #24272e;
+}
+
+body.dark-mode .archive-table thead {
+    background: #2b2f37;
+}
+
+body.dark-mode .archive-table th {
+    border-bottom-color: #393e47;
+    color: #b5bbc6;
+}
+
+body.dark-mode .archive-table td {
+    border-bottom-color: #353a43;
+    color: #d0d4dc;
+}
+
+body.dark-mode .archive-table tbody tr:hover {
+    background: #2b2f37;
+}
+
+body.dark-mode .archive-table .archive-product-name {
+    color: #f0f1f4;
+}
+
+body.dark-mode .archive-table .archive-product-description,
+body.dark-mode .archive-table .archive-date {
+    color: #a0a6b2;
+}
+
+body.dark-mode .archive-table .archive-product-image,
+body.dark-mode .archive-table .archive-no-image {
+    border-color: #414650;
+    background: #30343c;
+    color: #b5bbc6;
+}
+
+body.dark-mode .archive-status {
+    background: #393e47;
+    color: #d0d4dc;
+}
+
+body.dark-mode .archive-restore-button {
+    border-color: #315b40;
+    background: #233b2b;
+    color: #9de0b0;
+}
+
+body.dark-mode .archive-restore-button:hover {
+    border-color: #417b53;
+    background: #2a4a34;
+    color: #c1f0cd;
+}
+
+body.dark-mode #restoreModal .modal-content,
+body.dark-mode #restoreModal .modal-container,
+body.dark-mode #restoreModal .modal-dialog {
+    border-color: #414650;
+    background: #24272e;
+}
+
+body.dark-mode #restoreModal .modal-icon {
+    background: #233b2b;
+    color: #9de0b0;
+}
+
+body.dark-mode #restoreModalTitle {
+    color: #f0f1f4;
+}
+
+body.dark-mode #restoreModalMessage {
+    color: #b5bbc6;
+}
+
+body.dark-mode #cancelRestoreButton {
+    border-color: #444953;
+    background: #292d34;
+    color: #e0e3e9;
+}
+
+body.dark-mode #cancelRestoreButton:hover {
+    background: #343943;
+}
+
+body.dark-mode #confirmRestoreButton {
+    border-color: #237341;
+    background: #237341;
+    color: #ffffff;
+}
+
+/* ---------- Responsive Layout ---------- */
+
+@media (max-width: 768px) {
+    .inventory-archive-tabs {
+        width: 100%;
+    }
+
+    .inventory-view-tab {
+        flex: 1 1 auto;
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    .archive-panel-heading {
+        align-items: flex-start;
+    }
+
+    .archive-panel-actions {
+        width: 100%;
+    }
+
+    #refreshArchiveButton {
+        width: 100%;
+    }
+
+    .archive-table-container {
+        border-radius: 7px;
+    }
+
+    #restoreModal .modal-content,
+    #restoreModal .modal-container,
+    #restoreModal .modal-dialog {
+        padding: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .inventory-archive-tabs {
+        gap: 5px;
+        padding: 4px;
+    }
+
+    .inventory-view-tab {
+        gap: 6px;
+        padding: 9px 8px;
+        font-size: 12px;
+    }
+
+    .archive-panel-heading h2,
+    .archive-panel-heading h3 {
+        font-size: 16px;
+    }
+
+    #restoreModal {
+        padding: 12px;
+    }
+
+    #restoreModal .modal-content,
+    #restoreModal .modal-container,
+    #restoreModal .modal-dialog {
+        padding: 19px;
+    }
+
+    #restoreModal .modal-actions {
+        flex-direction: column-reverse;
+    }
+
+    #cancelRestoreButton,
+    #confirmRestoreButton {
+        width: 100%;
+    }
+}

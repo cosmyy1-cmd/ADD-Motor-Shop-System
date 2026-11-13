@@ -1,0 +1,661 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADD Motor Shop - Inventory</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="css/admin-layout.css">
+    <link rel="stylesheet" href="css/inventory.css">
+    <link rel="stylesheet" href="css/inventory-archive.css">
+</head>
+
+<body>
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button type="button" class="mobile-menu-button" id="mobileMenuButton" aria-label="Open navigation">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="topbar-page-info">
+                    <span class="topbar-label">ADMIN PORTAL</span>
+                    <h2>Manage ADD Motor Shop</h2>
+                </div>
+            </div>
+
+            <div class="topbar-right">
+                <button
+                    type="button"
+                    class="theme-toggle"
+                    id="themeToggle"
+                    aria-label="Toggle light and dark mode"
+                    title="Toggle light and dark mode"
+                >
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                    <span id="themeText">Dark Mode</span>
+                </button>
+
+                <div class="admin-profile">
+                    <div class="admin-avatar" id="adminAvatar">
+                        <span id="adminAvatarInitial">A</span>
+                    </div>
+
+                    <div class="admin-profile-info">
+                        <strong id="adminName">Admin</strong>
+                        <span id="adminRole">Admin</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- INVENTORY PAGE -->
+        <section class="inventory-page">
+
+            <!-- PAGE HEADING -->
+            <div class="page-heading">
+                <div class="page-heading-text">
+                    <span class="page-eyebrow">
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                        STOCK CONTROL
+                    </span>
+
+                    <h2>Inventory</h2>
+
+                    <p>
+                        Monitor motorcycle parts, supplies,
+                        stock levels, and inventory transactions.
+                    </p>
+                </div>
+
+                <div class="page-heading-actions">
+                    <button type="button" class="btn btn-secondary" id="refreshInventoryButton">
+                        <i class="fa-solid fa-rotate"></i>
+                        Refresh
+                    </button>
+
+                    <button type="button" class="btn btn-primary" id="addInventoryButton">
+                        <i class="fa-solid fa-plus"></i>
+                        Add Item
+                    </button>
+                </div>
+            </div>
+
+            <!-- SUMMARY CARDS -->
+            <div class="inventory-summary-grid">
+                <div class="inventory-summary-card">
+                    <div class="summary-card-icon">
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                    </div>
+                    <div class="summary-card-content">
+                        <span>Total Items</span>
+                        <strong id="totalItems">0</strong>
+                        <small>Inventory products</small>
+                    </div>
+                </div>
+
+                <div class="inventory-summary-card">
+                    <div class="summary-card-icon">
+                        <i class="fa-solid fa-cubes"></i>
+                    </div>
+                    <div class="summary-card-content">
+                        <span>Total Stock</span>
+                        <strong id="totalStock">0</strong>
+                        <small>Units currently available</small>
+                    </div>
+                </div>
+
+                <div class="inventory-summary-card warning">
+                    <div class="summary-card-icon">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                    <div class="summary-card-content">
+                        <span>Low Stock</span>
+                        <strong id="lowStockCount">0</strong>
+                        <small>Items need attention</small>
+                    </div>
+                </div>
+
+                <div class="inventory-summary-card danger">
+                    <div class="summary-card-icon">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </div>
+                    <div class="summary-card-content">
+                        <span>Out of Stock</span>
+                        <strong id="outOfStockCount">0</strong>
+                        <small>Items unavailable</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INVENTORY LIST -->
+            <section class="inventory-section">
+                <div class="section-header">
+                    <div>
+                        <span class="section-eyebrow">INVENTORY MANAGEMENT</span>
+                        <h3>Stock Items</h3>
+                        <p>Switch between active products and archived inventory.</p>
+                    </div>
+                </div>
+
+                <!-- ACTIVE / ARCHIVE TABS -->
+                <div class="inventory-archive-tabs" role="tablist" aria-label="Inventory views">
+                    <button
+                        type="button"
+                        class="inventory-view-tab active"
+                        id="activeInventoryTab"
+                        role="tab"
+                        aria-selected="true"
+                        aria-controls="activeInventoryPanel"
+                    >
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                        Active Inventory
+                    </button>
+
+                    <button
+                        type="button"
+                        class="inventory-view-tab"
+                        id="archivedInventoryTab"
+                        role="tab"
+                        aria-selected="false"
+                        aria-controls="archivedInventoryPanel"
+                    >
+                        <i class="fa-solid fa-box-archive"></i>
+                        Archive
+                        <span class="archive-count" id="archiveCount">0</span>
+                    </button>
+                </div>
+
+                <!-- ACTIVE INVENTORY PANEL -->
+                <div id="activeInventoryPanel" role="tabpanel" aria-labelledby="activeInventoryTab">
+
+                    <!-- FILTER BAR -->
+                    <div class="inventory-filter-bar">
+                        <div class="inventory-search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input
+                                type="text"
+                                id="inventorySearch"
+                                placeholder="Search item name, category, or SKU..."
+                                autocomplete="off"
+                            >
+                        </div>
+
+                        <div class="inventory-filter">
+                            <label for="categoryFilter">Category</label>
+                            <select id="categoryFilter">
+                                <option value="all">All Categories</option>
+                            </select>
+                        </div>
+
+                        <div class="inventory-filter">
+                            <label for="stockStatusFilter">Stock Status</label>
+                            <select id="stockStatusFilter">
+                                <option value="all">All Status</option>
+                                <option value="in-stock">In Stock</option>
+                                <option value="low-stock">Low Stock</option>
+                                <option value="out-of-stock">Out of Stock</option>
+                            </select>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="filter-reset-button"
+                            id="resetFiltersButton"
+                            title="Reset filters"
+                        >
+                            <i class="fa-solid fa-filter-circle-xmark"></i>
+                            Reset
+                        </button>
+                    </div>
+
+                    <!-- ACTIVE INVENTORY TABLE WRAPPER -->
+                    <div class="inventory-table-wrapper">
+
+                        <div class="inventory-loading" id="inventoryLoading">
+                            <div class="loading-spinner"></div>
+                            <p>Loading inventory...</p>
+                        </div>
+
+                        <div class="inventory-error" id="inventoryError" hidden>
+                            <div class="error-icon">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                            </div>
+                            <h4>Unable to Load Inventory</h4>
+                            <p id="inventoryErrorMessage">
+                                An error occurred while loading inventory.
+                            </p>
+                            <button type="button" class="btn btn-primary" id="retryInventoryButton">
+                                <i class="fa-solid fa-rotate-right"></i>
+                                Try Again
+                            </button>
+                        </div>
+
+                        <div class="inventory-empty" id="inventoryEmpty" hidden>
+                            <div class="empty-icon">
+                                <i class="fa-solid fa-box-open"></i>
+                            </div>
+                            <h4>No Inventory Items</h4>
+                            <p>There are currently no inventory items matching your filters.</p>
+                            <button type="button" class="btn btn-primary" id="emptyAddInventoryButton">
+                                <i class="fa-solid fa-plus"></i>
+                                Add Inventory Item
+                            </button>
+                        </div>
+
+                        <div class="inventory-table-container" id="inventoryTableContainer" hidden>
+                            <table class="inventory-table">
+                                <thead>
+                                    <tr>
+                                        <th>ITEM</th>
+                                        <th>SKU</th>
+                                        <th>CATEGORY</th>
+                                        <th>PRICE</th>
+                                        <th>STOCK</th>
+                                        <th>STATUS</th>
+                                        <th>LAST UPDATED</th>
+                                        <th>ACTIONS</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="inventoryTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ARCHIVED INVENTORY PANEL -->
+                <div
+                    id="archivedInventoryPanel"
+                    class="archived-inventory-panel"
+                    role="tabpanel"
+                    aria-labelledby="archivedInventoryTab"
+                    hidden
+                >
+                    <div class="archive-panel-heading">
+                        <div>
+                            <h4>
+                                <i class="fa-solid fa-box-archive"></i>
+                                Archived Items
+                            </h4>
+                            <p>
+                                Archived products are hidden from active inventory.
+                                Restore an item to make it active again.
+                            </p>
+                        </div>
+
+                        <button type="button" class="btn btn-secondary" id="refreshArchiveButton">
+                            <i class="fa-solid fa-rotate"></i>
+                            Refresh Archive
+                        </button>
+                    </div>
+
+                    <div class="archive-loading" id="archiveLoading" hidden>
+                        <div class="loading-spinner"></div>
+                        <p>Loading archived products...</p>
+                    </div>
+
+                    <div class="archive-error" id="archiveError" hidden>
+                        <div class="error-icon">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </div>
+                        <h4>Unable to Load Archive</h4>
+                        <p id="archiveErrorMessage">
+                            An error occurred while loading archived products.
+                        </p>
+                        <button type="button" class="btn btn-primary" id="retryArchiveButton">
+                            <i class="fa-solid fa-rotate-right"></i>
+                            Try Again
+                        </button>
+                    </div>
+
+                    <div class="archive-empty" id="archiveEmpty" hidden>
+                        <div class="empty-icon">
+                            <i class="fa-solid fa-box-open"></i>
+                        </div>
+                        <h4>No Archived Items</h4>
+                        <p>Products you archive will appear here.</p>
+                    </div>
+
+                    <div class="archive-table-container" id="archiveTableContainer" hidden>
+                        <table class="archive-table">
+                            <thead>
+                                <tr>
+                                    <th>ITEM</th>
+                                    <th>CATEGORY</th>
+                                    <th>PRICE</th>
+                                    <th>STOCK</th>
+                                    <th>STATUS</th>
+                                    <th>DATE ADDED</th>
+                                    <th>ACTIONS</th>
+                                </tr>
+                            </thead>
+                            <tbody id="archiveTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LOW STOCK ALERTS -->
+            <section class="inventory-section low-stock-section">
+                <div class="section-header">
+                    <div>
+                        <span class="section-eyebrow warning-text">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            ATTENTION REQUIRED
+                        </span>
+                        <h3>Low Stock Alerts</h3>
+                        <p>Inventory items that may need to be restocked.</p>
+                    </div>
+                </div>
+
+                <div class="low-stock-list" id="lowStockList">
+                    <div class="low-stock-empty" id="lowStockEmpty">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <div>
+                            <strong>Inventory levels look good.</strong>
+                            <span>No low-stock items require attention.</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TRANSACTIONS -->
+            <section class="inventory-section transactions-section">
+                <div class="section-header">
+                    <div>
+                        <span class="section-eyebrow">STOCK ACTIVITY</span>
+                        <h3>Recent Inventory Transactions</h3>
+                        <p>Track recent stock-in and stock-out activity.</p>
+                    </div>
+                </div>
+
+                <div class="transactions-table-wrapper">
+                    <table class="transactions-table">
+                        <thead>
+                            <tr>
+                                <th>DATE</th>
+                                <th>ITEM</th>
+                                <th>TYPE</th>
+                                <th>QUANTITY</th>
+                                <th>REFERENCE</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionsTableBody"></tbody>
+                    </table>
+
+                    <div class="transactions-empty" id="transactionsEmpty">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                        <p>No inventory transactions yet.</p>
+                    </div>
+                </div>
+            </section>
+
+    <!-- ADD / EDIT INVENTORY MODAL -->
+    <div class="modal-overlay" id="inventoryModal" hidden>
+        <div class="inventory-modal" role="dialog" aria-modal="true" aria-labelledby="inventoryModalTitle">
+            <div class="modal-header">
+                <div>
+                    <span class="modal-eyebrow">INVENTORY</span>
+                    <h3 id="inventoryModalTitle">Add Inventory Item</h3>
+                    <p id="inventoryModalSubtitle">Add a new motorcycle part or shop item.</p>
+                </div>
+                <button type="button" class="modal-close" id="closeInventoryModal" aria-label="Close modal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form id="inventoryForm" autocomplete="off">
+                <input type="hidden" id="inventoryItemId" name="inventoryItemId">
+
+                <div class="form-group">
+                    <label for="inventoryItemName">Item Name</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-box"></i>
+                        <input type="text" id="inventoryItemName" name="itemName" placeholder="e.g. Engine Oil" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inventorySku">SKU</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-barcode"></i>
+                        <input type="text" id="inventorySku" name="sku" placeholder="e.g. ADD-OIL-001">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inventoryCategory">Category</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-tags"></i>
+                        <select id="inventoryCategory" name="category" required>
+                            <option value="">Select category</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="inventoryPrice">Price</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-peso-sign"></i>
+                            <input type="number" id="inventoryPrice" name="price" min="0" step="0.01" placeholder="0.00" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inventoryStock">Stock Quantity</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-cubes"></i>
+                            <input type="number" id="inventoryStock" name="stock" min="0" step="1" placeholder="0" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inventoryReorderLevel">Reorder Level</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-bell"></i>
+                        <input type="number" id="inventoryReorderLevel" name="reorderLevel" min="0" step="1" value="5" placeholder="5">
+                    </div>
+                    <small class="form-help">The stock level at which the item will be considered low stock.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="inventoryDescription">Description</label>
+                    <textarea id="inventoryDescription" name="description" rows="4" placeholder="Optional item description..."></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelInventoryButton">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="saveInventoryButton">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        Save Item
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- STOCK TRANSACTION MODAL -->
+    <div class="modal-overlay" id="transactionModal" hidden>
+        <div class="inventory-modal transaction-modal" role="dialog" aria-modal="true" aria-labelledby="transactionModalTitle">
+            <div class="modal-header">
+                <div>
+                    <span class="modal-eyebrow">STOCK TRANSACTION</span>
+                    <h3 id="transactionModalTitle">Stock In</h3>
+                    <p id="transactionModalSubtitle">Record an inventory stock movement.</p>
+                </div>
+                <button type="button" class="modal-close" id="closeTransactionModal" aria-label="Close modal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form id="transactionForm" autocomplete="off">
+                <input type="hidden" id="transactionType" name="transactionType" value="in">
+
+                <div class="form-group">
+                    <label for="transactionItem">Inventory Item</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-box"></i>
+                        <select id="transactionItem" name="itemId" required>
+                            <option value="">Select inventory item</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="transactionQuantity">Quantity</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-cubes"></i>
+                        <input type="number" id="transactionQuantity" name="quantity" min="1" step="1" placeholder="Enter quantity" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="transactionReason">Reason</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-clipboard"></i>
+                        <select id="transactionReason" name="reason" required>
+                            <option value="">Select reason</option>
+                            <option value="Purchase">Purchase</option>
+                            <option value="Restock">Restock</option>
+                            <option value="Sale">Sale</option>
+                            <option value="Service">Service</option>
+                            <option value="Adjustment">Adjustment</option>
+                            <option value="Damaged">Damaged</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="transactionReference">Reference</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-hashtag"></i>
+                        <input type="text" id="transactionReference" name="reference" placeholder="Optional reference number">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="transactionNotes">Notes</label>
+                    <textarea id="transactionNotes" name="notes" rows="3" placeholder="Optional notes..."></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelTransactionButton">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="saveTransactionButton">
+                        <i class="fa-solid fa-check"></i>
+                        Record Transaction
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- DETAILS MODAL -->
+    <div class="modal-overlay" id="detailsModal" hidden>
+        <div class="inventory-modal details-modal" role="dialog" aria-modal="true" aria-labelledby="detailsModalTitle">
+            <div class="modal-header">
+                <div>
+                    <span class="modal-eyebrow">INVENTORY DETAILS</span>
+                    <h3 id="detailsModalTitle">Item Details</h3>
+                    <p>Review inventory information.</p>
+                </div>
+                <button type="button" class="modal-close" id="closeDetailsModal" aria-label="Close modal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="inventory-details" id="inventoryDetailsContent"></div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" id="closeDetailsButton">Close</button>
+                <button type="button" class="btn btn-primary" id="editDetailsButton">
+                    <i class="fa-solid fa-pen"></i>
+                    Edit Item
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ARCHIVE / DELETE CONFIRMATION MODAL -->
+    <div class="modal-overlay" id="deleteModal" hidden>
+        <div class="confirmation-modal" role="dialog" aria-modal="true" aria-labelledby="deleteModalTitle">
+            <div class="confirmation-icon danger">
+                <i class="fa-solid fa-box-archive"></i>
+            </div>
+
+            <h3 id="deleteModalTitle">Archive Inventory Item?</h3>
+
+            <p id="deleteModalMessage">
+                This product will be moved to Archive. Its transaction history and related records will be preserved.
+            </p>
+
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" id="cancelDeleteButton">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteButton">
+                    <i class="fa-solid fa-box-archive"></i>
+                    Archive Item
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESTORE CONFIRMATION MODAL -->
+    <div class="modal-overlay" id="restoreModal" hidden>
+        <div class="confirmation-modal" role="dialog" aria-modal="true" aria-labelledby="restoreModalTitle">
+            <div class="confirmation-icon">
+                <i class="fa-solid fa-box-open"></i>
+            </div>
+
+            <h3 id="restoreModalTitle">Restore Inventory Item?</h3>
+
+            <p id="restoreModalMessage">
+                This product will be moved back to Active Inventory.
+            </p>
+
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" id="cancelRestoreButton">Cancel</button>
+                <button type="button" class="btn btn-primary" id="confirmRestoreButton">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    Restore Item
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="inventory-toast" id="inventoryToast" role="status" aria-live="polite">
+        <div class="toast-icon">
+            <i class="fa-solid fa-circle-check" id="toastIcon"></i>
+        </div>
+
+        <div class="toast-content">
+            <strong id="toastTitle">Success</strong>
+            <span id="toastMessage">Inventory updated successfully.</span>
+        </div>
+
+        <button type="button" class="toast-close" id="closeToastButton" aria-label="Close notification">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+<script src="js/admin-layout.js"></script>
+<script src="js/admin-theme.js"></script>
+<script src="js/inventory.js"></script>
+<script src="js/inventory-archive.js"></script>
+<script src="js/inventory-transactions.js"></script>
+</body>
+</html>

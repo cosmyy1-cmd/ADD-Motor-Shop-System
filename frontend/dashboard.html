@@ -1,0 +1,545 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard - ADD Motor Shop</title>
+
+    <link
+        rel="stylesheet"
+        href="css/dashboard.css"
+    >
+
+    <!-- SHARED CUSTOMER HEADER CSS -->
+    <link
+        rel="stylesheet"
+        href="css/customer-header.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         SHARED CUSTOMER HEADER
+    ========================================== -->
+
+    <div id="customerHeader"></div>
+
+    <script src="js/customer-header.js"></script>
+
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+
+    <main class="container">
+
+
+        <!-- =====================================
+             WELCOME
+        ====================================== -->
+
+        <section class="welcome">
+
+            <div class="welcome-content">
+
+                <h1>
+
+                    Welcome
+                    <span>Customer!</span>
+
+                </h1>
+
+
+                <p>
+
+                    Manage your motorcycle services,
+                    appointments, motorcycles, and
+                    service history in one place.
+
+                </p>
+
+
+                <a
+                    href="book-service.html"
+                    class="quick-book"
+                >
+
+                    + Book a Service
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             STATISTICS
+        ====================================== -->
+
+        <section class="stats">
+
+
+            <!-- APPOINTMENTS -->
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <span class="stat-label">
+                        Appointments
+                    </span>
+
+                    <div class="stat-icon">
+                        📅
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="stat-number"
+                    id="appointments-count"
+                >
+                    0
+                </div>
+
+
+                <div class="stat-description">
+                    Upcoming appointments
+                </div>
+
+            </div>
+
+
+            <!-- MOTORCYCLES -->
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <span class="stat-label">
+                        Motorcycles
+                    </span>
+
+                    <div class="stat-icon">
+                        🏍️
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="stat-number"
+                    id="motorcycles-count"
+                >
+                    0
+                </div>
+
+
+                <div class="stat-description">
+                    Registered motorcycles
+                </div>
+
+            </div>
+
+
+            <!-- SERVICES -->
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <span class="stat-label">
+                        Completed Services
+                    </span>
+
+                    <div class="stat-icon">
+                        🔧
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="stat-number"
+                    id="completed-services-count"
+                >
+                    0
+                </div>
+
+
+                <div class="stat-description">
+                    Services completed
+                </div>
+
+            </div>
+
+
+            <!-- TOTAL SPENT -->
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <span class="stat-label">
+                        Total Spent
+                    </span>
+
+                    <div class="stat-icon">
+                        ₱
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="stat-number"
+                    id="total-spent"
+                >
+                    ₱0
+                </div>
+
+
+                <div class="stat-description">
+                    Total service expenses
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             CONTENT GRID
+        ====================================== -->
+
+        <section class="content-grid">
+
+
+            <!-- =================================
+                 LEFT SIDE
+            ================================== -->
+
+            <div>
+
+
+                <!-- =============================
+                     UPCOMING APPOINTMENTS
+                ============================== -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h2>
+                            Upcoming Appointments
+                        </h2>
+
+
+                        <a
+                            href="appointments.html"
+                        >
+                            View All
+                        </a>
+
+                    </div>
+
+
+                    <div
+                        id="appointments-list"
+                    >
+
+                        <div class="appointment">
+
+                            <div class="empty-state">
+
+                                📅
+
+                                <span>
+                                    Loading appointments...
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =============================
+                     SERVICE HISTORY
+                ============================== -->
+
+                <div
+                    class="card history-card"
+                >
+
+                    <div class="card-header">
+
+                        <h2>
+                            Recent Service History
+                        </h2>
+
+
+                        <a
+                            href="service-history.html"
+                        >
+                            View All
+                        </a>
+
+                    </div>
+
+
+                    <div
+                        class="history-list"
+                        id="history-list"
+                    >
+
+                        <div class="empty-state">
+
+                            🔧
+
+                            <span>
+                                Loading service history...
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================
+                 RIGHT SIDE
+            ================================== -->
+
+            <div>
+
+
+                <!-- =============================
+                     QUICK ACTIONS
+                ============================== -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h2>
+                            Quick Actions
+                        </h2>
+
+                    </div>
+
+
+                    <div class="quick-actions">
+
+
+                        <!-- BOOK SERVICE -->
+
+                        <a
+                            href="book-service.html"
+                            class="action"
+                        >
+
+                            <div class="action-icon">
+                                🔧
+                            </div>
+
+
+                            <div>
+
+                                <h3>
+                                    Book Service
+                                </h3>
+
+                                <p>
+                                    Schedule motorcycle
+                                    repair or maintenance.
+                                </p>
+
+                            </div>
+
+                        </a>
+
+
+                        <!-- APPOINTMENTS -->
+
+                        <a
+                            href="appointments.html"
+                            class="action"
+                        >
+
+                            <div class="action-icon">
+                                📅
+                            </div>
+
+
+                            <div class="action-icon">
+                                📅
+                            </div>
+
+
+                            <div>
+
+                                <h3>
+                                    My Appointments
+                                </h3>
+
+                                <p>
+                                    Check your upcoming
+                                    service schedules.
+                                </p>
+
+                            </div>
+
+                        </a>
+
+
+                        <!-- MOTORCYCLES -->
+
+                        <a
+                            href="motorcycles.html"
+                            class="action"
+                        >
+
+                            <div class="action-icon">
+                                🏍️
+                            </div>
+
+
+                            <div>
+
+                                <h3>
+                                    My Motorcycles
+                                </h3>
+
+                                <p>
+                                    Manage your registered
+                                    motorcycles.
+                                </p>
+
+                            </div>
+
+                        </a>
+
+
+                        <!-- SERVICE HISTORY -->
+
+                        <a
+                            href="service-history.html"
+                            class="action"
+                        >
+
+                            <div class="action-icon">
+                                📋
+                            </div>
+
+
+                            <div>
+
+                                <h3>
+                                    Service History
+                                </h3>
+
+                                <p>
+                                    View your previous
+                                    services.
+                                </p>
+
+                            </div>
+
+                        </a>
+
+
+                    </div>
+
+                </div>
+
+
+                <!-- =============================
+                     MY MOTORCYCLES
+                ============================== -->
+
+                <div
+                    class="card motorcycle-card"
+                >
+
+                    <div class="card-header">
+
+                        <h2>
+                            My Motorcycles
+                        </h2>
+
+
+                        <a
+                            href="motorcycles.html"
+                        >
+                            Manage
+                        </a>
+
+                    </div>
+
+
+                    <div
+                        class="motorcycle-box"
+                        id="motorcycle-list"
+                    >
+
+                        <div class="empty-state">
+
+                            🏍️
+
+                            <span>
+                                Loading motorcycles...
+                            </span>
+
+                        </div>
+
+
+                        <a
+                            href="motorcycles.html"
+                            class="manage-link"
+                        >
+                            + Add another motorcycle
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================
+         DASHBOARD JAVASCRIPT
+    ========================================== -->
+
+    <script src="js/dashboard.js"></script>
+
+    <script src="js/themes/dashboard-theme.js"></script>
+
+</body>
+
+</html>

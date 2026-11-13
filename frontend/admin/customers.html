@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ADD Motor Shop - Customers</title>
+
+
+    <!-- =====================================================
+         GOOGLE FONTS
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         FONT AWESOME
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <!-- =====================================================
+         SHARED ADMIN LAYOUT
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/admin-layout.css"
+    >
+
+
+    <!-- =====================================================
+         CUSTOMERS PAGE CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/customers.css"
+    >
+
+
+    <!-- =====================================================
+         CUSTOMER PAGINATION CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/customers-pagination.css"
+    >
+
+
+    <!-- =====================================================
+         CUSTOMER ACCOUNT RESTORATION CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/customers-restoration.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         NAVIGATION IS PROVIDED BY admin-layout.js
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOP BAR
+             MATCHED TO DASHBOARD HEADER
+        ================================================== -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    type="button"
+                    class="mobile-menu-button"
+                    id="mobileMenuButton"
+                    aria-label="Open navigation"
+                >
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+
+                <div class="topbar-page-info">
+
+                    <span class="topbar-label">
+                        ADMIN PORTAL
+                    </span>
+
+                    <h2>
+                        Manage ADD Motor Shop
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+
+                <!-- Theme Toggle -->
+
+                <button
+                    type="button"
+                    class="theme-toggle"
+                    id="themeToggle"
+                    aria-label="Toggle light and dark mode"
+                    title="Toggle light and dark mode"
+                >
+
+                    <i
+                        class="fa-solid fa-moon"
+                        id="themeIcon"
+                    ></i>
+
+                    <span id="themeText">
+                        Dark Mode
+                    </span>
+
+                </button>
+
+
+                <!-- Admin Profile -->
+
+                <div class="admin-profile">
+
+                    <div
+                        class="admin-avatar"
+                        id="adminAvatar"
+                    >
+
+                        <span id="adminAvatarInitial">
+                            A
+                        </span>
+
+                    </div>
+
+
+                    <div class="admin-profile-info">
+
+                        <strong id="adminName">
+                            Administrator
+                        </strong>
+
+                        <span id="adminRole">
+                            Administrator
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             PAGE CONTENT
+        ================================================== -->
+
+        <section class="page-content">
+
+
+            <!-- PAGE HEADING -->
+
+            <div class="page-heading">
+
+                <div class="page-heading-left">
+
+                    <span class="page-eyebrow">
+                        CUSTOMER MANAGEMENT
+                    </span>
+
+                    <h1>
+                        Customers
+                    </h1>
+
+                    <p>
+                        View and manage registered customers and their service information.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="refresh-button"
+                    id="refreshCustomers"
+                >
+
+                    <i class="fa-solid fa-rotate"></i>
+
+                    <span>
+                        Refresh
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 SUMMARY
+            ================================================== -->
+
+            <div class="summary-grid">
+
+
+                <div class="summary-card">
+
+                    <div class="summary-icon total">
+
+                        <i class="fa-solid fa-users"></i>
+
+                    </div>
+
+                    <div class="summary-content">
+
+                        <span class="summary-label">
+                            Total Customers
+                        </span>
+
+                        <strong
+                            class="summary-value"
+                            id="totalCustomers"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <div class="summary-icon motorcycles">
+
+                        <i class="fa-solid fa-motorcycle"></i>
+
+                    </div>
+
+                    <div class="summary-content">
+
+                        <span class="summary-label">
+                            Motorcycles
+                        </span>
+
+                        <strong
+                            class="summary-value"
+                            id="totalMotorcycles"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <div class="summary-icon appointments">
+
+                        <i class="fa-regular fa-calendar-check"></i>
+
+                    </div>
+
+                    <div class="summary-content">
+
+                        <span class="summary-label">
+                            With Appointments
+                        </span>
+
+                        <strong
+                            class="summary-value"
+                            id="customersWithAppointments"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <div class="summary-icon active">
+
+                        <i class="fa-solid fa-user-check"></i>
+
+                    </div>
+
+                    <div class="summary-content">
+
+                        <span class="summary-label">
+                            Active Customers
+                        </span>
+
+                        <strong
+                            class="summary-value"
+                            id="activeCustomers"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <div class="summary-icon new">
+
+                        <i class="fa-solid fa-user-plus"></i>
+
+                    </div>
+
+                    <div class="summary-content">
+
+                        <span class="summary-label">
+                            New Customers
+                        </span>
+
+                        <strong
+                            class="summary-value"
+                            id="newCustomers"
+                        >
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 CUSTOMER LIST
+            ================================================== -->
+
+            <div class="content-card">
+
+
+                <div class="content-card-header">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            CUSTOMERS
+                        </span>
+
+                        <h2>
+                            Customer List
+                        </h2>
+
+                        <p>
+                            View registered customer accounts and their information.
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="customer-count"
+                        id="displayedCustomers"
+                        hidden
+                    >
+                        0 customers
+                    </div>
+
+                </div>
+
+
+                <!-- FILTER BAR -->
+
+                <div class="filter-bar">
+
+
+                    <div class="search-box">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input
+                            type="text"
+                            id="customerSearch"
+                            placeholder="Search name, email, or phone..."
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+
+                    <div class="filter-control">
+
+                        <label for="customerStatusFilter">
+                            Status
+                        </label>
+
+                        <select id="customerStatusFilter">
+
+                            <option value="all">
+                                All Status
+                            </option>
+
+                            <option value="active">
+                                Active
+                            </option>
+
+                            <option value="inactive">
+                                Inactive
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="clear-filter-button"
+                        id="clearCustomerFilters"
+                    >
+
+                        <i class="fa-solid fa-filter-circle-xmark"></i>
+
+                        Clear
+
+                    </button>
+
+                </div>
+
+
+                <!-- LOADING -->
+
+                <div
+                    class="customers-loading"
+                    id="customersLoading"
+                >
+
+                    <div class="loading-spinner">
+
+                        <i class="fa-solid fa-spinner"></i>
+
+                    </div>
+
+                    <p>
+                        Loading customers...
+                    </p>
+
+                </div>
+
+
+                <!-- ERROR -->
+
+                <div
+                    class="customers-error"
+                    id="customersError"
+                    style="display: none;"
+                >
+
+                    <div class="error-icon">
+
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+
+                    </div>
+
+
+                    <div class="error-content">
+
+                        <h3>
+                            Unable to Load Customers
+                        </h3>
+
+                        <p id="customersErrorMessage">
+                            Something went wrong while loading customers.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="retry-button"
+                        id="retryCustomers"
+                    >
+
+                        <i class="fa-solid fa-rotate"></i>
+
+                        Try Again
+
+                    </button>
+
+                </div>
+
+
+                <!-- EMPTY -->
+
+                <div
+                    class="customers-empty"
+                    id="customersEmpty"
+                    style="display: none;"
+                >
+
+                    <div class="empty-icon">
+
+                        <i class="fa-solid fa-users-slash"></i>
+
+                    </div>
+
+                    <h3>
+                        No Customers Found
+                    </h3>
+
+                    <p>
+                        There are no customers matching your current search or filters.
+                    </p>
+
+                </div>
+
+
+                <!-- CUSTOMER LIST -->
+
+                <div
+                    class="customers-list"
+                    id="customersList"
+                ></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         CUSTOMER DETAILS MODAL
+    ====================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="customerModal"
+    >
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <span class="modal-eyebrow">
+                        CUSTOMER DETAILS
+                    </span>
+
+                    <h2>
+                        Customer Information
+                    </h2>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="closeCustomerModal"
+                    aria-label="Close customer details"
+                >
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+
+            <div
+                class="modal-body"
+                id="customerDetails"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         TOAST
+    ====================================================== -->
+
+    <div
+        class="toast"
+        id="toast"
+    >
+
+        <div class="toast-icon">
+
+            <i
+                class="fa-solid fa-check"
+                id="toastIcon"
+            ></i>
+
+        </div>
+
+
+        <div class="toast-content">
+
+            <strong id="toastTitle">
+                Success
+            </strong>
+
+            <span id="toastMessage">
+                Operation completed successfully.
+            </span>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="toast-close"
+            id="toastClose"
+            aria-label="Close notification"
+        >
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         SHARED ADMIN LAYOUT
+         THIS CREATES THE CENTRALIZED SIDEBAR
+    ====================================================== -->
+
+    <script src="js/admin-layout.js"></script>
+
+
+    <!-- =====================================================
+         SHARED THEME
+    ====================================================== -->
+
+    <script src="js/admin-theme.js"></script>
+
+
+    <!-- =====================================================
+         CUSTOMER JAVASCRIPT
+         INCLUDES CUSTOMER PAGINATION
+    ====================================================== -->
+
+    <script src="js/customers.js"></script>
+
+
+    <!-- =====================================================
+         CUSTOMER ACCOUNT RESTORATION JAVASCRIPT
+         MUST LOAD AFTER customers.js
+    ====================================================== -->
+
+    <script src="js/customers-restoration.js"></script>
+
+
+</body>
+
+</html>

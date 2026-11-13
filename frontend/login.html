@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Log In - ADD Motor Shop</title>
+
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <!-- LEFT BRAND SECTION -->
+        <section class="brand-side">
+
+            <div class="brand-content">
+
+                <div class="logo">
+                    ADD <span>MOTOR</span>
+                </div>
+
+                <h1 class="brand-title">
+                    Welcome <span>Back</span>
+                </h1>
+
+                <p class="brand-description">
+                    Log in to your ADD Motor Shop account
+                    to manage your motorcycle services,
+                    appointments, and records.
+                </p>
+
+                <ul class="benefits">
+
+                    <li>
+                        <span class="benefit-icon">⚡</span>
+                        Manage your service appointments
+                    </li>
+
+                    <li>
+                        <span class="benefit-icon">✓</span>
+                        Check your service status
+                    </li>
+
+                    <li>
+                        <span class="benefit-icon">🏍</span>
+                        Access motorcycle information
+                    </li>
+
+                    <li>
+                        <span class="benefit-icon">◈</span>
+                        View your service history
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="brand-bottom">
+                ADD Motor Shop Online Service Appointment
+                and Inventory System
+            </div>
+
+        </section>
+
+
+        <!-- LOGIN FORM -->
+        <section class="form-side">
+
+            <a href="index.html" class="back-link">
+                ← Back to Portal
+            </a>
+
+            <div class="form-header">
+
+                <h2>Log In</h2>
+
+                <p>
+                    Enter your account credentials to
+                    access the ADD Motor Shop system.
+                </p>
+
+            </div>
+
+
+            <!-- ERROR MESSAGE -->
+            <div
+                id="errorMessage"
+                class="error-message"
+            ></div>
+
+
+            <!-- SUCCESS MESSAGE -->
+            <div
+                id="successMessage"
+                class="success-message"
+            ></div>
+
+
+            <!-- LOGIN FORM -->
+            <form id="loginForm" novalidate>
+
+                <!-- EMAIL -->
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="alex@gmail.com"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="show-password"
+                            id="showPassword"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LOGIN OPTIONS -->
+                <div class="login-options">
+
+                    <label class="remember-me">
+
+                        <input
+                            type="checkbox"
+                            id="remember"
+                        >
+
+                        Remember me
+
+                    </label>
+
+                    <a
+                        href="#"
+                        class="forgot-password"
+                        id="forgotPassword"
+                    >
+                        Forgot Password?
+                    </a>
+
+                </div>
+
+
+                <!-- LOGIN BUTTON -->
+                <button
+                    type="submit"
+                    class="btn-primary"
+                    id="loginButton"
+                >
+                    Log In
+                </button>
+
+            </form>
+
+
+            <!-- DIVIDER -->
+            <div class="divider">
+                NEW CUSTOMER?
+            </div>
+
+
+            <!-- REGISTER -->
+            <div class="register-text">
+
+                Don't have an account?
+
+                <a href="register.html">
+                    Create Account
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- LOGIN SUCCESS TRANSITION -->
+    <div
+        class="login-transition"
+        id="loginTransition"
+    >
+
+        <div class="transition-background"></div>
+
+        <div class="transition-grid"></div>
+
+        <div class="transition-ring"></div>
+
+        <div class="transition-light"></div>
+
+        <div class="transition-particles">
+
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </div>
+
+        <div class="transition-content">
+
+            <div class="transition-bike">
+                🏍️
+            </div>
+
+            <div class="transition-brand">
+                ADD MOTOR SHOP
+            </div>
+
+            <div class="transition-welcome">
+                WELCOME
+            </div>
+
+            <div class="transition-line"></div>
+
+            <div class="transition-status">
+                ENTERING YOUR GARAGE
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- LOGIN JAVASCRIPT -->
+    <script src="js/login.js"></script>
+
+</body>
+</html>

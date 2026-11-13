@@ -1,0 +1,1992 @@
+:root {
+
+    --black: #080808;
+    --black-light: #111111;
+    --black-card: #151515;
+
+    --red: #dc2626;
+    --red-light: #ef4444;
+    --red-dark: #991b1b;
+
+    --white: #ffffff;
+    --text: #f5f5f5;
+    --muted: #a3a3a3;
+
+    --border: #292929;
+
+    --green: #22c55e;
+    --yellow: #eab308;
+    --blue: #3b82f6;
+
+    --red-glow: rgba(220, 38, 38, 0.25);
+}
+
+
+/* ==============================
+   RESET
+============================== */
+
+* {
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+
+    font-family:
+        'Segoe UI',
+        Tahoma,
+        Geneva,
+        Verdana,
+        sans-serif;
+}
+
+
+/* ==============================
+   BODY
+============================== */
+
+body {
+
+    min-height: 100vh;
+
+    color: var(--text);
+
+    background:
+
+        radial-gradient(
+            circle at 10% 20%,
+            rgba(220, 38, 38, 0.14),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(220, 38, 38, 0.10),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #050505,
+            #100505,
+            #080808
+        );
+}
+
+
+/* ==============================
+   NAVBAR
+============================== */
+
+.navbar {
+
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 35px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #080808,
+            #180606,
+            #080808
+        );
+
+    border-bottom:
+        1px solid #351313;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+}
+
+
+.logo {
+
+    font-size: 1.5rem;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    color: var(--white);
+}
+
+
+.logo span {
+
+    color: var(--red-light);
+}
+
+
+.nav-links {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+}
+
+
+.nav-links a {
+
+    color: var(--muted);
+
+    text-decoration: none;
+
+    font-size: 0.82rem;
+
+    padding:
+        9px
+        12px;
+
+    border-radius: 7px;
+
+    transition: 0.2s ease;
+}
+
+
+.nav-links a:hover {
+
+    color: white;
+
+    background:
+        rgba(220, 38, 38, 0.10);
+}
+
+
+.logout {
+
+    color: #fca5a5 !important;
+}
+
+
+/* ==============================
+   MAIN CONTAINER
+============================== */
+
+.container {
+
+    width: 100%;
+
+    max-width: 1250px;
+
+    margin: auto;
+
+    padding:
+        35px
+        25px
+        60px;
+}
+
+
+/* ==============================
+   WELCOME SECTION
+============================== */
+
+.welcome {
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 30px;
+
+    border-radius: 14px;
+
+    margin-bottom: 25px;
+
+    border:
+        1px solid #3a1717;
+
+    background:
+
+        linear-gradient(
+            120deg,
+            rgba(220, 38, 38, 0.20),
+            rgba(30, 5, 5, 0.75),
+            rgba(0, 0, 0, 0.8)
+        );
+
+    box-shadow:
+
+        0 15px 35px
+        rgba(0, 0, 0, 0.35);
+}
+
+
+.welcome::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+
+    height: 300px;
+
+    right: -100px;
+
+    top: -130px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(220, 38, 38, 0.12);
+
+    filter: blur(5px);
+}
+
+
+.welcome-content {
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.welcome h1 {
+
+    font-size: 1.9rem;
+
+    margin-bottom: 8px;
+}
+
+
+.welcome h1 span {
+
+    color: var(--red-light);
+}
+
+
+.welcome p {
+
+    color: var(--muted);
+
+    font-size: 0.86rem;
+
+    line-height: 1.6;
+
+    max-width: 650px;
+}
+
+
+/* ==============================
+   QUICK BOOK BUTTON
+============================== */
+
+.quick-book {
+
+    display: inline-block;
+
+    margin-top: 18px;
+
+    padding:
+        11px
+        18px;
+
+    border-radius: 8px;
+
+    background:
+        var(--red);
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 0.8rem;
+
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+
+.quick-book:hover {
+
+    background:
+        var(--red-light);
+
+    box-shadow:
+
+        0 0 20px
+        var(--red-glow);
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* ==============================
+   STAT CARDS
+============================== */
+
+.stats {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+
+.stat-card {
+
+    padding: 20px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.035),
+            rgba(220,38,38,0.025)
+        );
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 11px;
+
+    transition: 0.2s ease;
+}
+
+
+.stat-card:hover {
+
+    border-color:
+        rgba(220,38,38,0.40);
+
+    transform:
+        translateY(-2px);
+}
+
+
+.stat-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 12px;
+}
+
+
+.stat-label {
+
+    color: var(--muted);
+
+    font-size: 0.68rem;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+}
+
+
+.stat-icon {
+
+    width: 32px;
+
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background:
+        rgba(220,38,38,0.12);
+
+    font-size: 1rem;
+}
+
+
+.stat-number {
+
+    font-size: 1.55rem;
+
+    font-weight: 700;
+}
+
+
+.stat-description {
+
+    margin-top: 4px;
+
+    color: #737373;
+
+    font-size: 0.67rem;
+}
+
+
+/* ==============================
+   CONTENT GRID
+============================== */
+
+.content-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1.5fr 1fr;
+
+    gap: 20px;
+}
+
+
+/* ==============================
+   GENERAL CARD
+============================== */
+
+.card {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.025),
+            rgba(220,38,38,0.025)
+        );
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 12px;
+
+    overflow: hidden;
+}
+
+
+.card-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        18px
+        20px;
+
+    border-bottom:
+        1px solid #252525;
+}
+
+
+.card-header h2 {
+
+    font-size: 0.95rem;
+}
+
+
+.card-header a {
+
+    color:
+        #fca5a5;
+
+    text-decoration: none;
+
+    font-size: 0.68rem;
+}
+
+
+.card-header a:hover {
+
+    text-decoration:
+        underline;
+}
+
+
+/* ==============================
+   APPOINTMENT
+============================== */
+
+.appointment {
+
+    padding: 20px;
+
+    border-bottom:
+        1px solid #222;
+}
+
+
+.appointment:last-child {
+
+    border-bottom: none;
+}
+
+
+.appointment-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 15px;
+}
+
+
+.appointment-title {
+
+    font-size: 0.82rem;
+
+    font-weight: 600;
+}
+
+
+.appointment-number {
+
+    margin-top: 4px;
+
+    color: #737373;
+
+    font-size: 0.63rem;
+}
+
+
+/* ==============================
+   STATUS
+============================== */
+
+.status {
+
+    padding:
+        5px
+        9px;
+
+    border-radius: 20px;
+
+    font-size: 0.62rem;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+.status.confirmed {
+
+    color: #bfdbfe;
+
+    background:
+        rgba(59,130,246,0.12);
+
+    border:
+        1px solid
+        rgba(59,130,246,0.25);
+}
+
+
+.status.pending {
+
+    color: #fde68a;
+
+    background:
+        rgba(234,179,8,0.12);
+
+    border:
+        1px solid
+        rgba(234,179,8,0.25);
+}
+
+
+.status.in-service {
+
+    color: #c4b5fd;
+
+    background:
+        rgba(139,92,246,0.12);
+
+    border:
+        1px solid
+        rgba(139,92,246,0.25);
+}
+
+
+.status.completed {
+
+    color: #bbf7d0;
+
+    background:
+        rgba(34,197,94,0.12);
+
+    border:
+        1px solid
+        rgba(34,197,94,0.25);
+}
+
+
+.status.cancelled {
+
+    color: #fecaca;
+
+    background:
+        rgba(239,68,68,0.12);
+
+    border:
+        1px solid
+        rgba(239,68,68,0.25);
+}
+
+
+/* ==============================
+   APPOINTMENT DETAILS
+============================== */
+
+.appointment-details {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+}
+
+
+.detail-label {
+
+    color: #737373;
+
+    text-transform: uppercase;
+
+    font-size: 0.59rem;
+
+    letter-spacing: 0.4px;
+
+    margin-bottom: 5px;
+}
+
+
+.detail-value {
+
+    color: #ddd;
+
+    font-size: 0.72rem;
+
+    line-height: 1.4;
+}
+
+
+/* ==============================
+   APPOINTMENT SERVICES
+============================== */
+
+.appointment-services {
+
+    margin-top: 15px;
+
+    padding-top: 12px;
+
+    border-top:
+        1px solid #222;
+}
+
+
+.appointment-services-label {
+
+    color: #737373;
+
+    text-transform: uppercase;
+
+    font-size: 0.59rem;
+
+    letter-spacing: 0.4px;
+
+    margin-bottom: 6px;
+}
+
+
+.appointment-services-list {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+}
+
+
+.service-tag {
+
+    padding:
+        5px
+        8px;
+
+    border-radius: 6px;
+
+    background:
+        rgba(220,38,38,0.10);
+
+    border:
+        1px solid
+        rgba(220,38,38,0.18);
+
+    color: #fca5a5;
+
+    font-size: 0.61rem;
+}
+
+
+.appointment-total {
+
+    margin-top: 12px;
+
+    text-align: right;
+
+    color: #fca5a5;
+
+    font-size: 0.72rem;
+
+    font-weight: 600;
+}
+
+
+/* ==============================
+   QUICK ACTIONS
+============================== */
+
+.quick-actions {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 10px;
+
+    padding: 18px;
+}
+
+
+.action {
+
+    min-height: 105px;
+
+    padding: 15px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    text-decoration: none;
+
+    background:
+        #111;
+
+    border:
+        1px solid #292929;
+
+    border-radius: 9px;
+
+    transition: 0.2s ease;
+}
+
+
+.action:hover {
+
+    border-color:
+        rgba(220,38,38,0.5);
+
+    background:
+        rgba(220,38,38,0.07);
+
+    transform:
+        translateY(-2px);
+}
+
+
+.action-icon {
+
+    width: 35px;
+
+    height: 35px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background:
+        rgba(220,38,38,0.13);
+
+    font-size: 1rem;
+}
+
+
+.action h3 {
+
+    color: white;
+
+    font-size: 0.76rem;
+
+    margin-top: 12px;
+}
+
+
+.action p {
+
+    color: #737373;
+
+    font-size: 0.62rem;
+
+    margin-top: 4px;
+
+    line-height: 1.4;
+}
+
+
+/* ==============================
+   MOTORCYCLE CARD
+============================== */
+
+.motorcycle-card {
+
+    margin-top: 20px;
+}
+
+
+.motorcycle-box {
+
+    padding: 20px;
+}
+
+
+.motorcycle {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 14px;
+
+    border-radius: 9px;
+
+    background:
+        #111;
+
+    border:
+        1px solid #292929;
+
+    margin-bottom: 12px;
+}
+
+
+.motorcycle-icon {
+
+    width: 42px;
+
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background:
+        rgba(220,38,38,0.12);
+
+    font-size: 1.25rem;
+}
+
+
+.motorcycle-info {
+
+    flex: 1;
+}
+
+
+.motorcycle-name {
+
+    font-size: 0.8rem;
+
+    font-weight: 600;
+}
+
+
+.motorcycle-plate {
+
+    margin-top: 4px;
+
+    color: #737373;
+
+    font-size: 0.64rem;
+}
+
+
+.manage-link {
+
+    color: #fca5a5;
+
+    text-decoration: none;
+
+    font-size: 0.65rem;
+}
+
+
+.manage-link:hover {
+
+    text-decoration:
+        underline;
+}
+
+
+/* ==============================
+   SERVICE HISTORY
+============================== */
+
+.history-card {
+
+    margin-top: 20px;
+}
+
+
+.history-list {
+
+    padding:
+        0
+        20px;
+}
+
+
+.history-item {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding:
+        15px
+        0;
+
+    border-bottom:
+        1px solid #222;
+}
+
+
+.history-item:last-child {
+
+    border-bottom:
+        none;
+}
+
+
+.history-info h3 {
+
+    font-size: 0.75rem;
+
+    margin-bottom: 4px;
+}
+
+
+.history-info p {
+
+    color: #737373;
+
+    font-size: 0.63rem;
+}
+
+
+.history-price {
+
+    color:
+        #fca5a5;
+
+    font-size: 0.75rem;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+/* ==============================
+   EMPTY STATE
+============================== */
+
+.empty-state {
+
+    text-align: center;
+
+    padding:
+        25px
+        10px;
+
+    color: #737373;
+
+    font-size: 0.72rem;
+}
+
+
+.empty-state span {
+
+    display: block;
+
+    margin-top: 8px;
+}
+
+
+/* ==============================
+   ERROR STATE
+============================== */
+
+.error-state {
+
+    text-align: center;
+
+    padding:
+        25px
+        10px;
+
+    color: #737373;
+
+    font-size: 0.72rem;
+}
+
+
+.error-state span {
+
+    display: block;
+
+    margin-top: 8px;
+
+    color: #a3a3a3;
+}
+
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+@media (max-width: 1000px) {
+
+    .nav-links a {
+
+        padding:
+            8px
+            8px;
+
+        font-size:
+            0.75rem;
+    }
+
+
+    .stats {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .content-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+}
+
+
+@media (max-width: 750px) {
+
+    .navbar {
+
+        padding:
+            0
+            18px;
+    }
+
+
+    .nav-links {
+
+        display:
+            none;
+    }
+
+
+    .container {
+
+        padding:
+            25px
+            15px
+            45px;
+    }
+
+
+    .welcome {
+
+        padding:
+            25px
+            20px;
+    }
+
+
+    .welcome h1 {
+
+        font-size:
+            1.55rem;
+    }
+
+
+    .appointment-details {
+
+        grid-template-columns:
+            1fr
+            1fr;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .stats {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .appointment-top {
+
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+    }
+
+
+    .appointment-details {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .quick-actions {
+
+        grid-template-columns:
+            1fr;
+    }
+
+}
+/* =========================================
+   DASHBOARD THEME SUPPORT
+========================================= */
+
+
+/* =========================================
+   LIGHT THEME VARIABLES
+========================================= */
+
+html[data-dashboard-theme="light"] {
+
+    --black: #f3f4f6;
+    --black-light: #ffffff;
+    --black-card: #ffffff;
+
+    --white: #171717;
+    --text: #222222;
+    --muted: #666666;
+
+    --border: #d9d9d9;
+
+    --red-glow:
+        rgba(220, 38, 38, 0.16);
+}
+
+
+/* =========================================
+   DARK THEME
+========================================= */
+
+html[data-dashboard-theme="dark"] body {
+
+    color: #f5f5f5;
+
+    background:
+
+        radial-gradient(
+            circle at 10% 20%,
+            rgba(220, 38, 38, 0.14),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(220, 38, 38, 0.10),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #050505,
+            #100505,
+            #080808
+        );
+}
+
+
+html[data-dashboard-theme="dark"] .navbar {
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #080808,
+            #180606,
+            #080808
+        );
+
+    border-bottom:
+        1px solid #351313;
+}
+
+
+html[data-dashboard-theme="dark"] .nav-links a {
+
+    color: #a3a3a3;
+}
+
+
+html[data-dashboard-theme="dark"] .nav-links a:hover {
+
+    color: #ffffff;
+
+    background:
+        rgba(220, 38, 38, 0.10);
+}
+
+
+html[data-dashboard-theme="dark"] .logo {
+
+    color: #ffffff;
+}
+
+
+html[data-dashboard-theme="dark"] .logo span {
+
+    color: #ef4444;
+}
+
+
+html[data-dashboard-theme="dark"] .welcome {
+
+    border-color: #3a1717;
+
+    background:
+
+        linear-gradient(
+            120deg,
+            rgba(220, 38, 38, 0.20),
+            rgba(30, 5, 5, 0.75),
+            rgba(0, 0, 0, 0.8)
+        );
+
+    box-shadow:
+        0 15px 35px
+        rgba(0, 0, 0, 0.35);
+}
+
+
+html[data-dashboard-theme="dark"] .stat-card {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.035),
+            rgba(220,38,38,0.025)
+        );
+
+    border-color: #292929;
+}
+
+
+html[data-dashboard-theme="dark"] .card {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.025),
+            rgba(220,38,38,0.025)
+        );
+
+    border-color: #292929;
+}
+
+
+html[data-dashboard-theme="dark"] .card-header {
+
+    border-bottom-color:
+        #252525;
+}
+
+
+html[data-dashboard-theme="dark"] .appointment {
+
+    border-bottom-color:
+        #222222;
+}
+
+
+html[data-dashboard-theme="dark"] .appointment-services {
+
+    border-top-color:
+        #222222;
+}
+
+
+html[data-dashboard-theme="dark"] .history-item {
+
+    border-bottom-color:
+        #222222;
+}
+
+
+html[data-dashboard-theme="dark"] .action {
+
+    background:
+        #111111;
+
+    border-color:
+        #292929;
+}
+
+
+html[data-dashboard-theme="dark"] .action:hover {
+
+    background:
+        rgba(220,38,38,0.07);
+
+    border-color:
+        rgba(220,38,38,0.50);
+}
+
+
+html[data-dashboard-theme="dark"] .action h3 {
+
+    color:
+        #ffffff;
+}
+
+
+html[data-dashboard-theme="dark"] .motorcycle {
+
+    background:
+        #111111;
+
+    border-color:
+        #292929;
+}
+
+
+html[data-dashboard-theme="dark"] .detail-value {
+
+    color:
+        #dddddd;
+}
+
+
+html[data-dashboard-theme="dark"] .stat-description,
+html[data-dashboard-theme="dark"] .appointment-number,
+html[data-dashboard-theme="dark"] .detail-label,
+html[data-dashboard-theme="dark"] .appointment-services-label,
+html[data-dashboard-theme="dark"] .action p,
+html[data-dashboard-theme="dark"] .motorcycle-plate,
+html[data-dashboard-theme="dark"] .history-info p,
+html[data-dashboard-theme="dark"] .empty-state,
+html[data-dashboard-theme="dark"] .error-state {
+
+    color:
+        #737373;
+}
+
+
+html[data-dashboard-theme="dark"] .card-header a,
+html[data-dashboard-theme="dark"] .manage-link,
+html[data-dashboard-theme="dark"] .appointment-total,
+html[data-dashboard-theme="dark"] .history-price,
+html[data-dashboard-theme="dark"] .service-tag {
+
+    color:
+        #fca5a5;
+}
+
+
+/* =========================================
+   LIGHT THEME - PAGE
+========================================= */
+
+html[data-dashboard-theme="light"] body {
+
+    color:
+        #222222;
+
+    background:
+
+        radial-gradient(
+            circle at 10% 20%,
+            rgba(220, 38, 38, 0.08),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(220, 38, 38, 0.06),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #f8f8f8,
+            #fff5f5,
+            #f3f4f6
+        );
+}
+
+
+/* =========================================
+   LIGHT THEME - NAVBAR
+========================================= */
+
+html[data-dashboard-theme="light"] .navbar {
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #fff5f5,
+            #ffffff
+        );
+
+    border-bottom:
+        1px solid #e5caca;
+}
+
+
+html[data-dashboard-theme="light"] .logo {
+
+    color:
+        #171717;
+}
+
+
+html[data-dashboard-theme="light"] .logo span {
+
+    color:
+        #dc2626;
+}
+
+
+html[data-dashboard-theme="light"] .nav-links a {
+
+    color:
+        #666666;
+}
+
+
+html[data-dashboard-theme="light"] .nav-links a:hover {
+
+    color:
+        #dc2626;
+
+    background:
+        rgba(220, 38, 38, 0.07);
+}
+
+
+html[data-dashboard-theme="light"] .logout {
+
+    color:
+        #b91c1c !important;
+}
+
+
+/* =========================================
+   LIGHT THEME - WELCOME
+========================================= */
+
+html[data-dashboard-theme="light"] .welcome {
+
+    border-color:
+        #e5baba;
+
+    background:
+
+        linear-gradient(
+            120deg,
+            rgba(220, 38, 38, 0.10),
+            rgba(255, 245, 245, 0.96),
+            rgba(255, 255, 255, 0.98)
+        );
+
+    box-shadow:
+        0 15px 35px
+        rgba(0, 0, 0, 0.08);
+}
+
+
+html[data-dashboard-theme="light"] .welcome h1 {
+
+    color:
+        #222222;
+}
+
+
+html[data-dashboard-theme="light"] .welcome p {
+
+    color:
+        #666666;
+}
+
+
+/* =========================================
+   LIGHT THEME - STAT CARDS
+========================================= */
+
+html[data-dashboard-theme="light"] .stat-card {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #fffafa
+        );
+
+    border-color:
+        #d9d9d9;
+}
+
+
+html[data-dashboard-theme="light"] .stat-card:hover {
+
+    border-color:
+        rgba(220, 38, 38, 0.40);
+}
+
+
+html[data-dashboard-theme="light"] .stat-label {
+
+    color:
+        #666666;
+}
+
+
+html[data-dashboard-theme="light"] .stat-number {
+
+    color:
+        #222222;
+}
+
+
+html[data-dashboard-theme="light"] .stat-description {
+
+    color:
+        #666666;
+}
+
+
+/* =========================================
+   LIGHT THEME - CARDS
+========================================= */
+
+html[data-dashboard-theme="light"] .card {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #fffafa
+        );
+
+    border-color:
+        #d9d9d9;
+}
+
+
+html[data-dashboard-theme="light"] .card-header {
+
+    border-bottom-color:
+        #e5e5e5;
+}
+
+
+html[data-dashboard-theme="light"] .card-header h2 {
+
+    color:
+        #222222;
+}
+
+
+html[data-dashboard-theme="light"] .appointment {
+
+    border-bottom-color:
+        #e5e5e5;
+}
+
+
+html[data-dashboard-theme="light"] .appointment-services {
+
+    border-top-color:
+        #e5e5e5;
+}
+
+
+html[data-dashboard-theme="light"] .history-item {
+
+    border-bottom-color:
+        #e5e5e5;
+}
+
+
+/* =========================================
+   LIGHT THEME - APPOINTMENT
+========================================= */
+
+html[data-dashboard-theme="light"] .appointment-title {
+
+    color:
+        #222222;
+}
+
+
+html[data-dashboard-theme="light"] .appointment-number {
+
+    color:
+        #666666;
+}
+
+
+html[data-dashboard-theme="light"] .detail-label {
+
+    color:
+        #666666;
+}
+
+
+html[data-dashboard-theme="light"] .detail-value {
+
+    color:
+        #333333;
+}
+
+
+html[data-dashboard-theme="light"] .appointment-services-label {
+
+    color:
+        #666666;
+}
+
+
+html[data-dashboard-theme="light"] .card-header a,
+html[data-dashboard-theme="light"] .manage-link,
+html[data-dashboard-theme="light"] .appointment-total,
+html[data-dashboard-theme="light"] .history-price,
+html[data-dashboard-theme="light"] .service-tag {
+
+    color:
+        #b91c1c;
+}
+
+
+/* =========================================
+   LIGHT THEME - QUICK ACTIONS
+========================================= */
+
+html[data-dashboard-theme="light"] .action {
+
+    background:
+        #f8f8f8;
+
+    border-color:
+        #dddddd;
+}
+
+
+html[data-dashboard-theme="light"] .action:hover {
+
+    background:
+        rgba(220, 38, 38, 0.05);
+
+    border-color:
+        rgba(220, 38, 38, 0.35);
+}
+
+
+html[data-dashboard-theme="light"] .action h3 {
+
+    color:
+        #222222;
+}
+
+
+html[data-dashboard-theme="light"] .action p {
+
+    color:
+        #666666;
+}
+
+
+/* =========================================
+   LIGHT THEME - MOTORCYCLES
+========================================= */
+
+html[data-dashboard-theme="light"] .motorcycle {
+
+    background:
+        #f8f8f8;
+
+    border-color:
+        #dddddd;
+}
+
+
+html[data-dashboard-theme="light"] .motorcycle-name {
+
+    color:
+        #222222;
+}
+
+
+html[data-dashboard-theme="light"] .motorcycle-plate {
+
+    color:
+        #666666;
+}
+
+
+/* =========================================
+   LIGHT THEME - HISTORY
+========================================= */
+
+html[data-dashboard-theme="light"] .history-info h3 {
+
+    color:
+        #222222;
+}
+
+
+html[data-dashboard-theme="light"] .history-info p {
+
+    color:
+        #666666;
+}
+
+
+/* =========================================
+   LIGHT THEME - EMPTY / ERROR
+========================================= */
+
+html[data-dashboard-theme="light"] .empty-state,
+html[data-dashboard-theme="light"] .error-state {
+
+    color:
+        #666666;
+}
+
+
+html[data-dashboard-theme="light"] .error-state span {
+
+    color:
+        #777777;
+}
+
+
+/* =========================================
+   THEME TOGGLE
+   FLOATING UPPER LEFT
+========================================= */
+
+.dashboard-theme-toggle {
+
+    position:
+        fixed;
+
+    top:
+        86px;
+
+    left:
+        20px;
+
+    z-index:
+        2000;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    min-width:
+        92px;
+
+    padding:
+        9px
+        13px;
+
+    border:
+        1px solid
+        var(--red);
+
+    border-radius:
+        8px;
+
+    background:
+        var(--black-light);
+
+    color:
+        var(--red);
+
+    font-size:
+        0.75rem;
+
+    font-weight:
+        700;
+
+    line-height:
+        1;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0, 0, 0, 0.15);
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.dashboard-theme-toggle:hover {
+
+    background:
+        var(--red);
+
+    color:
+        #ffffff;
+
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 6px 16px
+        rgba(220, 38, 38, 0.20);
+}
+
+
+html[data-dashboard-theme="light"]
+.dashboard-theme-toggle {
+
+    background:
+        #ffffff;
+
+    color:
+        #dc2626;
+
+    border-color:
+        #dc2626;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0, 0, 0, 0.12);
+}
+
+
+html[data-dashboard-theme="dark"]
+.dashboard-theme-toggle {
+
+    background:
+        #111111;
+
+    color:
+        #ef4444;
+
+    border-color:
+        #dc2626;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0, 0, 0, 0.40);
+}
+
+
+/* =========================================
+   RESPONSIVE THEME BUTTON
+========================================= */
+
+@media (max-width: 750px) {
+
+    .dashboard-theme-toggle {
+
+        top:
+            82px;
+
+        left:
+            15px;
+
+        min-width:
+            88px;
+
+        padding:
+            8px
+            11px;
+
+    }
+
+}

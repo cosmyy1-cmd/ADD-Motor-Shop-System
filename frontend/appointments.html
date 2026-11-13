@@ -1,0 +1,329 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Appointments - ADD Motor Shop</title>
+
+    <!-- PAGE STYLES -->
+    <link rel="stylesheet" href="css/appointments.css">
+
+    <!-- SHARED CUSTOMER HEADER -->
+    <link rel="stylesheet" href="css/customer-header.css">
+
+</head>
+
+<body>
+
+    <!-- =========================
+         SHARED CUSTOMER HEADER
+    ========================== -->
+
+    <div id="customerHeader"></div>
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main class="page-container">
+
+
+        <!-- =========================
+             HEADER
+        ========================== -->
+
+        <div class="page-header">
+
+            <div>
+
+                <h1>
+                    My <span>Appointments</span>
+                </h1>
+
+                <p>
+                    View and track your motorcycle service appointments.
+                </p>
+
+            </div>
+
+            <a
+                href="book-service.html"
+                class="book-button"
+            >
+                + Book New Service
+            </a>
+
+        </div>
+
+
+        <!-- =========================
+             FILTERS
+        ========================== -->
+
+        <div class="filters">
+
+            <button
+                class="filter-button active"
+                onclick="filterAppointments('all', this)"
+            >
+                All
+            </button>
+
+            <button
+                class="filter-button"
+                onclick="filterAppointments('pending', this)"
+            >
+                Pending
+            </button>
+
+            <button
+                class="filter-button"
+                onclick="filterAppointments('confirmed', this)"
+            >
+                Confirmed
+            </button>
+
+            <button
+                class="filter-button"
+                onclick="filterAppointments('in-service', this)"
+            >
+                In Service
+            </button>
+
+            <button
+                class="filter-button"
+                onclick="filterAppointments('completed', this)"
+            >
+                Completed
+            </button>
+
+            <button
+                class="filter-button"
+                onclick="filterAppointments('cancelled', this)"
+            >
+                Cancelled
+            </button>
+
+        </div>
+
+
+        <!-- =========================
+             APPOINTMENTS
+        ========================== -->
+
+        <div
+            class="appointments"
+            id="appointmentsContainer"
+        >
+            <!-- Appointments are loaded dynamically -->
+            <!-- from the backend. -->
+        </div>
+
+
+        <!-- =========================
+             EMPTY STATE
+        ========================== -->
+
+        <div
+            class="empty-state"
+            id="emptyState"
+        >
+
+            <div class="empty-icon">
+                🏍️
+            </div>
+
+            <h3>
+                No Appointments Found
+            </h3>
+
+            <p>
+                You don't have any appointments under this category.
+            </p>
+
+            <a
+                href="book-service.html"
+                class="book-button"
+            >
+                Book a Service
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         DETAILS MODAL
+    ========================== -->
+
+    <div
+        class="modal"
+        id="appointmentModal"
+    >
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h2>
+                    Appointment Details
+                </h2>
+
+                <button
+                    class="close-button"
+                    type="button"
+                    onclick="closeModal()"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="modal-detail">
+
+                <div class="modal-detail-label">
+                    Appointment Number
+                </div>
+
+                <div
+                    class="modal-detail-value"
+                    id="modalAppointmentNumber"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="modal-detail">
+
+                <div class="modal-detail-label">
+                    Status
+                </div>
+
+                <div
+                    class="modal-detail-value"
+                    id="modalStatus"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="modal-detail">
+
+                <div class="modal-detail-label">
+                    Motorcycle
+                </div>
+
+                <div
+                    class="modal-detail-value"
+                    id="modalMotorcycle"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="modal-detail">
+
+                <div class="modal-detail-label">
+                    Plate Number
+                </div>
+
+                <div
+                    class="modal-detail-value"
+                    id="modalPlate"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="modal-detail">
+
+                <div class="modal-detail-label">
+                    Schedule
+                </div>
+
+                <div
+                    class="modal-detail-value"
+                    id="modalSchedule"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="modal-detail">
+
+                <div class="modal-detail-label">
+                    Mechanic
+                </div>
+
+                <div
+                    class="modal-detail-value"
+                    id="modalMechanic"
+                >
+                    Not Assigned
+                </div>
+
+            </div>
+
+
+            <div class="modal-detail">
+
+                <div class="modal-detail-label">
+                    Services
+                </div>
+
+                <div
+                    class="modal-services"
+                    id="modalServices"
+                >
+                </div>
+
+            </div>
+
+
+            <div class="modal-detail">
+
+                <div class="modal-detail-label">
+                    Estimated / Final Cost
+                </div>
+
+                <div
+                    class="modal-detail-value"
+                    id="modalCost"
+                >
+                    ₱0.00
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <!-- APPOINTMENTS FUNCTIONALITY -->
+    <script src="js/appointments.js"></script>
+
+    <!-- SHARED CUSTOMER HEADER AND THEME -->
+    <script src="js/customer-header.js"></script>
+
+</body>
+</html>

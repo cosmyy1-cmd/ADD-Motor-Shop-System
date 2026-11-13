@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Motorcycles - ADD Motor Shop</title>
+
+    <!-- PAGE STYLES -->
+    <link rel="stylesheet" href="css/motorcycles.css">
+
+    <!-- SHARED CUSTOMER HEADER -->
+    <link rel="stylesheet" href="css/customer-header.css">
+
+</head>
+
+<body>
+
+    <!-- =========================================
+         SHARED CUSTOMER HEADER
+    ========================================== -->
+
+    <div id="customerHeader"></div>
+
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+
+    <main class="page-container">
+
+        <!-- =========================================
+             PAGE HEADER
+        ========================================== -->
+
+        <div class="page-header">
+
+            <div>
+
+                <h1>
+                    My <span>Motorcycles</span>
+                </h1>
+
+                <p>
+                    Manage your motorcycles and their information.
+                </p>
+
+            </div>
+
+            <button
+                type="button"
+                class="add-button"
+                id="openAddButton"
+            >
+                <span class="add-button-icon">＋</span>
+                Add Motorcycle
+            </button>
+
+        </div>
+
+
+        <!-- =========================================
+             MOTORCYCLES SECTION
+        ========================================== -->
+
+        <section class="motorcycles-section">
+
+            <!-- LOADING STATE -->
+
+            <div
+                id="loadingState"
+                class="state-box"
+            >
+
+                <div class="loading-spinner"></div>
+
+                <p>
+                    Loading your motorcycles...
+                </p>
+
+            </div>
+
+
+            <!-- EMPTY STATE -->
+
+            <div
+                id="emptyState"
+                class="empty-state hidden"
+            >
+
+                <div class="empty-icon">
+                    🏍️
+                </div>
+
+                <h2>
+                    No Motorcycles Added
+                </h2>
+
+                <p>
+                    Add your first motorcycle to start booking services.
+                </p>
+
+                <button
+                    type="button"
+                    class="add-button"
+                    id="emptyAddButton"
+                >
+                    <span class="add-button-icon">＋</span>
+                    Add Motorcycle
+                </button>
+
+            </div>
+
+
+            <!-- MOTORCYCLE CARDS -->
+
+            <div
+                id="motorcyclesGrid"
+                class="motorcycles-grid"
+            >
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             INFORMATION BOX
+        ========================================== -->
+
+        <section class="info-card">
+
+            <div class="info-icon">
+                🏍️
+            </div>
+
+            <div>
+
+                <h3>
+                    Why add your motorcycle?
+                </h3>
+
+                <p>
+                    Your registered motorcycles can be quickly selected
+                    when booking a service appointment.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================
+         ADD / EDIT MOTORCYCLE MODAL
+    ========================================== -->
+
+    <div
+        class="modal"
+        id="motorcycleModal"
+    >
+
+        <div class="modal-content">
+
+            <!-- MODAL DECORATIVE BACKGROUND -->
+
+            <div class="modal-glow modal-glow-one"></div>
+            <div class="modal-glow modal-glow-two"></div>
+
+
+            <!-- MODAL HEADER -->
+
+            <div class="modal-header">
+
+                <div class="modal-heading">
+
+                    <div class="modal-eyebrow">
+                        <span class="eyebrow-line"></span>
+                        GARAGE PROFILE
+                    </div>
+
+                    <div class="modal-title-row">
+
+                        <div class="modal-bike-icon">
+                            <span>🏍️</span>
+                        </div>
+
+                        <div>
+
+                            <h2>
+                                Add <span>Motorcycle</span>
+                            </h2>
+
+                            <p>
+                                Register your ride with ADD Motor Shop.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="close-button"
+                    id="closeModalButton"
+                    aria-label="Close"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <!-- MODAL STATUS BAR -->
+
+            <div class="modal-status-bar">
+
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    MOTORCYCLE INFORMATION
+                </div>
+
+                <div class="status-number">
+                    01
+                </div>
+
+            </div>
+
+
+            <!-- MOTORCYCLE FORM -->
+
+            <form
+                id="motorcycleForm"
+                autocomplete="off"
+            >
+
+                <!-- BASIC INFORMATION -->
+
+                <div class="form-section">
+
+                    <div class="form-section-heading">
+
+                        <div class="section-number">
+                            01
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Basic Information
+                            </h3>
+
+                            <p>
+                                Tell us about your motorcycle.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BRAND -->
+
+                    <div class="form-group">
+
+                        <label for="brand">
+                            Motorcycle Brand
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                🏁
+                            </span>
+
+                            <select
+                                id="brand"
+                                name="brand"
+                                required
+                            >
+
+                                <option value="">
+                                    Select Brand
+                                </option>
+
+                                <option value="Honda">
+                                    Honda
+                                </option>
+
+                                <option value="Yamaha">
+                                    Yamaha
+                                </option>
+
+                                <option value="Suzuki">
+                                    Suzuki
+                                </option>
+
+                                <option value="Kawasaki">
+                                    Kawasaki
+                                </option>
+
+                                <option value="KTM">
+                                    KTM
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- MODEL -->
+
+                    <div class="form-group">
+
+                        <label for="model">
+                            Motorcycle Model
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                🏍
+                            </span>
+
+                            <input
+                                type="text"
+                                id="model"
+                                name="model"
+                                placeholder="e.g. Click 125"
+                                maxlength="150"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SPECIFICATIONS -->
+
+                <div class="form-section">
+
+                    <div class="form-section-heading">
+
+                        <div class="section-number">
+                            02
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Specifications
+                            </h3>
+
+                            <p>
+                                Add your motorcycle's technical details.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <!-- YEAR -->
+
+                        <div class="form-group">
+
+                            <label for="year">
+                                Year
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <span class="input-icon">
+                                    📅
+                                </span>
+
+                                <input
+                                    type="number"
+                                    id="year"
+                                    name="year"
+                                    placeholder="2024"
+                                    min="1900"
+                                    max="2100"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ENGINE CC -->
+
+                        <div class="form-group">
+
+                            <label for="engine_cc">
+                                Engine CC
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <span class="input-icon">
+                                    ⚙
+                                </span>
+
+                                <input
+                                    type="number"
+                                    id="engine_cc"
+                                    name="engine_cc"
+                                    placeholder="125"
+                                    min="1"
+                                    max="5000"
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <!-- PLATE NUMBER -->
+
+                        <div class="form-group">
+
+                            <label for="plate_number">
+                                Plate Number
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <span class="input-icon">
+                                    ▣
+                                </span>
+
+                                <input
+                                    type="text"
+                                    id="plate_number"
+                                    name="plate_number"
+                                    placeholder="ABC 1234"
+                                    maxlength="30"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- COLOR -->
+
+                        <div class="form-group">
+
+                            <label for="color">
+                                Color
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <span class="input-icon">
+                                    ◉
+                                </span>
+
+                                <input
+                                    type="text"
+                                    id="color"
+                                    name="color"
+                                    placeholder="Matte Black"
+                                    maxlength="50"
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PRIMARY MOTORCYCLE -->
+
+                <div class="primary-option">
+
+                    <div class="primary-icon">
+                        ★
+                    </div>
+
+                    <div class="primary-content">
+
+                        <label class="checkbox-container">
+
+                            <input
+                                type="checkbox"
+                                id="is_primary"
+                                name="is_primary"
+                            >
+
+                            <span class="custom-checkbox"></span>
+
+                            <span class="primary-label">
+                                Set as Primary Motorcycle
+                            </span>
+
+                        </label>
+
+                        <p>
+                            Use this motorcycle as your default selection
+                            when booking a service.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ERROR MESSAGE -->
+
+                <div
+                    id="formError"
+                    class="form-message error-message hidden"
+                >
+                </div>
+
+
+                <!-- SUCCESS MESSAGE -->
+
+                <div
+                    id="formSuccess"
+                    class="form-message success-message hidden"
+                >
+                </div>
+
+
+                <!-- MODAL ACTIONS -->
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="cancel-button"
+                        id="cancelButton"
+                    >
+                        <span class="button-symbol">×</span>
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="save-button"
+                        id="saveButton"
+                    >
+                        <span class="save-bike-icon">🏍️</span>
+
+                        <span class="save-button-text">
+                            Save Motorcycle
+                        </span>
+
+                        <span class="save-arrow">→</span>
+                    </button>
+
+                </div>
+
+
+                <!-- MODAL FOOTER -->
+
+                <div class="modal-footer-note">
+
+                    <span class="footer-lock">
+                        ✓
+                    </span>
+
+                    Your motorcycle information is saved securely
+                    to your account.
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <!-- MOTORCYCLES FUNCTIONALITY -->
+    <script src="js/motorcycles.js"></script>
+
+    <!-- SHARED CUSTOMER HEADER AND THEME -->
+    <script src="js/customer-header.js"></script>
+
+</body>
+
+</html>

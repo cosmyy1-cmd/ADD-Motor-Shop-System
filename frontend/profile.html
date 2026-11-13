@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - ADD Motor Shop</title>
+
+    <!-- Shared customer navigation and header -->
+    <link rel="stylesheet" href="css/customer-header.css">
+
+    <!-- Profile page styles -->
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+<body>
+
+    <!-- Shared customer header -->
+    <div id="customerHeader"></div>
+
+    <main class="page-container">
+
+        <!-- PROFILE HEADER -->
+        <section class="profile-header">
+            <div class="profile-header-content">
+
+                <div class="profile-avatar-large" id="profileAvatarLarge">
+                    --
+                </div>
+
+                <div class="profile-header-text">
+                    <h1>My <span>Profile</span></h1>
+                    <p>Manage your personal information and account settings.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PROFILE SUMMARY -->
+        <section class="profile-summary">
+
+            <div class="profile-summary-main">
+
+                <div class="profile-avatar" id="profileAvatar">
+                    --
+                </div>
+
+                <div class="profile-summary-info">
+                    <h2 id="profileName">Loading...</h2>
+                    <p class="profile-email" id="profileEmail">
+                        Loading profile...
+                    </p>
+                    <span class="account-badge">CUSTOMER ACCOUNT</span>
+                </div>
+
+            </div>
+
+            <div class="profile-summary-details">
+
+                <div class="summary-item">
+                    <span class="summary-label">Phone Number</span>
+                    <strong id="summaryPhone">Not provided</strong>
+                </div>
+
+                <div class="summary-item">
+                    <span class="summary-label">Member Since</span>
+                    <strong id="summaryMemberSince">--</strong>
+                </div>
+
+                <div class="summary-item">
+                    <span class="summary-label">Registered Motorcycles</span>
+                    <strong id="summaryMotorcycles">0</strong>
+                </div>
+
+                <div class="summary-item">
+                    <span class="summary-label">Completed Services</span>
+                    <strong id="summaryServices">0</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- PROFILE CONTENT -->
+        <section class="profile-grid">
+
+            <!-- PERSONAL INFORMATION -->
+            <div class="profile-card">
+
+                <div class="card-header">
+                    <div>
+                        <h2>Personal Information</h2>
+                        <p>View and manage your personal details.</p>
+                    </div>
+
+                    <div class="card-icon">👤</div>
+                </div>
+
+                <form id="profileForm">
+
+                    <div id="profileMessage" class="profile-message"></div>
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input
+                                type="text"
+                                id="firstName"
+                                name="firstName"
+                                autocomplete="given-name"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input
+                                type="text"
+                                id="lastName"
+                                name="lastName"
+                                autocomplete="family-name"
+                                required
+                            >
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            autocomplete="email"
+                            disabled
+                        >
+                        <small>Your registered email address cannot be changed here.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            autocomplete="tel"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <textarea
+                            id="address"
+                            name="address"
+                            autocomplete="street-address"
+                            placeholder="Enter your complete address"
+                        ></textarea>
+                    </div>
+
+                    <div class="form-actions">
+
+                        <button
+                            type="button"
+                            class="btn-secondary"
+                            id="cancelProfile"
+                        >
+                            Cancel
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="btn-primary"
+                        >
+                            Save Changes
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+            <!-- PASSWORD AND SECURITY -->
+            <div class="profile-card password-card">
+
+                <div class="card-header">
+                    <div>
+                        <h2>Password and Security</h2>
+                        <p>Keep your account secure.</p>
+                    </div>
+
+                    <div class="card-icon">🔒</div>
+                </div>
+
+                <form id="passwordForm">
+
+                    <div class="form-group">
+                        <label for="currentPassword">Current Password</label>
+                        <input
+                            type="password"
+                            id="currentPassword"
+                            name="currentPassword"
+                            autocomplete="current-password"
+                            placeholder="Enter current password"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newPassword">New Password</label>
+                        <input
+                            type="password"
+                            id="newPassword"
+                            name="newPassword"
+                            autocomplete="new-password"
+                            placeholder="Enter new password"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm New Password</label>
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            autocomplete="new-password"
+                            placeholder="Confirm new password"
+                            required
+                        >
+                    </div>
+
+                    <div class="password-requirements">
+
+                        <div class="requirements-title">
+                            Password Requirements
+                        </div>
+
+                        <ul>
+                            <li>At least 8 characters long</li>
+                            <li>Contains at least one number</li>
+                            <li>New password and confirmation must match</li>
+                        </ul>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="btn-primary full-width"
+                    >
+                        Update Password
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+        <!-- RECENT ACTIVITY -->
+        <section class="profile-card activity-card">
+
+            <div class="card-header">
+                <div>
+                    <h2>Recent Activity</h2>
+                    <p>View your recent appointments and motorcycle registrations.</p>
+                </div>
+
+                <div class="card-icon">📋</div>
+            </div>
+
+            <div class="activity-list" id="activityList">
+                <p class="activity-empty">Loading recent activity...</p>
+            </div>
+
+        </section>
+
+        <!-- SECURITY NOTICE -->
+        <section class="security-notice">
+
+            <div class="security-icon">🛡️</div>
+
+            <div class="security-content">
+                <h3>Your Account Security Matters</h3>
+                <p>
+                    Keep your account information accurate and do not share
+                    your password with anyone. Always log out when using a
+                    shared or public device.
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>
+            &copy; <span id="currentYear"></span> ADD Motor Shop.
+            All Rights Reserved.
+        </p>
+    </footer>
+
+    <!-- Shared navigation and theme -->
+    <script src="js/customer-header.js"></script>
+
+    <!-- Profile page functionality -->
+    <script src="js/profile.js"></script>
+
+</body>
+</html>
